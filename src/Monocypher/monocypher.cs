@@ -1,10 +1,19 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Monocypher
 {
     public static partial class monocypher
     {
         public const string MonocypherDll = "monocypher";
+
+        public partial struct size_t
+        {
+            public static implicit operator size_t(int value)
+            {
+                return new size_t(new IntPtr(value));
+            }
+        }
 
         public unsafe struct Byte8
         {

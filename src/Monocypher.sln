@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monocypher", "Monocypher\Monocypher.csproj", "{D257E231-8932-4312-B114-89F315DC2B41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monocypher.CodeGen", "Monocypher.CodeGen\Monocypher.CodeGen.csproj", "{87B215EB-E00C-4C0F-B142-72251ABA9E91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D257E231-8932-4312-B114-89F315DC2B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D257E231-8932-4312-B114-89F315DC2B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D257E231-8932-4312-B114-89F315DC2B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D257E231-8932-4312-B114-89F315DC2B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B215EB-E00C-4C0F-B142-72251ABA9E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B215EB-E00C-4C0F-B142-72251ABA9E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B215EB-E00C-4C0F-B142-72251ABA9E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B215EB-E00C-4C0F-B142-72251ABA9E91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B95E1471-C56A-4968-86B1-85BB995DD437}
+	EndGlobalSection
+EndGlobal

@@ -25,7 +25,7 @@ namespace Monocypher
             public monocypher.crypto_sign_vtable.hash_delegate hash;
             
             [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-            public delegate void hash_delegate(Byte64 hash, IntPtr message, monocypher.size_t message_size);
+            public delegate void hash_delegate(ref Byte64 hash, IntPtr message, monocypher.size_t message_size);
             
             public monocypher.crypto_sign_vtable.init_delegate init;
             
@@ -40,7 +40,7 @@ namespace Monocypher
             public monocypher.crypto_sign_vtable.final_delegate final;
             
             [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-            public delegate void final_delegate(IntPtr ctx, Byte64 hash);
+            public delegate void final_delegate(IntPtr ctx, ref Byte64 hash);
             
             public monocypher.size_t ctx_size;
         }
@@ -250,13 +250,13 @@ namespace Monocypher
         /// Return 0 if a and b are equal, -1 otherwise
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_verify16(Byte16 a, Byte16 b);
+        public static extern int crypto_verify16(in Byte16 a, in Byte16 b);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_verify32(Byte32 a, Byte32 b);
+        public static extern int crypto_verify32(in Byte32 a, in Byte32 b);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_verify64(Byte64 a, Byte64 b);
+        public static extern int crypto_verify64(in Byte64 a, in Byte64 b);
         
         /// <summary>
         /// Please erase all copies
@@ -269,25 +269,25 @@ namespace Monocypher
         /// ------------------------
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_lock(Byte16 mac, IntPtr cipher_text, Byte32 key, Byte24 nonce, IntPtr plain_text, monocypher.size_t text_size);
+        public static extern void crypto_lock(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr plain_text, monocypher.size_t text_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_unlock(IntPtr plain_text, Byte32 key, Byte24 nonce, Byte16 mac, IntPtr cipher_text, monocypher.size_t text_size);
+        public static extern int crypto_unlock(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr cipher_text, monocypher.size_t text_size);
         
         /// <summary>
         /// With additional data
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_lock_aead(Byte16 mac, IntPtr cipher_text, Byte32 key, Byte24 nonce, IntPtr ad, monocypher.size_t ad_size, IntPtr plain_text, monocypher.size_t text_size);
+        public static extern void crypto_lock_aead(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr ad, monocypher.size_t ad_size, IntPtr plain_text, monocypher.size_t text_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_unlock_aead(IntPtr plain_text, Byte32 key, Byte24 nonce, Byte16 mac, IntPtr ad, monocypher.size_t ad_size, IntPtr cipher_text, monocypher.size_t text_size);
+        public static extern int crypto_unlock_aead(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr ad, monocypher.size_t ad_size, IntPtr cipher_text, monocypher.size_t text_size);
         
         /// <summary>
         /// Direct interface
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_blake2b(Byte64 hash, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_blake2b(ref Byte64 hash, IntPtr message, monocypher.size_t message_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_general(IntPtr hash, monocypher.size_t hash_size, IntPtr key, monocypher.size_t key_size, IntPtr message, monocypher.size_t message_size);
@@ -318,79 +318,79 @@ namespace Monocypher
         public static extern void crypto_argon2i_general(IntPtr hash, uint hash_size, IntPtr work_area, uint nb_blocks, uint nb_iterations, IntPtr password, uint password_size, IntPtr salt, uint salt_size, IntPtr key, uint key_size, IntPtr ad, uint ad_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_key_exchange(Byte32 shared_key, Byte32 your_secret_key, Byte32 their_public_key);
+        public static extern void crypto_key_exchange(ref Byte32 shared_key, in Byte32 your_secret_key, in Byte32 their_public_key);
         
         /// <summary>
         /// Generate public key
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_public_key(Byte32 public_key, Byte32 secret_key);
+        public static extern void crypto_sign_public_key(ref Byte32 public_key, in Byte32 secret_key);
         
         /// <summary>
         /// Direct interface
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign(Byte64 signature, Byte32 secret_key, Byte32 public_key, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_check(Byte64 signature, Byte32 public_key, IntPtr message, monocypher.size_t message_size);
+        public static extern int crypto_check(in Byte64 signature, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
         /// Specialised hash.
         /// Used to hash X25519 shared secrets.
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hchacha20(Byte32 @out, Byte32 key, Byte16 @in);
+        public static extern void crypto_hchacha20(ref Byte32 @out, in Byte32 key, in Byte16 @in);
         
         /// <summary>
         /// Unauthenticated stream cipher.
         /// Don't forget to add authentication.
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_chacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, Byte32 key, Byte8 nonce);
+        public static extern void crypto_chacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte8 nonce);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_xchacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, Byte32 key, Byte24 nonce);
+        public static extern void crypto_xchacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte24 nonce);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ietf_chacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, Byte32 key, Byte12 nonce);
+        public static extern void crypto_ietf_chacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte12 nonce);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong crypto_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, Byte32 key, Byte8 nonce, ulong ctr);
+        public static extern ulong crypto_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte8 nonce, ulong ctr);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong crypto_xchacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, Byte32 key, Byte24 nonce, ulong ctr);
+        public static extern ulong crypto_xchacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte24 nonce, ulong ctr);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint crypto_ietf_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, Byte32 key, Byte12 nonce, uint ctr);
+        public static extern uint crypto_ietf_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte12 nonce, uint ctr);
         
         /// <summary>
         /// Direct interface
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_poly1305(Byte16 mac, IntPtr message, monocypher.size_t message_size, Byte32 key);
+        public static extern void crypto_poly1305(ref Byte16 mac, IntPtr message, monocypher.size_t message_size, in Byte32 key);
         
         /// <summary>
         /// Incremental interface
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_poly1305_init(ref monocypher.crypto_poly1305_ctx ctx, Byte32 key);
+        public static extern void crypto_poly1305_init(ref monocypher.crypto_poly1305_ctx ctx, in Byte32 key);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_poly1305_update(ref monocypher.crypto_poly1305_ctx ctx, IntPtr message, monocypher.size_t message_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_poly1305_final(ref monocypher.crypto_poly1305_ctx ctx, Byte16 mac);
+        public static extern void crypto_poly1305_final(ref monocypher.crypto_poly1305_ctx ctx, ref Byte16 mac);
         
         /// <summary>
         /// Shared secrets are not quite random.
         /// Hash them to derive an actual shared key.
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_x25519_public_key(Byte32 public_key, Byte32 secret_key);
+        public static extern void crypto_x25519_public_key(ref Byte32 public_key, in Byte32 secret_key);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_x25519(Byte32 raw_shared_secret, Byte32 your_secret_key, Byte32 their_public_key);
+        public static extern void crypto_x25519(ref Byte32 raw_shared_secret, in Byte32 your_secret_key, in Byte32 their_public_key);
         
         /// <summary>
         /// "Dirty" versions of x25519_public_key()
@@ -398,10 +398,10 @@ namespace Monocypher
         /// Note that those functions leaks 3 bits of the private key.
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_x25519_dirty_small(Byte32 pk, Byte32 sk);
+        public static extern void crypto_x25519_dirty_small(ref Byte32 pk, in Byte32 sk);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_x25519_dirty_fast(Byte32 pk, Byte32 sk);
+        public static extern void crypto_x25519_dirty_fast(ref Byte32 pk, in Byte32 sk);
         
         /// <summary>
         /// scalar "division"
@@ -409,17 +409,17 @@ namespace Monocypher
         /// than Diffie-Hellman key exchange.
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_x25519_inverse(Byte32 blind_salt, Byte32 private_key, Byte32 curve_point);
+        public static extern void crypto_x25519_inverse(ref Byte32 blind_salt, in Byte32 private_key, in Byte32 curve_point);
         
         /// <summary>
         /// EdDSA to X25519
         /// ---------------
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_from_eddsa_private(Byte32 x25519, Byte32 eddsa);
+        public static extern void crypto_from_eddsa_private(ref Byte32 x25519, in Byte32 eddsa);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_from_eddsa_public(Byte32 x25519, Byte32 eddsa);
+        public static extern void crypto_from_eddsa_public(ref Byte32 x25519, in Byte32 eddsa);
         
         /// <summary>
         /// Signing (2 passes)
@@ -427,7 +427,7 @@ namespace Monocypher
         /// else you might reveal the private key.
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, Byte32 secret_key, Byte32 public_key);
+        public static extern void crypto_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_update(ref monocypher.crypto_sign_ctx_abstract ctx, IntPtr message, monocypher.size_t message_size);
@@ -439,7 +439,7 @@ namespace Monocypher
         /// use crypto_sign_update() again.
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_final(ref monocypher.crypto_sign_ctx_abstract ctx, Byte64 signature);
+        public static extern void crypto_sign_final(ref monocypher.crypto_sign_ctx_abstract ctx, ref Byte64 signature);
         
         /// <summary>
         /// Verification (1 pass)
@@ -447,7 +447,7 @@ namespace Monocypher
         /// before you're done checking it.
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_check_init(ref monocypher.crypto_check_ctx_abstract ctx, Byte64 signature, Byte32 public_key);
+        public static extern void crypto_check_init(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_check_update(ref monocypher.crypto_check_ctx_abstract ctx, IntPtr message, monocypher.size_t message_size);
@@ -459,28 +459,28 @@ namespace Monocypher
         /// Custom hash interface
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_public_key_custom_hash(Byte32 public_key, Byte32 secret_key, in monocypher.crypto_sign_vtable hash);
+        public static extern void crypto_sign_public_key_custom_hash(ref Byte32 public_key, in Byte32 secret_key, in monocypher.crypto_sign_vtable hash);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_init_first_pass_custom_hash(ref monocypher.crypto_sign_ctx_abstract ctx, Byte32 secret_key, Byte32 public_key, in monocypher.crypto_sign_vtable hash);
+        public static extern void crypto_sign_init_first_pass_custom_hash(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key, in monocypher.crypto_sign_vtable hash);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_check_init_custom_hash(ref monocypher.crypto_check_ctx_abstract ctx, Byte64 signature, Byte32 public_key, in monocypher.crypto_sign_vtable hash);
+        public static extern void crypto_check_init_custom_hash(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key, in monocypher.crypto_sign_vtable hash);
         
         /// <summary>
         /// Elligator mappings proper
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hidden_to_curve(Byte32 curve, Byte32 hidden);
+        public static extern void crypto_hidden_to_curve(ref Byte32 curve, in Byte32 hidden);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_curve_to_hidden(Byte32 hidden, Byte32 curve, byte tweak);
+        public static extern int crypto_curve_to_hidden(ref Byte32 hidden, in Byte32 curve, byte tweak);
         
         /// <summary>
         /// Easy to use key pair generation
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hidden_key_pair(Byte32 hidden, Byte32 secret_key, Byte32 seed);
+        public static extern void crypto_hidden_key_pair(ref Byte32 hidden, ref Byte32 secret_key, ref Byte32 seed);
         
         /// <summary>
         /// SHA 512
@@ -493,10 +493,10 @@ namespace Monocypher
         public static extern void crypto_sha512_update(ref monocypher.crypto_sha512_ctx ctx, IntPtr message, monocypher.size_t message_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sha512_final(ref monocypher.crypto_sha512_ctx ctx, Byte64 hash);
+        public static extern void crypto_sha512_final(ref monocypher.crypto_sha512_ctx ctx, ref Byte64 hash);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sha512(Byte64 hash, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_sha512(ref Byte64 hash, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
         /// HMAC SHA 512
@@ -509,36 +509,36 @@ namespace Monocypher
         public static extern void crypto_hmac_sha512_update(ref monocypher.crypto_hmac_sha512_ctx ctx, IntPtr message, monocypher.size_t message_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hmac_sha512_final(ref monocypher.crypto_hmac_sha512_ctx ctx, Byte64 hmac);
+        public static extern void crypto_hmac_sha512_final(ref monocypher.crypto_hmac_sha512_ctx ctx, ref Byte64 hmac);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hmac_sha512(Byte64 hmac, IntPtr key, monocypher.size_t key_size, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_hmac_sha512(ref Byte64 hmac, IntPtr key, monocypher.size_t key_size, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
         /// Generate public key
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ed25519_public_key(Byte32 public_key, Byte32 secret_key);
+        public static extern void crypto_ed25519_public_key(ref Byte32 public_key, in Byte32 secret_key);
         
         /// <summary>
         /// Direct interface
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ed25519_sign(Byte64 signature, Byte32 secret_key, Byte32 public_key, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_ed25519_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_ed25519_check(Byte64 signature, Byte32 public_key, IntPtr message, monocypher.size_t message_size);
+        public static extern int crypto_ed25519_check(in Byte64 signature, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
         /// Incremental interface
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ed25519_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, Byte32 secret_key, Byte32 public_key);
+        public static extern void crypto_ed25519_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ed25519_check_init(ref monocypher.crypto_check_ctx_abstract ctx, Byte64 signature, Byte32 public_key);
+        public static extern void crypto_ed25519_check_init(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
         
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_from_ed25519_private(Byte32 x25519, Byte32 eddsa);
+        public static extern void crypto_from_ed25519_private(ref Byte32 x25519, in Byte32 eddsa);
     }
 }

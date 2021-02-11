@@ -30,7 +30,7 @@ function Build-Project {
     # Setup the correct build system and outputs based on platform
     $NETPlatform = "linux"
     $NETSharedLibExtension = "so"
-    $CMakeBuilder = "Ninja"
+    $CMakeBuilder = "Unix Makefiles"
     $CMakeArch = ""
     if ($IsMacOS) {
         $NETPlatform = "osx"

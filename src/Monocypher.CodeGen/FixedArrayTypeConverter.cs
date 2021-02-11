@@ -37,7 +37,7 @@ namespace Monocypher.CodeGen
                         pointerElementType = eltType;
                     }
                     pointerElementType = pointerElementType.GetCanonicalType();
-                    return pointerElementType.TypeKind == CppTypeKind.Primitive ? CSharpPrimitiveType.IntPtr : null;
+                    return pointerElementType.TypeKind == CppTypeKind.Primitive ? new CSharpPrimitiveType(CSharpPrimitiveKind.IntPtr) : null;
 
                 case CppTypeKind.Array:
 
@@ -51,7 +51,7 @@ namespace Monocypher.CodeGen
                     var csArrayElementType = converter.GetCSharpType(arrayElementType, context, true);
                     var elementTypeName = csArrayElementType.ToString();
                     elementTypeName = char.ToUpper(elementTypeName[0]) + elementTypeName.Substring(1);
-                    var freeType = new CSharpFreeType($"{elementTypeName}{arrayType.Size}");
+                    var freeType = new CSharpArrayLikeType($"{elementTypeName}{arrayType.Size}", arrayType.Size);
                     csType = new CSharpRefType(isConst ? CSharpRefKind.In : CSharpRefKind.Ref, freeType);
                     
                     return csType;
@@ -73,4 +73,13 @@ namespace Monocypher.CodeGen
         }
     }
 
+    internal class CSharpArrayLikeType : CSharpFreeType
+    {
+        public CSharpArrayLikeType(string text, int size) : base(text)
+        {
+            Size = size;
+        }
+
+        public int Size { get; }
+    }
 }

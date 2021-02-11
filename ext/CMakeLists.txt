@@ -12,8 +12,9 @@ set(MONOCYPHER_SOURCES
 
 include_directories(${MONOCYPHER_SRC_FOLDER})
 
-if(MSVC) 
+if(MSVC)
+    # use static linking with CRT
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 
-add_library(monocypher SHARED ${MONOCYPHER_SOURCES} Monocypher.def)
+add_library(monocypher_native SHARED ${MONOCYPHER_SOURCES} Monocypher.def)

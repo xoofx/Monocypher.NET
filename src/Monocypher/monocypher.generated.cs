@@ -6,6 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 using System;
 
 namespace Monocypher
@@ -247,298 +248,4000 @@ namespace Monocypher
         }
         
         /// <summary>
-        /// Return 0 if a and b are equal, -1 otherwise
+        /// 
+        /// Cryptographic operations often require comparison of secrets or values derived
+        ///   from secrets. Standard comparison functions like
+        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   first difference, leaking information through timing differences.
+        /// <br/>
+        /// 
+        /// As an example, say a message authentication code (MAC) is sent over the network
+        ///   along with a message, but the correct MAC is secret. If the attacker attempts
+        ///   a forgery, one does not want to reveal &#x201C;your MAC is wrong,
+        ///   and it took 384 microseconds to tell&#x201D;. If
+        ///   the next attempt takes 462 microseconds instead, it tells the attacker they
+        ///   just guessed a byte correctly. That way, an attacker can derive the correct
+        ///   MAC byte by byte, and successfully forge a message. This has lead to practical
+        ///   attacks in the past.
+        /// <br/>
+        /// 
+        /// To avoid such catastrophic failure,
+        ///   <see cref="crypto_verify16"/>(),
+        ///   <see cref="crypto_verify32"/>() and
+        ///   <see cref="crypto_verify64"/>() provide comparison
+        ///   functions whose timing is independent from the content of their input. They
+        ///   compare the first 16, 32, or 64 bytes of the two byte arrays
+        ///   <paramref name="a"/> and <paramref name="b"/>.
+        /// <br/>
+        /// 
+        /// When in doubt, prefer these functions over
+        ///   <see cref="memcmp"/>().
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_verify16(in Byte16 a, in Byte16 b);
         
+        /// <summary>
+        /// 
+        /// Cryptographic operations often require comparison of secrets or values derived
+        ///   from secrets. Standard comparison functions like
+        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   first difference, leaking information through timing differences.
+        /// <br/>
+        /// 
+        /// As an example, say a message authentication code (MAC) is sent over the network
+        ///   along with a message, but the correct MAC is secret. If the attacker attempts
+        ///   a forgery, one does not want to reveal &#x201C;your MAC is wrong,
+        ///   and it took 384 microseconds to tell&#x201D;. If
+        ///   the next attempt takes 462 microseconds instead, it tells the attacker they
+        ///   just guessed a byte correctly. That way, an attacker can derive the correct
+        ///   MAC byte by byte, and successfully forge a message. This has lead to practical
+        ///   attacks in the past.
+        /// <br/>
+        /// 
+        /// To avoid such catastrophic failure,
+        ///   <see cref="crypto_verify16"/>(),
+        ///   <see cref="crypto_verify32"/>() and
+        ///   <see cref="crypto_verify64"/>() provide comparison
+        ///   functions whose timing is independent from the content of their input. They
+        ///   compare the first 16, 32, or 64 bytes of the two byte arrays
+        ///   <paramref name="a"/> and <paramref name="b"/>.
+        /// <br/>
+        /// 
+        /// When in doubt, prefer these functions over
+        ///   <see cref="memcmp"/>().
+        /// 
+        /// </summary>
+        public static unsafe int crypto_verify16(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
+        {
+            ExpectSize16(nameof(a), a.Length);
+            ExpectSize16(nameof(b), b.Length);
+            return crypto_verify16(in MemoryMarshal.AsRef<Byte16>(a), in MemoryMarshal.AsRef<Byte16>(b));
+        }
+        
+        /// <summary>
+        /// 
+        /// Cryptographic operations often require comparison of secrets or values derived
+        ///   from secrets. Standard comparison functions like
+        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   first difference, leaking information through timing differences.
+        /// <br/>
+        /// 
+        /// As an example, say a message authentication code (MAC) is sent over the network
+        ///   along with a message, but the correct MAC is secret. If the attacker attempts
+        ///   a forgery, one does not want to reveal &#x201C;your MAC is wrong,
+        ///   and it took 384 microseconds to tell&#x201D;. If
+        ///   the next attempt takes 462 microseconds instead, it tells the attacker they
+        ///   just guessed a byte correctly. That way, an attacker can derive the correct
+        ///   MAC byte by byte, and successfully forge a message. This has lead to practical
+        ///   attacks in the past.
+        /// <br/>
+        /// 
+        /// To avoid such catastrophic failure,
+        ///   <see cref="crypto_verify16"/>(),
+        ///   <see cref="crypto_verify32"/>() and
+        ///   <see cref="crypto_verify64"/>() provide comparison
+        ///   functions whose timing is independent from the content of their input. They
+        ///   compare the first 16, 32, or 64 bytes of the two byte arrays
+        ///   <paramref name="a"/> and <paramref name="b"/>.
+        /// <br/>
+        /// 
+        /// When in doubt, prefer these functions over
+        ///   <see cref="memcmp"/>().
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_verify32(in Byte32 a, in Byte32 b);
         
+        /// <summary>
+        /// 
+        /// Cryptographic operations often require comparison of secrets or values derived
+        ///   from secrets. Standard comparison functions like
+        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   first difference, leaking information through timing differences.
+        /// <br/>
+        /// 
+        /// As an example, say a message authentication code (MAC) is sent over the network
+        ///   along with a message, but the correct MAC is secret. If the attacker attempts
+        ///   a forgery, one does not want to reveal &#x201C;your MAC is wrong,
+        ///   and it took 384 microseconds to tell&#x201D;. If
+        ///   the next attempt takes 462 microseconds instead, it tells the attacker they
+        ///   just guessed a byte correctly. That way, an attacker can derive the correct
+        ///   MAC byte by byte, and successfully forge a message. This has lead to practical
+        ///   attacks in the past.
+        /// <br/>
+        /// 
+        /// To avoid such catastrophic failure,
+        ///   <see cref="crypto_verify16"/>(),
+        ///   <see cref="crypto_verify32"/>() and
+        ///   <see cref="crypto_verify64"/>() provide comparison
+        ///   functions whose timing is independent from the content of their input. They
+        ///   compare the first 16, 32, or 64 bytes of the two byte arrays
+        ///   <paramref name="a"/> and <paramref name="b"/>.
+        /// <br/>
+        /// 
+        /// When in doubt, prefer these functions over
+        ///   <see cref="memcmp"/>().
+        /// 
+        /// </summary>
+        public static unsafe int crypto_verify32(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
+        {
+            ExpectSize32(nameof(a), a.Length);
+            ExpectSize32(nameof(b), b.Length);
+            return crypto_verify32(in MemoryMarshal.AsRef<Byte32>(a), in MemoryMarshal.AsRef<Byte32>(b));
+        }
+        
+        /// <summary>
+        /// 
+        /// Cryptographic operations often require comparison of secrets or values derived
+        ///   from secrets. Standard comparison functions like
+        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   first difference, leaking information through timing differences.
+        /// <br/>
+        /// 
+        /// As an example, say a message authentication code (MAC) is sent over the network
+        ///   along with a message, but the correct MAC is secret. If the attacker attempts
+        ///   a forgery, one does not want to reveal &#x201C;your MAC is wrong,
+        ///   and it took 384 microseconds to tell&#x201D;. If
+        ///   the next attempt takes 462 microseconds instead, it tells the attacker they
+        ///   just guessed a byte correctly. That way, an attacker can derive the correct
+        ///   MAC byte by byte, and successfully forge a message. This has lead to practical
+        ///   attacks in the past.
+        /// <br/>
+        /// 
+        /// To avoid such catastrophic failure,
+        ///   <see cref="crypto_verify16"/>(),
+        ///   <see cref="crypto_verify32"/>() and
+        ///   <see cref="crypto_verify64"/>() provide comparison
+        ///   functions whose timing is independent from the content of their input. They
+        ///   compare the first 16, 32, or 64 bytes of the two byte arrays
+        ///   <paramref name="a"/> and <paramref name="b"/>.
+        /// <br/>
+        /// 
+        /// When in doubt, prefer these functions over
+        ///   <see cref="memcmp"/>().
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_verify64(in Byte64 a, in Byte64 b);
         
         /// <summary>
-        /// Please erase all copies
+        /// 
+        /// Cryptographic operations often require comparison of secrets or values derived
+        ///   from secrets. Standard comparison functions like
+        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   first difference, leaking information through timing differences.
+        /// <br/>
+        /// 
+        /// As an example, say a message authentication code (MAC) is sent over the network
+        ///   along with a message, but the correct MAC is secret. If the attacker attempts
+        ///   a forgery, one does not want to reveal &#x201C;your MAC is wrong,
+        ///   and it took 384 microseconds to tell&#x201D;. If
+        ///   the next attempt takes 462 microseconds instead, it tells the attacker they
+        ///   just guessed a byte correctly. That way, an attacker can derive the correct
+        ///   MAC byte by byte, and successfully forge a message. This has lead to practical
+        ///   attacks in the past.
+        /// <br/>
+        /// 
+        /// To avoid such catastrophic failure,
+        ///   <see cref="crypto_verify16"/>(),
+        ///   <see cref="crypto_verify32"/>() and
+        ///   <see cref="crypto_verify64"/>() provide comparison
+        ///   functions whose timing is independent from the content of their input. They
+        ///   compare the first 16, 32, or 64 bytes of the two byte arrays
+        ///   <paramref name="a"/> and <paramref name="b"/>.
+        /// <br/>
+        /// 
+        /// When in doubt, prefer these functions over
+        ///   <see cref="memcmp"/>().
+        /// 
         /// </summary>
+        public static unsafe int crypto_verify64(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
+        {
+            ExpectSize64(nameof(a), a.Length);
+            ExpectSize64(nameof(b), b.Length);
+            return crypto_verify64(in MemoryMarshal.AsRef<Byte64>(a), in MemoryMarshal.AsRef<Byte64>(b));
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_wipe"/>() securely erases sensitive data
+        ///   in memory.
+        /// <br/>
+        /// 
+        /// Sensitive data (such as cryptographic keys or secret plaintexts) should be
+        ///   erased from memory as early as possible, to minimise the window in which it
+        ///   can be leaked. Standard functions like memset and bzero are not safe to use,
+        ///   as the compiler may decide they have no effect and optimise them out.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="secret">The buffer to erase.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_wipe(IntPtr secret, monocypher.size_t size);
         
         /// <summary>
-        /// Authenticated encryption
-        /// ------------------------
+        /// <see cref="crypto_wipe"/>() securely erases sensitive data
+        ///   in memory.
+        /// <br/>
+        /// 
+        /// Sensitive data (such as cryptographic keys or secret plaintexts) should be
+        ///   erased from memory as early as possible, to minimise the window in which it
+        ///   can be leaked. Standard functions like memset and bzero are not safe to use,
+        ///   as the compiler may decide they have no effect and optimise them out.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="secret">The buffer to erase.</param>
+        public static unsafe void crypto_wipe(Span<byte> secret)
+        {
+            fixed(void* secret_ptr = secret)
+            crypto_wipe(new IntPtr(secret_ptr), (monocypher.size_t)secret.Length);
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_lock"/>() encrypts and authenticates a
+        ///   plaintext. It can be decrypted by
+        ///   <see cref="crypto_unlock"/>().
+        /// </summary>
+        /// <param name="key">A 32-byte session key, shared between the sender and the recipient. It
+        ///       must be secret and random. Different methods can be used to produce and
+        ///       exchange this key, such as Diffie-Hellman key exchange, password key
+        ///       derivation (the password must be communicated on a secure channel), or
+        ///       even meeting physically. See
+        ///       <see cref="crypto_key_exchange"/> for key
+        ///       exchange, and <see cref="crypto_argon2i"/> for
+        ///       password key derivation.</param>
+        /// <param name="nonce">A 24-byte number, used only once with any given session key. It does not
+        ///       need to be secret or random, but it does have to be unique.
+        ///       Never use the same nonce twice with the same
+        ///       key. This would reveal the XOR of 2 different messages, which allows
+        ///       decryption and forgeries. The easiest (and recommended) way to generate
+        ///       this nonce is to select it at random. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator).</param>
+        /// <param name="mac">A 16-byte message authentication code (MAC),
+        ///       that can only be produced by someone who knows the session key. This
+        ///       guarantee cannot be upheld if a nonce has been reused with the session
+        ///       key, because doing so allows the attacker to learn the authentication key
+        ///       associated with that nonce. The MAC is intended to be sent along with the
+        ///       ciphertext.</param>
+        /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
+        ///       length however, will not. Be careful when
+        ///       combining encryption with compression. See
+        ///       <see cref="intro"/> for details.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_lock(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr plain_text, monocypher.size_t text_size);
         
+        /// <summary>
+        /// <see cref="crypto_lock"/>() encrypts and authenticates a
+        ///   plaintext. It can be decrypted by
+        ///   <see cref="crypto_unlock"/>().
+        /// </summary>
+        /// <param name="key">A 32-byte session key, shared between the sender and the recipient. It
+        ///       must be secret and random. Different methods can be used to produce and
+        ///       exchange this key, such as Diffie-Hellman key exchange, password key
+        ///       derivation (the password must be communicated on a secure channel), or
+        ///       even meeting physically. See
+        ///       <see cref="crypto_key_exchange"/> for key
+        ///       exchange, and <see cref="crypto_argon2i"/> for
+        ///       password key derivation.</param>
+        /// <param name="nonce">A 24-byte number, used only once with any given session key. It does not
+        ///       need to be secret or random, but it does have to be unique.
+        ///       Never use the same nonce twice with the same
+        ///       key. This would reveal the XOR of 2 different messages, which allows
+        ///       decryption and forgeries. The easiest (and recommended) way to generate
+        ///       this nonce is to select it at random. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator).</param>
+        /// <param name="mac">A 16-byte message authentication code (MAC),
+        ///       that can only be produced by someone who knows the session key. This
+        ///       guarantee cannot be upheld if a nonce has been reused with the session
+        ///       key, because doing so allows the attacker to learn the authentication key
+        ///       associated with that nonce. The MAC is intended to be sent along with the
+        ///       ciphertext.</param>
+        /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
+        ///       length however, will not. Be careful when
+        ///       combining encryption with compression. See
+        ///       <see cref="intro"/> for details.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        public static unsafe void crypto_lock(Span<byte> mac, Span<byte> cipher_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> plain_text)
+        {
+            ExpectSize16(nameof(mac), mac.Length);
+            ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize24(nameof(nonce), nonce.Length);
+            fixed(void* cipher_text_ptr = cipher_text)
+            fixed(void* plain_text_ptr = plain_text)
+            crypto_lock(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length);
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_lock"/>() encrypts and authenticates a
+        ///   plaintext. It can be decrypted by
+        ///   <see cref="crypto_unlock"/>().
+        /// </summary>
+        /// <param name="key">A 32-byte session key, shared between the sender and the recipient. It
+        ///       must be secret and random. Different methods can be used to produce and
+        ///       exchange this key, such as Diffie-Hellman key exchange, password key
+        ///       derivation (the password must be communicated on a secure channel), or
+        ///       even meeting physically. See
+        ///       <see cref="crypto_key_exchange"/> for key
+        ///       exchange, and <see cref="crypto_argon2i"/> for
+        ///       password key derivation.</param>
+        /// <param name="nonce">A 24-byte number, used only once with any given session key. It does not
+        ///       need to be secret or random, but it does have to be unique.
+        ///       Never use the same nonce twice with the same
+        ///       key. This would reveal the XOR of 2 different messages, which allows
+        ///       decryption and forgeries. The easiest (and recommended) way to generate
+        ///       this nonce is to select it at random. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator).</param>
+        /// <param name="mac">A 16-byte message authentication code (MAC),
+        ///       that can only be produced by someone who knows the session key. This
+        ///       guarantee cannot be upheld if a nonce has been reused with the session
+        ///       key, because doing so allows the attacker to learn the authentication key
+        ///       associated with that nonce. The MAC is intended to be sent along with the
+        ///       ciphertext.</param>
+        /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
+        ///       length however, will not. Be careful when
+        ///       combining encryption with compression. See
+        ///       <see cref="intro"/> for details.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_unlock(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr cipher_text, monocypher.size_t text_size);
         
         /// <summary>
-        /// With additional data
+        /// <see cref="crypto_lock"/>() encrypts and authenticates a
+        ///   plaintext. It can be decrypted by
+        ///   <see cref="crypto_unlock"/>().
         /// </summary>
+        /// <param name="key">A 32-byte session key, shared between the sender and the recipient. It
+        ///       must be secret and random. Different methods can be used to produce and
+        ///       exchange this key, such as Diffie-Hellman key exchange, password key
+        ///       derivation (the password must be communicated on a secure channel), or
+        ///       even meeting physically. See
+        ///       <see cref="crypto_key_exchange"/> for key
+        ///       exchange, and <see cref="crypto_argon2i"/> for
+        ///       password key derivation.</param>
+        /// <param name="nonce">A 24-byte number, used only once with any given session key. It does not
+        ///       need to be secret or random, but it does have to be unique.
+        ///       Never use the same nonce twice with the same
+        ///       key. This would reveal the XOR of 2 different messages, which allows
+        ///       decryption and forgeries. The easiest (and recommended) way to generate
+        ///       this nonce is to select it at random. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator).</param>
+        /// <param name="mac">A 16-byte message authentication code (MAC),
+        ///       that can only be produced by someone who knows the session key. This
+        ///       guarantee cannot be upheld if a nonce has been reused with the session
+        ///       key, because doing so allows the attacker to learn the authentication key
+        ///       associated with that nonce. The MAC is intended to be sent along with the
+        ///       ciphertext.</param>
+        /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
+        ///       length however, will not. Be careful when
+        ///       combining encryption with compression. See
+        ///       <see cref="intro"/> for details.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        public static unsafe int crypto_unlock(Span<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> mac, ReadOnlySpan<byte> cipher_text)
+        {
+            ExpectSameBufferSize(nameof(plain_text), plain_text.Length, nameof(cipher_text), cipher_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize24(nameof(nonce), nonce.Length);
+            ExpectSize16(nameof(mac), mac.Length);
+            fixed(void* plain_text_ptr = plain_text)
+            fixed(void* cipher_text_ptr = cipher_text)
+            return crypto_unlock(new IntPtr(plain_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), in MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), (monocypher.size_t)plain_text.Length);
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_lock"/>() encrypts and authenticates a
+        ///   plaintext. It can be decrypted by
+        ///   <see cref="crypto_unlock"/>().
+        /// </summary>
+        /// <param name="key">A 32-byte session key, shared between the sender and the recipient. It
+        ///       must be secret and random. Different methods can be used to produce and
+        ///       exchange this key, such as Diffie-Hellman key exchange, password key
+        ///       derivation (the password must be communicated on a secure channel), or
+        ///       even meeting physically. See
+        ///       <see cref="crypto_key_exchange"/> for key
+        ///       exchange, and <see cref="crypto_argon2i"/> for
+        ///       password key derivation.</param>
+        /// <param name="nonce">A 24-byte number, used only once with any given session key. It does not
+        ///       need to be secret or random, but it does have to be unique.
+        ///       Never use the same nonce twice with the same
+        ///       key. This would reveal the XOR of 2 different messages, which allows
+        ///       decryption and forgeries. The easiest (and recommended) way to generate
+        ///       this nonce is to select it at random. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator).</param>
+        /// <param name="mac">A 16-byte message authentication code (MAC),
+        ///       that can only be produced by someone who knows the session key. This
+        ///       guarantee cannot be upheld if a nonce has been reused with the session
+        ///       key, because doing so allows the attacker to learn the authentication key
+        ///       associated with that nonce. The MAC is intended to be sent along with the
+        ///       ciphertext.</param>
+        /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
+        ///       length however, will not. Be careful when
+        ///       combining encryption with compression. See
+        ///       <see cref="intro"/> for details.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_lock_aead(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr ad, monocypher.size_t ad_size, IntPtr plain_text, monocypher.size_t text_size);
         
+        /// <summary>
+        /// <see cref="crypto_lock"/>() encrypts and authenticates a
+        ///   plaintext. It can be decrypted by
+        ///   <see cref="crypto_unlock"/>().
+        /// </summary>
+        /// <param name="key">A 32-byte session key, shared between the sender and the recipient. It
+        ///       must be secret and random. Different methods can be used to produce and
+        ///       exchange this key, such as Diffie-Hellman key exchange, password key
+        ///       derivation (the password must be communicated on a secure channel), or
+        ///       even meeting physically. See
+        ///       <see cref="crypto_key_exchange"/> for key
+        ///       exchange, and <see cref="crypto_argon2i"/> for
+        ///       password key derivation.</param>
+        /// <param name="nonce">A 24-byte number, used only once with any given session key. It does not
+        ///       need to be secret or random, but it does have to be unique.
+        ///       Never use the same nonce twice with the same
+        ///       key. This would reveal the XOR of 2 different messages, which allows
+        ///       decryption and forgeries. The easiest (and recommended) way to generate
+        ///       this nonce is to select it at random. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator).</param>
+        /// <param name="mac">A 16-byte message authentication code (MAC),
+        ///       that can only be produced by someone who knows the session key. This
+        ///       guarantee cannot be upheld if a nonce has been reused with the session
+        ///       key, because doing so allows the attacker to learn the authentication key
+        ///       associated with that nonce. The MAC is intended to be sent along with the
+        ///       ciphertext.</param>
+        /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
+        ///       length however, will not. Be careful when
+        ///       combining encryption with compression. See
+        ///       <see cref="intro"/> for details.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        public static unsafe void crypto_lock_aead(Span<byte> mac, Span<byte> cipher_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> ad, ReadOnlySpan<byte> plain_text)
+        {
+            ExpectSize16(nameof(mac), mac.Length);
+            ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize24(nameof(nonce), nonce.Length);
+            fixed(void* cipher_text_ptr = cipher_text)
+            fixed(void* ad_ptr = ad)
+            fixed(void* plain_text_ptr = plain_text)
+            crypto_lock_aead(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), new IntPtr(ad_ptr), (monocypher.size_t)ad.Length, new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length);
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_lock"/>() encrypts and authenticates a
+        ///   plaintext. It can be decrypted by
+        ///   <see cref="crypto_unlock"/>().
+        /// </summary>
+        /// <param name="key">A 32-byte session key, shared between the sender and the recipient. It
+        ///       must be secret and random. Different methods can be used to produce and
+        ///       exchange this key, such as Diffie-Hellman key exchange, password key
+        ///       derivation (the password must be communicated on a secure channel), or
+        ///       even meeting physically. See
+        ///       <see cref="crypto_key_exchange"/> for key
+        ///       exchange, and <see cref="crypto_argon2i"/> for
+        ///       password key derivation.</param>
+        /// <param name="nonce">A 24-byte number, used only once with any given session key. It does not
+        ///       need to be secret or random, but it does have to be unique.
+        ///       Never use the same nonce twice with the same
+        ///       key. This would reveal the XOR of 2 different messages, which allows
+        ///       decryption and forgeries. The easiest (and recommended) way to generate
+        ///       this nonce is to select it at random. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator).</param>
+        /// <param name="mac">A 16-byte message authentication code (MAC),
+        ///       that can only be produced by someone who knows the session key. This
+        ///       guarantee cannot be upheld if a nonce has been reused with the session
+        ///       key, because doing so allows the attacker to learn the authentication key
+        ///       associated with that nonce. The MAC is intended to be sent along with the
+        ///       ciphertext.</param>
+        /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
+        ///       length however, will not. Be careful when
+        ///       combining encryption with compression. See
+        ///       <see cref="intro"/> for details.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_unlock_aead(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr ad, monocypher.size_t ad_size, IntPtr cipher_text, monocypher.size_t text_size);
         
         /// <summary>
-        /// Direct interface
+        /// <see cref="crypto_lock"/>() encrypts and authenticates a
+        ///   plaintext. It can be decrypted by
+        ///   <see cref="crypto_unlock"/>().
         /// </summary>
+        /// <param name="key">A 32-byte session key, shared between the sender and the recipient. It
+        ///       must be secret and random. Different methods can be used to produce and
+        ///       exchange this key, such as Diffie-Hellman key exchange, password key
+        ///       derivation (the password must be communicated on a secure channel), or
+        ///       even meeting physically. See
+        ///       <see cref="crypto_key_exchange"/> for key
+        ///       exchange, and <see cref="crypto_argon2i"/> for
+        ///       password key derivation.</param>
+        /// <param name="nonce">A 24-byte number, used only once with any given session key. It does not
+        ///       need to be secret or random, but it does have to be unique.
+        ///       Never use the same nonce twice with the same
+        ///       key. This would reveal the XOR of 2 different messages, which allows
+        ///       decryption and forgeries. The easiest (and recommended) way to generate
+        ///       this nonce is to select it at random. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator).</param>
+        /// <param name="mac">A 16-byte message authentication code (MAC),
+        ///       that can only be produced by someone who knows the session key. This
+        ///       guarantee cannot be upheld if a nonce has been reused with the session
+        ///       key, because doing so allows the attacker to learn the authentication key
+        ///       associated with that nonce. The MAC is intended to be sent along with the
+        ///       ciphertext.</param>
+        /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
+        ///       length however, will not. Be careful when
+        ///       combining encryption with compression. See
+        ///       <see cref="intro"/> for details.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        public static unsafe int crypto_unlock_aead(Span<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> mac, ReadOnlySpan<byte> ad, ReadOnlySpan<byte> cipher_text)
+        {
+            ExpectSameBufferSize(nameof(plain_text), plain_text.Length, nameof(cipher_text), cipher_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize24(nameof(nonce), nonce.Length);
+            ExpectSize16(nameof(mac), mac.Length);
+            fixed(void* plain_text_ptr = plain_text)
+            fixed(void* ad_ptr = ad)
+            fixed(void* cipher_text_ptr = cipher_text)
+            return crypto_unlock_aead(new IntPtr(plain_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), in MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(ad_ptr), (monocypher.size_t)ad.Length, new IntPtr(cipher_text_ptr), (monocypher.size_t)plain_text.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash.</param>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b(ref Byte64 hash, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash.</param>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        public static unsafe void crypto_blake2b(Span<byte> hash, ReadOnlySpan<byte> message)
+        {
+            ExpectSize64(nameof(hash), hash.Length);
+            fixed(void* message_ptr = message)
+            crypto_blake2b(ref MemoryMarshal.AsRef<Byte64>(hash), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash.</param>
+        /// <param name="hash_size">Length of <paramref name="hash"/>, in bytes. Must be between
+        ///       1 and 64. Anything below 32 is discouraged when using Blake2b as a
+        ///       general-purpose hash function; anything below 16 is discouraged when using
+        ///       Blake2b as a message authentication code.</param>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. May be
+        ///       NULL if
+        ///       <paramref name="key_size"/> is 0, in which case no key is
+        ///       used. Keys can be used to create a message authentication code (MAC). Use
+        ///       <see cref="crypto_verify16"/>,
+        ///       <see cref="crypto_verify32"/>, or
+        ///       <see cref="crypto_verify64"/> to compare MACs
+        ///       created this way. Choose the size of the hash accordingly. Users may want
+        ///       to wipe the key with <see cref="crypto_wipe"/>
+        ///       once they are done with it.</param>
+        /// <param name="key_size">Length of <paramref name="key"/>, in bytes. Must be between
+        ///       0 and 64. 32 is a good default.</param>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_general(IntPtr hash, monocypher.size_t hash_size, IntPtr key, monocypher.size_t key_size, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
-        /// Incremental interface
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="hash">The output hash.</param>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. May be
+        ///       NULL if
+        ///       <paramref name="key_size"/> is 0, in which case no key is
+        ///       used. Keys can be used to create a message authentication code (MAC). Use
+        ///       <see cref="crypto_verify16"/>,
+        ///       <see cref="crypto_verify32"/>, or
+        ///       <see cref="crypto_verify64"/> to compare MACs
+        ///       created this way. Choose the size of the hash accordingly. Users may want
+        ///       to wipe the key with <see cref="crypto_wipe"/>
+        ///       once they are done with it.</param>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        public static unsafe void crypto_blake2b_general(Span<byte> hash, ReadOnlySpan<byte> key, ReadOnlySpan<byte> message)
+        {
+            fixed(void* hash_ptr = hash)
+            fixed(void* key_ptr = key)
+            fixed(void* message_ptr = message)
+            crypto_blake2b_general(new IntPtr(hash_ptr), (monocypher.size_t)hash.Length, new IntPtr(key_ptr), (monocypher.size_t)key.Length, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash.</param>
+        /// <param name="hash_size">Length of <paramref name="hash"/>, in bytes. Must be between
+        ///       1 and 64. Anything below 32 is discouraged when using Blake2b as a
+        ///       general-purpose hash function; anything below 16 is discouraged when using
+        ///       Blake2b as a message authentication code.</param>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. May be
+        ///       NULL if
+        ///       <paramref name="key_size"/> is 0, in which case no key is
+        ///       used. Keys can be used to create a message authentication code (MAC). Use
+        ///       <see cref="crypto_verify16"/>,
+        ///       <see cref="crypto_verify32"/>, or
+        ///       <see cref="crypto_verify64"/> to compare MACs
+        ///       created this way. Choose the size of the hash accordingly. Users may want
+        ///       to wipe the key with <see cref="crypto_wipe"/>
+        ///       once they are done with it.</param>
+        /// <param name="key_size">Length of <paramref name="key"/>, in bytes. Must be between
+        ///       0 and 64. 32 is a good default.</param>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_init(ref monocypher.crypto_blake2b_ctx ctx);
         
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_update(ref monocypher.crypto_blake2b_ctx ctx, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        public static unsafe void crypto_blake2b_update(ref monocypher.crypto_blake2b_ctx ctx, ReadOnlySpan<byte> message)
+        {
+            fixed(void* message_ptr = message)
+            crypto_blake2b_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_final(ref monocypher.crypto_blake2b_ctx ctx, IntPtr hash);
         
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash.</param>
+        public static unsafe void crypto_blake2b_final(ref monocypher.crypto_blake2b_ctx ctx, Span<byte> hash)
+        {
+            fixed(void* hash_ptr = hash)
+            crypto_blake2b_final(ref ctx, new IntPtr(hash_ptr));
+        }
+        
+        /// <summary>
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash_size">Length of <paramref name="hash"/>, in bytes. Must be between
+        ///       1 and 64. Anything below 32 is discouraged when using Blake2b as a
+        ///       general-purpose hash function; anything below 16 is discouraged when using
+        ///       Blake2b as a message authentication code.</param>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. May be
+        ///       NULL if
+        ///       <paramref name="key_size"/> is 0, in which case no key is
+        ///       used. Keys can be used to create a message authentication code (MAC). Use
+        ///       <see cref="crypto_verify16"/>,
+        ///       <see cref="crypto_verify32"/>, or
+        ///       <see cref="crypto_verify64"/> to compare MACs
+        ///       created this way. Choose the size of the hash accordingly. Users may want
+        ///       to wipe the key with <see cref="crypto_wipe"/>
+        ///       once they are done with it.</param>
+        /// <param name="key_size">Length of <paramref name="key"/>, in bytes. Must be between
+        ///       0 and 64. 32 is a good default.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_general_init(ref monocypher.crypto_blake2b_ctx ctx, monocypher.size_t hash_size, IntPtr key, monocypher.size_t key_size);
         
         /// <summary>
-        /// Password key derivation (Argon2 i)
-        /// ----------------------------------
+        /// 
+        /// BLAKE2b is a fast cryptographically secure hash, based on the ideas of Chacha20.
+        ///   It is faster than MD5, yet just as secure as SHA-3.
+        /// <br/>
+        /// 
+        /// Note that BLAKE2b itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// BLAKE2b is immune to length extension attacks, and as such does not require any
+        ///   specific precautions, such as using the HMAC algorithm.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash_size">Length of <paramref name="hash"/>, in bytes. Must be between
+        ///       1 and 64. Anything below 32 is discouraged when using Blake2b as a
+        ///       general-purpose hash function; anything below 16 is discouraged when using
+        ///       Blake2b as a message authentication code.</param>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. May be
+        ///       NULL if
+        ///       <paramref name="key_size"/> is 0, in which case no key is
+        ///       used. Keys can be used to create a message authentication code (MAC). Use
+        ///       <see cref="crypto_verify16"/>,
+        ///       <see cref="crypto_verify32"/>, or
+        ///       <see cref="crypto_verify64"/> to compare MACs
+        ///       created this way. Choose the size of the hash accordingly. Users may want
+        ///       to wipe the key with <see cref="crypto_wipe"/>
+        ///       once they are done with it.</param>
+        public static unsafe void crypto_blake2b_general_init(ref monocypher.crypto_blake2b_ctx ctx, monocypher.size_t hash_size, ReadOnlySpan<byte> key)
+        {
+            fixed(void* key_ptr = key)
+            crypto_blake2b_general_init(ref ctx, hash_size, new IntPtr(key_ptr), (monocypher.size_t)key.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// Argon2i is a resource intensive password key derivation scheme optimised for the
+        ///   typical x86-like processor. It runs in constant time with respect to the
+        ///   contents of the password.
+        /// <br/>
+        /// 
+        /// Typical applications are password checking (for online services), and key
+        ///   derivation (for encryption). Derived keys can be used to encrypt, for example,
+        ///   private keys or password databases.
+        /// <br/>
+        /// 
+        /// The version provided by Monocypher has no threading support, so the degree of
+        ///   parallelism is limited to 1. This is considered good enough for most purposes.
+        /// <br/>
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_argon2i(IntPtr hash, uint hash_size, IntPtr work_area, uint nb_blocks, uint nb_iterations, IntPtr password, uint password_size, IntPtr salt, uint salt_size);
         
+        /// <summary>
+        /// 
+        /// Argon2i is a resource intensive password key derivation scheme optimised for the
+        ///   typical x86-like processor. It runs in constant time with respect to the
+        ///   contents of the password.
+        /// <br/>
+        /// 
+        /// Typical applications are password checking (for online services), and key
+        ///   derivation (for encryption). Derived keys can be used to encrypt, for example,
+        ///   private keys or password databases.
+        /// <br/>
+        /// 
+        /// The version provided by Monocypher has no threading support, so the degree of
+        ///   parallelism is limited to 1. This is considered good enough for most purposes.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_argon2i(Span<byte> hash, Span<byte> work_area, uint nb_blocks, uint nb_iterations, ReadOnlySpan<byte> password, ReadOnlySpan<byte> salt)
+        {
+            fixed(void* hash_ptr = hash)
+            fixed(void* work_area_ptr = work_area)
+            fixed(void* password_ptr = password)
+            fixed(void* salt_ptr = salt)
+            crypto_argon2i(new IntPtr(hash_ptr), (uint)hash.Length, new IntPtr(work_area_ptr), nb_blocks, nb_iterations, new IntPtr(password_ptr), (uint)password.Length, new IntPtr(salt_ptr), (uint)salt.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// Argon2i is a resource intensive password key derivation scheme optimised for the
+        ///   typical x86-like processor. It runs in constant time with respect to the
+        ///   contents of the password.
+        /// <br/>
+        /// 
+        /// Typical applications are password checking (for online services), and key
+        ///   derivation (for encryption). Derived keys can be used to encrypt, for example,
+        ///   private keys or password databases.
+        /// <br/>
+        /// 
+        /// The version provided by Monocypher has no threading support, so the degree of
+        ///   parallelism is limited to 1. This is considered good enough for most purposes.
+        /// <br/>
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_argon2i_general(IntPtr hash, uint hash_size, IntPtr work_area, uint nb_blocks, uint nb_iterations, IntPtr password, uint password_size, IntPtr salt, uint salt_size, IntPtr key, uint key_size, IntPtr ad, uint ad_size);
         
+        /// <summary>
+        /// 
+        /// Argon2i is a resource intensive password key derivation scheme optimised for the
+        ///   typical x86-like processor. It runs in constant time with respect to the
+        ///   contents of the password.
+        /// <br/>
+        /// 
+        /// Typical applications are password checking (for online services), and key
+        ///   derivation (for encryption). Derived keys can be used to encrypt, for example,
+        ///   private keys or password databases.
+        /// <br/>
+        /// 
+        /// The version provided by Monocypher has no threading support, so the degree of
+        ///   parallelism is limited to 1. This is considered good enough for most purposes.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_argon2i_general(Span<byte> hash, Span<byte> work_area, uint nb_blocks, uint nb_iterations, ReadOnlySpan<byte> password, ReadOnlySpan<byte> salt, ReadOnlySpan<byte> key, ReadOnlySpan<byte> ad)
+        {
+            fixed(void* hash_ptr = hash)
+            fixed(void* work_area_ptr = work_area)
+            fixed(void* password_ptr = password)
+            fixed(void* salt_ptr = salt)
+            fixed(void* key_ptr = key)
+            fixed(void* ad_ptr = ad)
+            crypto_argon2i_general(new IntPtr(hash_ptr), (uint)hash.Length, new IntPtr(work_area_ptr), nb_blocks, nb_iterations, new IntPtr(password_ptr), (uint)password.Length, new IntPtr(salt_ptr), (uint)salt.Length, new IntPtr(key_ptr), (uint)key.Length, new IntPtr(ad_ptr), (uint)ad.Length);
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_key_exchange"/>() computes a shared key
+        ///   with your secret key and their public key.
+        /// <br/>
+        /// <see cref="crypto_key_exchange_public_key"/>()
+        ///   deterministically computes the public key from a random secret key.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="shared_key">The shared secret, known only to those who know a relevant secret key
+        ///       (yours or theirs). It is cryptographically random, and suitable for use
+        ///       with the <see cref="crypto_lock"/> family of
+        ///       functions.</param>
+        /// <param name="your_secret_key">A 32-byte random number, known only to you. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random bytes (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="their_public_key">The public key of the other party.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_key_exchange(ref Byte32 shared_key, in Byte32 your_secret_key, in Byte32 their_public_key);
         
         /// <summary>
-        /// Generate public key
+        /// <see cref="crypto_key_exchange"/>() computes a shared key
+        ///   with your secret key and their public key.
+        /// <br/>
+        /// <see cref="crypto_key_exchange_public_key"/>()
+        ///   deterministically computes the public key from a random secret key.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="shared_key">The shared secret, known only to those who know a relevant secret key
+        ///       (yours or theirs). It is cryptographically random, and suitable for use
+        ///       with the <see cref="crypto_lock"/> family of
+        ///       functions.</param>
+        /// <param name="your_secret_key">A 32-byte random number, known only to you. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random bytes (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="their_public_key">The public key of the other party.</param>
+        public static unsafe void crypto_key_exchange(Span<byte> shared_key, ReadOnlySpan<byte> your_secret_key, ReadOnlySpan<byte> their_public_key)
+        {
+            ExpectSize32(nameof(shared_key), shared_key.Length);
+            ExpectSize32(nameof(your_secret_key), your_secret_key.Length);
+            ExpectSize32(nameof(their_public_key), their_public_key.Length);
+            crypto_key_exchange(ref MemoryMarshal.AsRef<Byte32>(shared_key), in MemoryMarshal.AsRef<Byte32>(your_secret_key), in MemoryMarshal.AsRef<Byte32>(their_public_key));
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_sign"/>() and
+        ///   <see cref="crypto_check"/>() provide EdDSA public key
+        ///   signatures and verification.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="secret_key">A 32-byte random number, known only to you. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator). Do not
+        ///       use the same private key for both signatures and key exchanges. The public
+        ///       keys are different, and revealing both may leak information.</param>
+        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        ///       with <see cref="crypto_sign_public_key"/>().</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_public_key(ref Byte32 public_key, in Byte32 secret_key);
         
         /// <summary>
-        /// Direct interface
+        /// <see cref="crypto_sign"/>() and
+        ///   <see cref="crypto_check"/>() provide EdDSA public key
+        ///   signatures and verification.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="secret_key">A 32-byte random number, known only to you. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator). Do not
+        ///       use the same private key for both signatures and key exchanges. The public
+        ///       keys are different, and revealing both may leak information.</param>
+        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        ///       with <see cref="crypto_sign_public_key"/>().</param>
+        public static unsafe void crypto_sign_public_key(Span<byte> public_key, ReadOnlySpan<byte> secret_key)
+        {
+            ExpectSize32(nameof(public_key), public_key.Length);
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            crypto_sign_public_key(ref MemoryMarshal.AsRef<Byte32>(public_key), in MemoryMarshal.AsRef<Byte32>(secret_key));
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_sign"/>() and
+        ///   <see cref="crypto_check"/>() provide EdDSA public key
+        ///   signatures and verification.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="signature">The signature.</param>
+        /// <param name="secret_key">A 32-byte random number, known only to you. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator). Do not
+        ///       use the same private key for both signatures and key exchanges. The public
+        ///       keys are different, and revealing both may leak information.</param>
+        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        ///       with <see cref="crypto_sign_public_key"/>().</param>
+        /// <param name="message">Message to sign.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// <see cref="crypto_sign"/>() and
+        ///   <see cref="crypto_check"/>() provide EdDSA public key
+        ///   signatures and verification.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="signature">The signature.</param>
+        /// <param name="secret_key">A 32-byte random number, known only to you. See
+        ///       <see cref="intro"/> about random number
+        ///       generation (use your operating system's random number generator). Do not
+        ///       use the same private key for both signatures and key exchanges. The public
+        ///       keys are different, and revealing both may leak information.</param>
+        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        ///       with <see cref="crypto_sign_public_key"/>().</param>
+        /// <param name="message">Message to sign.</param>
+        public static unsafe void crypto_sign(Span<byte> signature, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key, ReadOnlySpan<byte> message)
+        {
+            ExpectSize64(nameof(signature), signature.Length);
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            fixed(void* message_ptr = message)
+            crypto_sign(ref MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_sign"/>() and
+        ///   <see cref="crypto_check"/>() provide EdDSA public key
+        ///   signatures and verification.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="signature">The signature.</param>
+        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        ///       with <see cref="crypto_sign_public_key"/>().</param>
+        /// <param name="message">Message to sign.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_check(in Byte64 signature, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
-        /// Specialised hash.
-        /// Used to hash X25519 shared secrets.
+        /// <see cref="crypto_sign"/>() and
+        ///   <see cref="crypto_check"/>() provide EdDSA public key
+        ///   signatures and verification.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="signature">The signature.</param>
+        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        ///       with <see cref="crypto_sign_public_key"/>().</param>
+        /// <param name="message">Message to sign.</param>
+        public static unsafe int crypto_check(ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key, ReadOnlySpan<byte> message)
+        {
+            ExpectSize64(nameof(signature), signature.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            fixed(void* message_ptr = message)
+            return crypto_check(in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_hchacha20"/>() provides a
+        ///   not-so-cryptographic hash. It may be used for some specific purposes, such as
+        ///   X25519 key derivation, or XChacha20 initialisation. If in doubt, do not use
+        ///   directly. Use <see cref="crypto_blake2b"/>
+        ///   instead.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A sufficiently random key, such as the output of
+        ///       <see cref="crypto_x25519"/>.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hchacha20(ref Byte32 @out, in Byte32 key, in Byte16 @in);
         
         /// <summary>
-        /// Unauthenticated stream cipher.
-        /// Don't forget to add authentication.
+        /// <see cref="crypto_hchacha20"/>() provides a
+        ///   not-so-cryptographic hash. It may be used for some specific purposes, such as
+        ///   X25519 key derivation, or XChacha20 initialisation. If in doubt, do not use
+        ///   directly. Use <see cref="crypto_blake2b"/>
+        ///   instead.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="key">A sufficiently random key, such as the output of
+        ///       <see cref="crypto_x25519"/>.</param>
+        public static unsafe void crypto_hchacha20(Span<byte> @out, ReadOnlySpan<byte> key, ReadOnlySpan<byte> @in)
+        {
+            ExpectSize32(nameof(@out), @out.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize16(nameof(@in), @in.Length);
+            crypto_hchacha20(ref MemoryMarshal.AsRef<Byte32>(@out), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte16>(@in));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A 32-byte secret key.</param>
+        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        ///       not need to be secret or random, but it does have to be unique. Repeating
+        ///       a nonce with the same key reveals the XOR of two different messages, which
+        ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
+        ///       cannot. They are too small, and the same
+        ///       nonce may be selected twice by accident. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random numbers (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="plain_text">The message to encrypt. It is allowed to be
+        ///       NULL, in which case it will be
+        ///       interpreted as an all zero input.
+        ///       <paramref name="cipher_text"/> will then contain the raw
+        ///       Chacha20 stream.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="text_size">Length of both <paramref name="plain_text"/> and
+        ///       <paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_chacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte8 nonce);
         
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A 32-byte secret key.</param>
+        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        ///       not need to be secret or random, but it does have to be unique. Repeating
+        ///       a nonce with the same key reveals the XOR of two different messages, which
+        ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
+        ///       cannot. They are too small, and the same
+        ///       nonce may be selected twice by accident. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random numbers (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="plain_text">The message to encrypt. It is allowed to be
+        ///       NULL, in which case it will be
+        ///       interpreted as an all zero input.
+        ///       <paramref name="cipher_text"/> will then contain the raw
+        ///       Chacha20 stream.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        public static unsafe void crypto_chacha20(Span<byte> cipher_text, ReadOnlySpan<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce)
+        {
+            ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize8(nameof(nonce), nonce.Length);
+            fixed(void* cipher_text_ptr = cipher_text)
+            fixed(void* plain_text_ptr = plain_text)
+            crypto_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte8>(nonce));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A 32-byte secret key.</param>
+        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        ///       not need to be secret or random, but it does have to be unique. Repeating
+        ///       a nonce with the same key reveals the XOR of two different messages, which
+        ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
+        ///       cannot. They are too small, and the same
+        ///       nonce may be selected twice by accident. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random numbers (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="plain_text">The message to encrypt. It is allowed to be
+        ///       NULL, in which case it will be
+        ///       interpreted as an all zero input.
+        ///       <paramref name="cipher_text"/> will then contain the raw
+        ///       Chacha20 stream.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="text_size">Length of both <paramref name="plain_text"/> and
+        ///       <paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_xchacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte24 nonce);
         
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A 32-byte secret key.</param>
+        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        ///       not need to be secret or random, but it does have to be unique. Repeating
+        ///       a nonce with the same key reveals the XOR of two different messages, which
+        ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
+        ///       cannot. They are too small, and the same
+        ///       nonce may be selected twice by accident. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random numbers (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="plain_text">The message to encrypt. It is allowed to be
+        ///       NULL, in which case it will be
+        ///       interpreted as an all zero input.
+        ///       <paramref name="cipher_text"/> will then contain the raw
+        ///       Chacha20 stream.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        public static unsafe void crypto_xchacha20(Span<byte> cipher_text, ReadOnlySpan<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce)
+        {
+            ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize24(nameof(nonce), nonce.Length);
+            fixed(void* cipher_text_ptr = cipher_text)
+            fixed(void* plain_text_ptr = plain_text)
+            crypto_xchacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive as
+        ///   specified by the IETF in RFC 8439. They are provided strictly for
+        ///   compatibility with existing systems or strict standards compliance. New
+        ///   programs are strongly encouraged to use
+        ///   <see cref="crypto_xchacha20"/> instead.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// The <see cref="crypto_ietf_chacha20"/>() and
+        ///   <see cref="crypto_ietf_chacha20_ctr"/>() functions behave
+        ///   the same as <see cref="crypto_chacha20"/> and
+        ///   <see cref="crypto_chacha20_ctr"/>, respectively, but use
+        ///   differently-sized nonce and counter values. The nonce encompasses 12 bytes and
+        ///   the counter is correspondingly reduced to 4 bytes. The short counter limits a
+        ///   single pair of key and nonce to 256 GiB of data. A nonce of 12 bytes is
+        ///   just barely too short to be safely chosen at
+        ///   random; use a message counter instead. RFC 8439 also permits linear feedback
+        ///   shift registers to generate nonces.
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ietf_chacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte12 nonce);
         
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive as
+        ///   specified by the IETF in RFC 8439. They are provided strictly for
+        ///   compatibility with existing systems or strict standards compliance. New
+        ///   programs are strongly encouraged to use
+        ///   <see cref="crypto_xchacha20"/> instead.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// The <see cref="crypto_ietf_chacha20"/>() and
+        ///   <see cref="crypto_ietf_chacha20_ctr"/>() functions behave
+        ///   the same as <see cref="crypto_chacha20"/> and
+        ///   <see cref="crypto_chacha20_ctr"/>, respectively, but use
+        ///   differently-sized nonce and counter values. The nonce encompasses 12 bytes and
+        ///   the counter is correspondingly reduced to 4 bytes. The short counter limits a
+        ///   single pair of key and nonce to 256 GiB of data. A nonce of 12 bytes is
+        ///   just barely too short to be safely chosen at
+        ///   random; use a message counter instead. RFC 8439 also permits linear feedback
+        ///   shift registers to generate nonces.
+        /// 
+        /// </summary>
+        public static unsafe void crypto_ietf_chacha20(Span<byte> cipher_text, ReadOnlySpan<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce)
+        {
+            ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize12(nameof(nonce), nonce.Length);
+            fixed(void* cipher_text_ptr = cipher_text)
+            fixed(void* plain_text_ptr = plain_text)
+            crypto_ietf_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte12>(nonce));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A 32-byte secret key.</param>
+        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        ///       not need to be secret or random, but it does have to be unique. Repeating
+        ///       a nonce with the same key reveals the XOR of two different messages, which
+        ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
+        ///       cannot. They are too small, and the same
+        ///       nonce may be selected twice by accident. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random numbers (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="plain_text">The message to encrypt. It is allowed to be
+        ///       NULL, in which case it will be
+        ///       interpreted as an all zero input.
+        ///       <paramref name="cipher_text"/> will then contain the raw
+        ///       Chacha20 stream.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="text_size">Length of both <paramref name="plain_text"/> and
+        ///       <paramref name="cipher_text"/>, in bytes.</param>
+        /// <param name="ctr">The number of 64-byte blocks since the beginning of the stream.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern ulong crypto_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte8 nonce, ulong ctr);
         
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A 32-byte secret key.</param>
+        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        ///       not need to be secret or random, but it does have to be unique. Repeating
+        ///       a nonce with the same key reveals the XOR of two different messages, which
+        ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
+        ///       cannot. They are too small, and the same
+        ///       nonce may be selected twice by accident. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random numbers (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="plain_text">The message to encrypt. It is allowed to be
+        ///       NULL, in which case it will be
+        ///       interpreted as an all zero input.
+        ///       <paramref name="cipher_text"/> will then contain the raw
+        ///       Chacha20 stream.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="ctr">The number of 64-byte blocks since the beginning of the stream.</param>
+        public static unsafe ulong crypto_chacha20_ctr(Span<byte> cipher_text, ReadOnlySpan<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ulong ctr)
+        {
+            ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize8(nameof(nonce), nonce.Length);
+            fixed(void* cipher_text_ptr = cipher_text)
+            fixed(void* plain_text_ptr = plain_text)
+            return crypto_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte8>(nonce), ctr);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A 32-byte secret key.</param>
+        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        ///       not need to be secret or random, but it does have to be unique. Repeating
+        ///       a nonce with the same key reveals the XOR of two different messages, which
+        ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
+        ///       cannot. They are too small, and the same
+        ///       nonce may be selected twice by accident. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random numbers (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="plain_text">The message to encrypt. It is allowed to be
+        ///       NULL, in which case it will be
+        ///       interpreted as an all zero input.
+        ///       <paramref name="cipher_text"/> will then contain the raw
+        ///       Chacha20 stream.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="text_size">Length of both <paramref name="plain_text"/> and
+        ///       <paramref name="cipher_text"/>, in bytes.</param>
+        /// <param name="ctr">The number of 64-byte blocks since the beginning of the stream.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern ulong crypto_xchacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte24 nonce, ulong ctr);
         
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">A 32-byte secret key.</param>
+        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        ///       not need to be secret or random, but it does have to be unique. Repeating
+        ///       a nonce with the same key reveals the XOR of two different messages, which
+        ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
+        ///       cannot. They are too small, and the same
+        ///       nonce may be selected twice by accident. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random numbers (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="plain_text">The message to encrypt. It is allowed to be
+        ///       NULL, in which case it will be
+        ///       interpreted as an all zero input.
+        ///       <paramref name="cipher_text"/> will then contain the raw
+        ///       Chacha20 stream.</param>
+        /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="ctr">The number of 64-byte blocks since the beginning of the stream.</param>
+        public static unsafe ulong crypto_xchacha20_ctr(Span<byte> cipher_text, ReadOnlySpan<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ulong ctr)
+        {
+            ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize24(nameof(nonce), nonce.Length);
+            fixed(void* cipher_text_ptr = cipher_text)
+            fixed(void* plain_text_ptr = plain_text)
+            return crypto_xchacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), ctr);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive as
+        ///   specified by the IETF in RFC 8439. They are provided strictly for
+        ///   compatibility with existing systems or strict standards compliance. New
+        ///   programs are strongly encouraged to use
+        ///   <see cref="crypto_xchacha20"/> instead.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// The <see cref="crypto_ietf_chacha20"/>() and
+        ///   <see cref="crypto_ietf_chacha20_ctr"/>() functions behave
+        ///   the same as <see cref="crypto_chacha20"/> and
+        ///   <see cref="crypto_chacha20_ctr"/>, respectively, but use
+        ///   differently-sized nonce and counter values. The nonce encompasses 12 bytes and
+        ///   the counter is correspondingly reduced to 4 bytes. The short counter limits a
+        ///   single pair of key and nonce to 256 GiB of data. A nonce of 12 bytes is
+        ///   just barely too short to be safely chosen at
+        ///   random; use a message counter instead. RFC 8439 also permits linear feedback
+        ///   shift registers to generate nonces.
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern uint crypto_ietf_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte12 nonce, uint ctr);
         
         /// <summary>
-        /// Direct interface
+        /// 
+        /// These functions provide an interface for the Chacha20 encryption primitive as
+        ///   specified by the IETF in RFC 8439. They are provided strictly for
+        ///   compatibility with existing systems or strict standards compliance. New
+        ///   programs are strongly encouraged to use
+        ///   <see cref="crypto_xchacha20"/> instead.
+        /// <br/>
+        /// 
+        /// Chacha20 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// The <see cref="crypto_ietf_chacha20"/>() and
+        ///   <see cref="crypto_ietf_chacha20_ctr"/>() functions behave
+        ///   the same as <see cref="crypto_chacha20"/> and
+        ///   <see cref="crypto_chacha20_ctr"/>, respectively, but use
+        ///   differently-sized nonce and counter values. The nonce encompasses 12 bytes and
+        ///   the counter is correspondingly reduced to 4 bytes. The short counter limits a
+        ///   single pair of key and nonce to 256 GiB of data. A nonce of 12 bytes is
+        ///   just barely too short to be safely chosen at
+        ///   random; use a message counter instead. RFC 8439 also permits linear feedback
+        ///   shift registers to generate nonces.
+        /// 
         /// </summary>
+        public static unsafe uint crypto_ietf_chacha20_ctr(Span<byte> cipher_text, ReadOnlySpan<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, uint ctr)
+        {
+            ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
+            ExpectSize32(nameof(key), key.Length);
+            ExpectSize12(nameof(nonce), nonce.Length);
+            fixed(void* cipher_text_ptr = cipher_text)
+            fixed(void* plain_text_ptr = plain_text)
+            return crypto_ietf_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte12>(nonce), ctr);
+        }
+        
+        /// <summary>
+        /// 
+        /// Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+        ///   means the authentication key can be used only once.
+        ///   This makes Poly1305 easy to misuse. On the other
+        ///   hand, Poly1305 is fast, and provably secure if used correctly.
+        /// <br/>
+        /// 
+        /// Poly1305 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="mac">The authentication code.</param>
+        /// <param name="key">The secret authentication key. Use only once per message. Do not use the
+        ///       session key to authenticate messages. It should be wiped with
+        ///       <see cref="crypto_wipe"/> after use.</param>
+        /// <param name="message">The message to authenticate. May overlap with the
+        ///       <paramref name="mac"/> argument.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_poly1305(ref Byte16 mac, IntPtr message, monocypher.size_t message_size, in Byte32 key);
         
         /// <summary>
-        /// Incremental interface
+        /// 
+        /// Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+        ///   means the authentication key can be used only once.
+        ///   This makes Poly1305 easy to misuse. On the other
+        ///   hand, Poly1305 is fast, and provably secure if used correctly.
+        /// <br/>
+        /// 
+        /// Poly1305 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="mac">The authentication code.</param>
+        /// <param name="key">The secret authentication key. Use only once per message. Do not use the
+        ///       session key to authenticate messages. It should be wiped with
+        ///       <see cref="crypto_wipe"/> after use.</param>
+        /// <param name="message">The message to authenticate. May overlap with the
+        ///       <paramref name="mac"/> argument.</param>
+        public static unsafe void crypto_poly1305(Span<byte> mac, ReadOnlySpan<byte> message, ReadOnlySpan<byte> key)
+        {
+            ExpectSize16(nameof(mac), mac.Length);
+            ExpectSize32(nameof(key), key.Length);
+            fixed(void* message_ptr = message)
+            crypto_poly1305(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(message_ptr), (monocypher.size_t)message.Length, in MemoryMarshal.AsRef<Byte32>(key));
+        }
+        
+        /// <summary>
+        /// 
+        /// Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+        ///   means the authentication key can be used only once.
+        ///   This makes Poly1305 easy to misuse. On the other
+        ///   hand, Poly1305 is fast, and provably secure if used correctly.
+        /// <br/>
+        /// 
+        /// Poly1305 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">The secret authentication key. Use only once per message. Do not use the
+        ///       session key to authenticate messages. It should be wiped with
+        ///       <see cref="crypto_wipe"/> after use.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_poly1305_init(ref monocypher.crypto_poly1305_ctx ctx, in Byte32 key);
         
+        /// <summary>
+        /// 
+        /// Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+        ///   means the authentication key can be used only once.
+        ///   This makes Poly1305 easy to misuse. On the other
+        ///   hand, Poly1305 is fast, and provably secure if used correctly.
+        /// <br/>
+        /// 
+        /// Poly1305 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">The secret authentication key. Use only once per message. Do not use the
+        ///       session key to authenticate messages. It should be wiped with
+        ///       <see cref="crypto_wipe"/> after use.</param>
+        public static unsafe void crypto_poly1305_init(ref monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> key)
+        {
+            ExpectSize32(nameof(key), key.Length);
+            crypto_poly1305_init(ref ctx, in MemoryMarshal.AsRef<Byte32>(key));
+        }
+        
+        /// <summary>
+        /// 
+        /// Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+        ///   means the authentication key can be used only once.
+        ///   This makes Poly1305 easy to misuse. On the other
+        ///   hand, Poly1305 is fast, and provably secure if used correctly.
+        /// <br/>
+        /// 
+        /// Poly1305 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="message">The message to authenticate. May overlap with the
+        ///       <paramref name="mac"/> argument.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_poly1305_update(ref monocypher.crypto_poly1305_ctx ctx, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// 
+        /// Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+        ///   means the authentication key can be used only once.
+        ///   This makes Poly1305 easy to misuse. On the other
+        ///   hand, Poly1305 is fast, and provably secure if used correctly.
+        /// <br/>
+        /// 
+        /// Poly1305 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="message">The message to authenticate. May overlap with the
+        ///       <paramref name="mac"/> argument.</param>
+        public static unsafe void crypto_poly1305_update(ref monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> message)
+        {
+            fixed(void* message_ptr = message)
+            crypto_poly1305_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+        ///   means the authentication key can be used only once.
+        ///   This makes Poly1305 easy to misuse. On the other
+        ///   hand, Poly1305 is fast, and provably secure if used correctly.
+        /// <br/>
+        /// 
+        /// Poly1305 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="mac">The authentication code.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_poly1305_final(ref monocypher.crypto_poly1305_ctx ctx, ref Byte16 mac);
         
         /// <summary>
-        /// Shared secrets are not quite random.
-        /// Hash them to derive an actual shared key.
+        /// 
+        /// Poly1305 is a one-time message authentication code. &#x201C;One-time&#x201D;
+        ///   means the authentication key can be used only once.
+        ///   This makes Poly1305 easy to misuse. On the other
+        ///   hand, Poly1305 is fast, and provably secure if used correctly.
+        /// <br/>
+        /// 
+        /// Poly1305 is a low-level primitive. Consider using authenticated encryption,
+        ///   implemented by <see cref="crypto_lock"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="mac">The authentication code.</param>
+        public static unsafe void crypto_poly1305_final(ref monocypher.crypto_poly1305_ctx ctx, Span<byte> mac)
+        {
+            ExpectSize16(nameof(mac), mac.Length);
+            crypto_poly1305_final(ref ctx, ref MemoryMarshal.AsRef<Byte16>(mac));
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_x25519"/>() computes a shared secret with
+        ///   <paramref name="your_secret_key"/> and
+        ///   <paramref name="their_public_key"/>. It is a low-level
+        ///   primitive. Use <see cref="crypto_key_exchange"/>
+        ///   unless you have a specific reason not to.
+        /// <br/>
+        /// <see cref="crypto_x25519_public_key"/>() is the same as
+        ///   <see cref="crypto_key_exchange_public_key"/>. It
+        ///   deterministically computes the public key from a random secret key.
+        /// <br/>
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_x25519_public_key(ref Byte32 public_key, in Byte32 secret_key);
         
+        /// <summary>
+        /// <see cref="crypto_x25519"/>() computes a shared secret with
+        ///   <paramref name="your_secret_key"/> and
+        ///   <paramref name="their_public_key"/>. It is a low-level
+        ///   primitive. Use <see cref="crypto_key_exchange"/>
+        ///   unless you have a specific reason not to.
+        /// <br/>
+        /// <see cref="crypto_x25519_public_key"/>() is the same as
+        ///   <see cref="crypto_key_exchange_public_key"/>. It
+        ///   deterministically computes the public key from a random secret key.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_x25519_public_key(Span<byte> public_key, ReadOnlySpan<byte> secret_key)
+        {
+            ExpectSize32(nameof(public_key), public_key.Length);
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            crypto_x25519_public_key(ref MemoryMarshal.AsRef<Byte32>(public_key), in MemoryMarshal.AsRef<Byte32>(secret_key));
+        }
+        
+        /// <summary>
+        /// <see cref="crypto_x25519"/>() computes a shared secret with
+        ///   <paramref name="your_secret_key"/> and
+        ///   <paramref name="their_public_key"/>. It is a low-level
+        ///   primitive. Use <see cref="crypto_key_exchange"/>
+        ///   unless you have a specific reason not to.
+        /// <br/>
+        /// <see cref="crypto_x25519_public_key"/>() is the same as
+        ///   <see cref="crypto_key_exchange_public_key"/>. It
+        ///   deterministically computes the public key from a random secret key.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="raw_shared_secret">The shared secret, known only to those who know a relevant secret key
+        ///       (yours or theirs). It is not cryptographically random. Do not use it
+        ///       directly as a key. Hash it with
+        ///       <see cref="crypto_hchacha20"/> or
+        ///       <see cref="crypto_blake2b"/> first.</param>
+        /// <param name="your_secret_key">A 32-byte secret random number. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random bytes (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="their_public_key">The public key of the other party.
+        ///     <br/>
+        /// <paramref name="raw_shared_secret"/> and
+        ///       <paramref name="your_secret_key"/> may overlap if your
+        ///       secret is no longer required.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_x25519(ref Byte32 raw_shared_secret, in Byte32 your_secret_key, in Byte32 their_public_key);
         
         /// <summary>
-        /// "Dirty" versions of x25519_public_key()
-        /// Only use to generate ephemeral keys you want to hide.
-        /// Note that those functions leaks 3 bits of the private key.
+        /// <see cref="crypto_x25519"/>() computes a shared secret with
+        ///   <paramref name="your_secret_key"/> and
+        ///   <paramref name="their_public_key"/>. It is a low-level
+        ///   primitive. Use <see cref="crypto_key_exchange"/>
+        ///   unless you have a specific reason not to.
+        /// <br/>
+        /// <see cref="crypto_x25519_public_key"/>() is the same as
+        ///   <see cref="crypto_key_exchange_public_key"/>. It
+        ///   deterministically computes the public key from a random secret key.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="raw_shared_secret">The shared secret, known only to those who know a relevant secret key
+        ///       (yours or theirs). It is not cryptographically random. Do not use it
+        ///       directly as a key. Hash it with
+        ///       <see cref="crypto_hchacha20"/> or
+        ///       <see cref="crypto_blake2b"/> first.</param>
+        /// <param name="your_secret_key">A 32-byte secret random number. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random bytes (use the operating system's random number
+        ///       generator).</param>
+        /// <param name="their_public_key">The public key of the other party.
+        ///     <br/>
+        /// <paramref name="raw_shared_secret"/> and
+        ///       <paramref name="your_secret_key"/> may overlap if your
+        ///       secret is no longer required.</param>
+        public static unsafe void crypto_x25519(Span<byte> raw_shared_secret, ReadOnlySpan<byte> your_secret_key, ReadOnlySpan<byte> their_public_key)
+        {
+            ExpectSize32(nameof(raw_shared_secret), raw_shared_secret.Length);
+            ExpectSize32(nameof(your_secret_key), your_secret_key.Length);
+            ExpectSize32(nameof(their_public_key), their_public_key.Length);
+            crypto_x25519(ref MemoryMarshal.AsRef<Byte32>(raw_shared_secret), in MemoryMarshal.AsRef<Byte32>(your_secret_key), in MemoryMarshal.AsRef<Byte32>(their_public_key));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are used in public key generation for
+        ///   <see cref="crypto_curve_to_hidden"/>.
+        ///   This is a highly advanced feature; unless you are
+        ///   reading this because you were referred here from
+        ///   <see cref="crypto_curve_to_hidden"/>,
+        ///   you likely have no reason to be using these
+        ///   functions and are probably looking for
+        ///   <see cref="crypto_key_exchange"/> or
+        ///   <see cref="crypto_x25519"/> instead. Expect
+        ///   elliptic curve jargon on this page.
+        /// <br/>
+        /// 
+        /// Both functions generate a Curve25519 public key
+        ///   <paramref name="pk"/> from the given secret key
+        ///   <paramref name="sk"/>; the public keys are on the
+        ///   whole curve, rather than just the main
+        ///   prime-order subgroup. Both do the same with different code size and memory
+        ///   characteristics: <see cref="crypto_x25519_dirty_fast"/>()
+        ///   uses multiple large temporary variables and uses functions that are normally
+        ///   used internally for <see cref="crypto_sign"/>;
+        ///   accordingly, it uses both more memory (for the temporary variables) and more
+        ///   code size (unless the signing code is already compiled in elsewhere).
+        ///   <see cref="crypto_x25519_dirty_small"/>() yields the same
+        ///   result, but does so using less code and memory at a large performance penalty
+        ///   compared to <see cref="crypto_x25519_dirty_fast"/>().
+        /// <br/>
+        /// 
+        /// The resulting public keys are to be used with
+        ///   <see cref="crypto_x25519"/> or
+        ///   <see cref="crypto_key_exchange"/>, which clear the
+        ///   cofactor.
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_x25519_dirty_small(ref Byte32 pk, in Byte32 sk);
         
+        /// <summary>
+        /// 
+        /// These functions are used in public key generation for
+        ///   <see cref="crypto_curve_to_hidden"/>.
+        ///   This is a highly advanced feature; unless you are
+        ///   reading this because you were referred here from
+        ///   <see cref="crypto_curve_to_hidden"/>,
+        ///   you likely have no reason to be using these
+        ///   functions and are probably looking for
+        ///   <see cref="crypto_key_exchange"/> or
+        ///   <see cref="crypto_x25519"/> instead. Expect
+        ///   elliptic curve jargon on this page.
+        /// <br/>
+        /// 
+        /// Both functions generate a Curve25519 public key
+        ///   <paramref name="pk"/> from the given secret key
+        ///   <paramref name="sk"/>; the public keys are on the
+        ///   whole curve, rather than just the main
+        ///   prime-order subgroup. Both do the same with different code size and memory
+        ///   characteristics: <see cref="crypto_x25519_dirty_fast"/>()
+        ///   uses multiple large temporary variables and uses functions that are normally
+        ///   used internally for <see cref="crypto_sign"/>;
+        ///   accordingly, it uses both more memory (for the temporary variables) and more
+        ///   code size (unless the signing code is already compiled in elsewhere).
+        ///   <see cref="crypto_x25519_dirty_small"/>() yields the same
+        ///   result, but does so using less code and memory at a large performance penalty
+        ///   compared to <see cref="crypto_x25519_dirty_fast"/>().
+        /// <br/>
+        /// 
+        /// The resulting public keys are to be used with
+        ///   <see cref="crypto_x25519"/> or
+        ///   <see cref="crypto_key_exchange"/>, which clear the
+        ///   cofactor.
+        /// 
+        /// </summary>
+        public static unsafe void crypto_x25519_dirty_small(Span<byte> pk, ReadOnlySpan<byte> sk)
+        {
+            ExpectSize32(nameof(pk), pk.Length);
+            ExpectSize32(nameof(sk), sk.Length);
+            crypto_x25519_dirty_small(ref MemoryMarshal.AsRef<Byte32>(pk), in MemoryMarshal.AsRef<Byte32>(sk));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are used in public key generation for
+        ///   <see cref="crypto_curve_to_hidden"/>.
+        ///   This is a highly advanced feature; unless you are
+        ///   reading this because you were referred here from
+        ///   <see cref="crypto_curve_to_hidden"/>,
+        ///   you likely have no reason to be using these
+        ///   functions and are probably looking for
+        ///   <see cref="crypto_key_exchange"/> or
+        ///   <see cref="crypto_x25519"/> instead. Expect
+        ///   elliptic curve jargon on this page.
+        /// <br/>
+        /// 
+        /// Both functions generate a Curve25519 public key
+        ///   <paramref name="pk"/> from the given secret key
+        ///   <paramref name="sk"/>; the public keys are on the
+        ///   whole curve, rather than just the main
+        ///   prime-order subgroup. Both do the same with different code size and memory
+        ///   characteristics: <see cref="crypto_x25519_dirty_fast"/>()
+        ///   uses multiple large temporary variables and uses functions that are normally
+        ///   used internally for <see cref="crypto_sign"/>;
+        ///   accordingly, it uses both more memory (for the temporary variables) and more
+        ///   code size (unless the signing code is already compiled in elsewhere).
+        ///   <see cref="crypto_x25519_dirty_small"/>() yields the same
+        ///   result, but does so using less code and memory at a large performance penalty
+        ///   compared to <see cref="crypto_x25519_dirty_fast"/>().
+        /// <br/>
+        /// 
+        /// The resulting public keys are to be used with
+        ///   <see cref="crypto_x25519"/> or
+        ///   <see cref="crypto_key_exchange"/>, which clear the
+        ///   cofactor.
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_x25519_dirty_fast(ref Byte32 pk, in Byte32 sk);
         
         /// <summary>
-        /// scalar "division"
-        /// Used for OPRF.  Be aware that exponential blinding is less secure
-        /// than Diffie-Hellman key exchange.
+        /// 
+        /// These functions are used in public key generation for
+        ///   <see cref="crypto_curve_to_hidden"/>.
+        ///   This is a highly advanced feature; unless you are
+        ///   reading this because you were referred here from
+        ///   <see cref="crypto_curve_to_hidden"/>,
+        ///   you likely have no reason to be using these
+        ///   functions and are probably looking for
+        ///   <see cref="crypto_key_exchange"/> or
+        ///   <see cref="crypto_x25519"/> instead. Expect
+        ///   elliptic curve jargon on this page.
+        /// <br/>
+        /// 
+        /// Both functions generate a Curve25519 public key
+        ///   <paramref name="pk"/> from the given secret key
+        ///   <paramref name="sk"/>; the public keys are on the
+        ///   whole curve, rather than just the main
+        ///   prime-order subgroup. Both do the same with different code size and memory
+        ///   characteristics: <see cref="crypto_x25519_dirty_fast"/>()
+        ///   uses multiple large temporary variables and uses functions that are normally
+        ///   used internally for <see cref="crypto_sign"/>;
+        ///   accordingly, it uses both more memory (for the temporary variables) and more
+        ///   code size (unless the signing code is already compiled in elsewhere).
+        ///   <see cref="crypto_x25519_dirty_small"/>() yields the same
+        ///   result, but does so using less code and memory at a large performance penalty
+        ///   compared to <see cref="crypto_x25519_dirty_fast"/>().
+        /// <br/>
+        /// 
+        /// The resulting public keys are to be used with
+        ///   <see cref="crypto_x25519"/> or
+        ///   <see cref="crypto_key_exchange"/>, which clear the
+        ///   cofactor.
+        /// 
         /// </summary>
+        public static unsafe void crypto_x25519_dirty_fast(Span<byte> pk, ReadOnlySpan<byte> sk)
+        {
+            ExpectSize32(nameof(pk), pk.Length);
+            ExpectSize32(nameof(sk), sk.Length);
+            crypto_x25519_dirty_fast(ref MemoryMarshal.AsRef<Byte32>(pk), in MemoryMarshal.AsRef<Byte32>(sk));
+        }
+        
+        /// <summary>
+        /// 
+        /// The <see cref="crypto_x25519_inverse"/>() function performs
+        ///   scalar multiplication of the multiplicative inverse of a scalar for X25519.
+        ///   This is a highly advanced, specialized feature;
+        ///   unless you are implementing a protocol that requires this specifically,
+        ///   you likely have no reason to be using these
+        ///   functions and are probably looking for
+        ///   <see cref="crypto_key_exchange"/> or
+        ///   <see cref="crypto_x25519"/> instead. Expect
+        ///   elliptic curve jargon on this page.
+        /// <br/>
+        /// 
+        /// This function is used, for example, with exponential blinding in oblivious
+        ///   pseudo-random functions (OPRFs).
+        /// </summary>
+        /// <param name="blind_salt">The output point.</param>
+        /// <param name="private_key">The private key (scalar) to use. First, the value is clamped; then the
+        ///       clamped value's multiplicative inverse (modulo the curve order) is
+        ///       determined; the clamped value's multiplicative inverse then has its
+        ///       cofactor cleared, and that final value is then used for scalar
+        ///       multiplication.</param>
+        /// <param name="curve_point">The curve point on X25519 to multiply with the multiplicative inverse
+        ///       (modulo the curve order) of
+        ///     <paramref name="private_key"/>.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_x25519_inverse(ref Byte32 blind_salt, in Byte32 private_key, in Byte32 curve_point);
         
         /// <summary>
-        /// EdDSA to X25519
-        /// ---------------
+        /// 
+        /// The <see cref="crypto_x25519_inverse"/>() function performs
+        ///   scalar multiplication of the multiplicative inverse of a scalar for X25519.
+        ///   This is a highly advanced, specialized feature;
+        ///   unless you are implementing a protocol that requires this specifically,
+        ///   you likely have no reason to be using these
+        ///   functions and are probably looking for
+        ///   <see cref="crypto_key_exchange"/> or
+        ///   <see cref="crypto_x25519"/> instead. Expect
+        ///   elliptic curve jargon on this page.
+        /// <br/>
+        /// 
+        /// This function is used, for example, with exponential blinding in oblivious
+        ///   pseudo-random functions (OPRFs).
         /// </summary>
+        /// <param name="blind_salt">The output point.</param>
+        /// <param name="private_key">The private key (scalar) to use. First, the value is clamped; then the
+        ///       clamped value's multiplicative inverse (modulo the curve order) is
+        ///       determined; the clamped value's multiplicative inverse then has its
+        ///       cofactor cleared, and that final value is then used for scalar
+        ///       multiplication.</param>
+        /// <param name="curve_point">The curve point on X25519 to multiply with the multiplicative inverse
+        ///       (modulo the curve order) of
+        ///     <paramref name="private_key"/>.</param>
+        public static unsafe void crypto_x25519_inverse(Span<byte> blind_salt, ReadOnlySpan<byte> private_key, ReadOnlySpan<byte> curve_point)
+        {
+            ExpectSize32(nameof(blind_salt), blind_salt.Length);
+            ExpectSize32(nameof(private_key), private_key.Length);
+            ExpectSize32(nameof(curve_point), curve_point.Length);
+            crypto_x25519_inverse(ref MemoryMarshal.AsRef<Byte32>(blind_salt), in MemoryMarshal.AsRef<Byte32>(private_key), in MemoryMarshal.AsRef<Byte32>(curve_point));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions convert keys for use with
+        ///   <see cref="crypto_sign"/> (EdDSA with the BLAKE2b
+        ///   hash function) to keys for use with
+        ///   <see cref="crypto_key_exchange"/> and
+        ///   <see cref="crypto_x25519"/>. This may be useful in
+        ///   some resource-constrained contexts or when no other key is available (for
+        ///   example, when retrieving SSH public keys from GitHub and reusing the SSH
+        ///   public keys as X25519 public keys).
+        /// <br/>
+        /// 
+        /// The <see cref="crypto_from_eddsa_private"/>() function
+        ///   converts an EdDSA (with BLAKE2b) private key to an X25519 private key. The
+        ///   <see cref="crypto_from_eddsa_public"/>() function
+        ///   converts an EdDSA public key to an X25519 public key.
+        /// <br/>
+        /// 
+        /// X25519 key pairs cannot be converted back to EdDSA key pairs. The conversion of
+        ///   private keys is specific to EdDSA with BLAKE2b because of the way EdDSA works.
+        ///   In particular, this means that the output of
+        ///   <see cref="crypto_from_eddsa_private"/>() differs from
+        ///   <see cref="crypto_from_ed25519_private"/> in the
+        ///   optional code. However, the output of
+        ///   <see cref="crypto_from_eddsa_public"/>() is identical to
+        ///   <see cref="crypto_from_ed25519_public"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="eddsa">The signing public key or private key to convert to a X25519 public key or
+        ///       private key, respectively.</param>
+        /// <param name="x25519">The converted private key or public key.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_from_eddsa_private(ref Byte32 x25519, in Byte32 eddsa);
         
+        /// <summary>
+        /// 
+        /// These functions convert keys for use with
+        ///   <see cref="crypto_sign"/> (EdDSA with the BLAKE2b
+        ///   hash function) to keys for use with
+        ///   <see cref="crypto_key_exchange"/> and
+        ///   <see cref="crypto_x25519"/>. This may be useful in
+        ///   some resource-constrained contexts or when no other key is available (for
+        ///   example, when retrieving SSH public keys from GitHub and reusing the SSH
+        ///   public keys as X25519 public keys).
+        /// <br/>
+        /// 
+        /// The <see cref="crypto_from_eddsa_private"/>() function
+        ///   converts an EdDSA (with BLAKE2b) private key to an X25519 private key. The
+        ///   <see cref="crypto_from_eddsa_public"/>() function
+        ///   converts an EdDSA public key to an X25519 public key.
+        /// <br/>
+        /// 
+        /// X25519 key pairs cannot be converted back to EdDSA key pairs. The conversion of
+        ///   private keys is specific to EdDSA with BLAKE2b because of the way EdDSA works.
+        ///   In particular, this means that the output of
+        ///   <see cref="crypto_from_eddsa_private"/>() differs from
+        ///   <see cref="crypto_from_ed25519_private"/> in the
+        ///   optional code. However, the output of
+        ///   <see cref="crypto_from_eddsa_public"/>() is identical to
+        ///   <see cref="crypto_from_ed25519_public"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="eddsa">The signing public key or private key to convert to a X25519 public key or
+        ///       private key, respectively.</param>
+        /// <param name="x25519">The converted private key or public key.</param>
+        public static unsafe void crypto_from_eddsa_private(Span<byte> x25519, ReadOnlySpan<byte> eddsa)
+        {
+            ExpectSize32(nameof(x25519), x25519.Length);
+            ExpectSize32(nameof(eddsa), eddsa.Length);
+            crypto_from_eddsa_private(ref MemoryMarshal.AsRef<Byte32>(x25519), in MemoryMarshal.AsRef<Byte32>(eddsa));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions convert keys for use with
+        ///   <see cref="crypto_sign"/> (EdDSA with the BLAKE2b
+        ///   hash function) to keys for use with
+        ///   <see cref="crypto_key_exchange"/> and
+        ///   <see cref="crypto_x25519"/>. This may be useful in
+        ///   some resource-constrained contexts or when no other key is available (for
+        ///   example, when retrieving SSH public keys from GitHub and reusing the SSH
+        ///   public keys as X25519 public keys).
+        /// <br/>
+        /// 
+        /// The <see cref="crypto_from_eddsa_private"/>() function
+        ///   converts an EdDSA (with BLAKE2b) private key to an X25519 private key. The
+        ///   <see cref="crypto_from_eddsa_public"/>() function
+        ///   converts an EdDSA public key to an X25519 public key.
+        /// <br/>
+        /// 
+        /// X25519 key pairs cannot be converted back to EdDSA key pairs. The conversion of
+        ///   private keys is specific to EdDSA with BLAKE2b because of the way EdDSA works.
+        ///   In particular, this means that the output of
+        ///   <see cref="crypto_from_eddsa_private"/>() differs from
+        ///   <see cref="crypto_from_ed25519_private"/> in the
+        ///   optional code. However, the output of
+        ///   <see cref="crypto_from_eddsa_public"/>() is identical to
+        ///   <see cref="crypto_from_ed25519_public"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="eddsa">The signing public key or private key to convert to a X25519 public key or
+        ///       private key, respectively.</param>
+        /// <param name="x25519">The converted private key or public key.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_from_eddsa_public(ref Byte32 x25519, in Byte32 eddsa);
         
         /// <summary>
-        /// Signing (2 passes)
-        /// Make sure the two passes hash the same message,
-        /// else you might reveal the private key.
+        /// 
+        /// These functions convert keys for use with
+        ///   <see cref="crypto_sign"/> (EdDSA with the BLAKE2b
+        ///   hash function) to keys for use with
+        ///   <see cref="crypto_key_exchange"/> and
+        ///   <see cref="crypto_x25519"/>. This may be useful in
+        ///   some resource-constrained contexts or when no other key is available (for
+        ///   example, when retrieving SSH public keys from GitHub and reusing the SSH
+        ///   public keys as X25519 public keys).
+        /// <br/>
+        /// 
+        /// The <see cref="crypto_from_eddsa_private"/>() function
+        ///   converts an EdDSA (with BLAKE2b) private key to an X25519 private key. The
+        ///   <see cref="crypto_from_eddsa_public"/>() function
+        ///   converts an EdDSA public key to an X25519 public key.
+        /// <br/>
+        /// 
+        /// X25519 key pairs cannot be converted back to EdDSA key pairs. The conversion of
+        ///   private keys is specific to EdDSA with BLAKE2b because of the way EdDSA works.
+        ///   In particular, this means that the output of
+        ///   <see cref="crypto_from_eddsa_private"/>() differs from
+        ///   <see cref="crypto_from_ed25519_private"/> in the
+        ///   optional code. However, the output of
+        ///   <see cref="crypto_from_eddsa_public"/>() is identical to
+        ///   <see cref="crypto_from_ed25519_public"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="eddsa">The signing public key or private key to convert to a X25519 public key or
+        ///       private key, respectively.</param>
+        /// <param name="x25519">The converted private key or public key.</param>
+        public static unsafe void crypto_from_eddsa_public(Span<byte> x25519, ReadOnlySpan<byte> eddsa)
+        {
+            ExpectSize32(nameof(x25519), x25519.Length);
+            ExpectSize32(nameof(eddsa), eddsa.Length);
+            crypto_from_eddsa_public(ref MemoryMarshal.AsRef<Byte32>(x25519), in MemoryMarshal.AsRef<Byte32>(eddsa));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
         
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key)
+        {
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            crypto_sign_init_first_pass(ref ctx, in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_update(ref monocypher.crypto_sign_ctx_abstract ctx, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_sign_update(ref monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> message)
+        {
+            fixed(void* message_ptr = message)
+            crypto_sign_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_init_second_pass(ref monocypher.crypto_sign_ctx_abstract ctx);
         
         /// <summary>
-        /// use crypto_sign_update() again.
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_final(ref monocypher.crypto_sign_ctx_abstract ctx, ref Byte64 signature);
         
         /// <summary>
-        /// Verification (1 pass)
-        /// Make sure you don't use (parts of) the message
-        /// before you're done checking it.
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_sign_final(ref monocypher.crypto_sign_ctx_abstract ctx, Span<byte> signature)
+        {
+            ExpectSize64(nameof(signature), signature.Length);
+            crypto_sign_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(signature));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_check_init(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
         
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_check_init(ref monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key)
+        {
+            ExpectSize64(nameof(signature), signature.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            crypto_check_init(ref ctx, in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_check_update(ref monocypher.crypto_check_ctx_abstract ctx, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_check_update(ref monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> message)
+        {
+            fixed(void* message_ptr = message)
+            crypto_check_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_sign"/> and
+        ///   <see cref="crypto_check"/>. Prefer those simpler
+        ///   functions if possible.
+        /// <br/>
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_check_final(ref monocypher.crypto_check_ctx_abstract ctx);
         
         /// <summary>
-        /// Custom hash interface
+        /// 
+        /// These functions are variants of the
+        ///   <see cref="crypto_sign_init_first_pass"/> family
+        ///   of functions: They provide the ability to replace the EdDSA hash function with
+        ///   any user-provided hash function.
+        /// <br/>
+        /// This is a highly advanced feature. Interoperability
+        ///   of public key signatures with other cryptographic libraries can normally be
+        ///   achieved by using
+        ///   <see cref="crypto_ed25519_sign"/> or
+        ///   <see cref="crypto_ed25519_sign_init_first_pass"/>
+        ///   already. This interface is exposed only for completeness and to handle special
+        ///   situations (e.g. to use the hash function of the future winner of the NIST
+        ///   lightweight crypto competition on a device with highly constrained resources
+        ///   or taking advantage of hardware support for cryptographic hash functions).
+        ///   Whenever possible, these functions should be avoided.
+        /// <br/>
+        /// 
+        /// To make available a custom hash algorithm for use with these functions, a
+        ///   crypto_sign_vtable structure must be
+        ///   provided. It is defined as:
+        /// <br/>
+        /// 
+        /// typedef struct { 
+        ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
+        ///                  size_t message_size); 
+        ///     void (*init  )(void *ctx); 
+        ///     void (*update)(void *ctx, const uint8_t *message, 
+        ///                    size_t message_size); 
+        ///     void (*final )(void *ctx, uint8_t hash[64]); 
+        ///     size_t ctx_size; 
+        /// } crypto_sign_vtable;
+        /// <br/>
+        /// 
+        /// The context argument to the functions shall be referred to as &#x201C;outer
+        ///   signing context&#x201D;. The outer signing context must contain a
+        ///   crypto_sign_ctx_abstract as
+        ///   its first member. Other than that, the outer
+        ///   signing context may be defined freely. Logically, it is required to contain
+        ///   some kind of hash context as well, else it cannot work as a custom hash
+        ///   function.
+        /// <br/>
+        /// 
+        /// Because the calling code cannot know the real type of the outer signing context,
+        ///   it is cast to void * when calling the hash
+        ///   functions in the vtable, but the <paramref name="ctx"/> argument
+        ///   to the functions in the vtable is always guaranteed to be the outer signing
+        ///   context.
+        /// <br/>
+        /// 
+        /// The hash functions must not fail. If they somehow can fail, they have no way to
+        ///   propagate its error status, and thus the only ways to handle errors are to
+        ///   either assume an error never occurs (if reasonable), or to induce a crash in
+        ///   the code when an error occurs.
+        /// <br/>
+        /// 
+        /// The fields of crypto_sign_vtable are:
+        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        ///       computed hash to <paramref name="hash"/>. The output length
+        ///       must be exactly 64 bytes. This will normally
+        ///       be constructed using the functions that provide the
+        ///       <paramref name="init"/>,
+        ///       <paramref name="update"/> and
+        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
+        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       writes the computed hash to <paramref name="hash"/>. The
+        ///       output length must be exactly 64 bytes. This
+        ///       function should wipe the hash context with
+        ///       <see cref="crypto_wipe"/> if it contains
+        ///       pointers to objects outside the outer signing context. Monocypher takes
+        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
+        ///       <see cref="sizeof"/>().<br/>
+        /// 
+        /// The functions indicated in the
+        ///   crypto_sign_vtable must be thread-safe if any
+        ///   of Monocypher's signing functions are accessed from multiple threads.
+        /// <br/>
+        /// 
+        /// After calling
+        ///   <see cref="crypto_sign_init_first_pass_custom_hash"/>()
+        ///   or <see cref="crypto_check_init_custom_hash"/>(), the
+        ///   <see cref="crypto_sign_update"/>,
+        ///   <see cref="crypto_sign_final"/>,
+        ///   <see cref="crypto_sign_init_second_pass"/>,
+        ///   <see cref="crypto_check_update"/>, and
+        ///   <see cref="crypto_check_final"/> functions can be
+        ///   used as usual. They will call into the hash vtable as required. The same
+        ///   security considerations and semantics apply.
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_public_key_custom_hash(ref Byte32 public_key, in Byte32 secret_key, in monocypher.crypto_sign_vtable hash);
         
+        /// <summary>
+        /// 
+        /// These functions are variants of the
+        ///   <see cref="crypto_sign_init_first_pass"/> family
+        ///   of functions: They provide the ability to replace the EdDSA hash function with
+        ///   any user-provided hash function.
+        /// <br/>
+        /// This is a highly advanced feature. Interoperability
+        ///   of public key signatures with other cryptographic libraries can normally be
+        ///   achieved by using
+        ///   <see cref="crypto_ed25519_sign"/> or
+        ///   <see cref="crypto_ed25519_sign_init_first_pass"/>
+        ///   already. This interface is exposed only for completeness and to handle special
+        ///   situations (e.g. to use the hash function of the future winner of the NIST
+        ///   lightweight crypto competition on a device with highly constrained resources
+        ///   or taking advantage of hardware support for cryptographic hash functions).
+        ///   Whenever possible, these functions should be avoided.
+        /// <br/>
+        /// 
+        /// To make available a custom hash algorithm for use with these functions, a
+        ///   crypto_sign_vtable structure must be
+        ///   provided. It is defined as:
+        /// <br/>
+        /// 
+        /// typedef struct { 
+        ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
+        ///                  size_t message_size); 
+        ///     void (*init  )(void *ctx); 
+        ///     void (*update)(void *ctx, const uint8_t *message, 
+        ///                    size_t message_size); 
+        ///     void (*final )(void *ctx, uint8_t hash[64]); 
+        ///     size_t ctx_size; 
+        /// } crypto_sign_vtable;
+        /// <br/>
+        /// 
+        /// The context argument to the functions shall be referred to as &#x201C;outer
+        ///   signing context&#x201D;. The outer signing context must contain a
+        ///   crypto_sign_ctx_abstract as
+        ///   its first member. Other than that, the outer
+        ///   signing context may be defined freely. Logically, it is required to contain
+        ///   some kind of hash context as well, else it cannot work as a custom hash
+        ///   function.
+        /// <br/>
+        /// 
+        /// Because the calling code cannot know the real type of the outer signing context,
+        ///   it is cast to void * when calling the hash
+        ///   functions in the vtable, but the <paramref name="ctx"/> argument
+        ///   to the functions in the vtable is always guaranteed to be the outer signing
+        ///   context.
+        /// <br/>
+        /// 
+        /// The hash functions must not fail. If they somehow can fail, they have no way to
+        ///   propagate its error status, and thus the only ways to handle errors are to
+        ///   either assume an error never occurs (if reasonable), or to induce a crash in
+        ///   the code when an error occurs.
+        /// <br/>
+        /// 
+        /// The fields of crypto_sign_vtable are:
+        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        ///       computed hash to <paramref name="hash"/>. The output length
+        ///       must be exactly 64 bytes. This will normally
+        ///       be constructed using the functions that provide the
+        ///       <paramref name="init"/>,
+        ///       <paramref name="update"/> and
+        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
+        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       writes the computed hash to <paramref name="hash"/>. The
+        ///       output length must be exactly 64 bytes. This
+        ///       function should wipe the hash context with
+        ///       <see cref="crypto_wipe"/> if it contains
+        ///       pointers to objects outside the outer signing context. Monocypher takes
+        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
+        ///       <see cref="sizeof"/>().<br/>
+        /// 
+        /// The functions indicated in the
+        ///   crypto_sign_vtable must be thread-safe if any
+        ///   of Monocypher's signing functions are accessed from multiple threads.
+        /// <br/>
+        /// 
+        /// After calling
+        ///   <see cref="crypto_sign_init_first_pass_custom_hash"/>()
+        ///   or <see cref="crypto_check_init_custom_hash"/>(), the
+        ///   <see cref="crypto_sign_update"/>,
+        ///   <see cref="crypto_sign_final"/>,
+        ///   <see cref="crypto_sign_init_second_pass"/>,
+        ///   <see cref="crypto_check_update"/>, and
+        ///   <see cref="crypto_check_final"/> functions can be
+        ///   used as usual. They will call into the hash vtable as required. The same
+        ///   security considerations and semantics apply.
+        /// 
+        /// </summary>
+        public static unsafe void crypto_sign_public_key_custom_hash(Span<byte> public_key, ReadOnlySpan<byte> secret_key, in monocypher.crypto_sign_vtable hash)
+        {
+            ExpectSize32(nameof(public_key), public_key.Length);
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            crypto_sign_public_key_custom_hash(ref MemoryMarshal.AsRef<Byte32>(public_key), in MemoryMarshal.AsRef<Byte32>(secret_key), in hash);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of the
+        ///   <see cref="crypto_sign_init_first_pass"/> family
+        ///   of functions: They provide the ability to replace the EdDSA hash function with
+        ///   any user-provided hash function.
+        /// <br/>
+        /// This is a highly advanced feature. Interoperability
+        ///   of public key signatures with other cryptographic libraries can normally be
+        ///   achieved by using
+        ///   <see cref="crypto_ed25519_sign"/> or
+        ///   <see cref="crypto_ed25519_sign_init_first_pass"/>
+        ///   already. This interface is exposed only for completeness and to handle special
+        ///   situations (e.g. to use the hash function of the future winner of the NIST
+        ///   lightweight crypto competition on a device with highly constrained resources
+        ///   or taking advantage of hardware support for cryptographic hash functions).
+        ///   Whenever possible, these functions should be avoided.
+        /// <br/>
+        /// 
+        /// To make available a custom hash algorithm for use with these functions, a
+        ///   crypto_sign_vtable structure must be
+        ///   provided. It is defined as:
+        /// <br/>
+        /// 
+        /// typedef struct { 
+        ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
+        ///                  size_t message_size); 
+        ///     void (*init  )(void *ctx); 
+        ///     void (*update)(void *ctx, const uint8_t *message, 
+        ///                    size_t message_size); 
+        ///     void (*final )(void *ctx, uint8_t hash[64]); 
+        ///     size_t ctx_size; 
+        /// } crypto_sign_vtable;
+        /// <br/>
+        /// 
+        /// The context argument to the functions shall be referred to as &#x201C;outer
+        ///   signing context&#x201D;. The outer signing context must contain a
+        ///   crypto_sign_ctx_abstract as
+        ///   its first member. Other than that, the outer
+        ///   signing context may be defined freely. Logically, it is required to contain
+        ///   some kind of hash context as well, else it cannot work as a custom hash
+        ///   function.
+        /// <br/>
+        /// 
+        /// Because the calling code cannot know the real type of the outer signing context,
+        ///   it is cast to void * when calling the hash
+        ///   functions in the vtable, but the <paramref name="ctx"/> argument
+        ///   to the functions in the vtable is always guaranteed to be the outer signing
+        ///   context.
+        /// <br/>
+        /// 
+        /// The hash functions must not fail. If they somehow can fail, they have no way to
+        ///   propagate its error status, and thus the only ways to handle errors are to
+        ///   either assume an error never occurs (if reasonable), or to induce a crash in
+        ///   the code when an error occurs.
+        /// <br/>
+        /// 
+        /// The fields of crypto_sign_vtable are:
+        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        ///       computed hash to <paramref name="hash"/>. The output length
+        ///       must be exactly 64 bytes. This will normally
+        ///       be constructed using the functions that provide the
+        ///       <paramref name="init"/>,
+        ///       <paramref name="update"/> and
+        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
+        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       writes the computed hash to <paramref name="hash"/>. The
+        ///       output length must be exactly 64 bytes. This
+        ///       function should wipe the hash context with
+        ///       <see cref="crypto_wipe"/> if it contains
+        ///       pointers to objects outside the outer signing context. Monocypher takes
+        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
+        ///       <see cref="sizeof"/>().<br/>
+        /// 
+        /// The functions indicated in the
+        ///   crypto_sign_vtable must be thread-safe if any
+        ///   of Monocypher's signing functions are accessed from multiple threads.
+        /// <br/>
+        /// 
+        /// After calling
+        ///   <see cref="crypto_sign_init_first_pass_custom_hash"/>()
+        ///   or <see cref="crypto_check_init_custom_hash"/>(), the
+        ///   <see cref="crypto_sign_update"/>,
+        ///   <see cref="crypto_sign_final"/>,
+        ///   <see cref="crypto_sign_init_second_pass"/>,
+        ///   <see cref="crypto_check_update"/>, and
+        ///   <see cref="crypto_check_final"/> functions can be
+        ///   used as usual. They will call into the hash vtable as required. The same
+        ///   security considerations and semantics apply.
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_init_first_pass_custom_hash(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key, in monocypher.crypto_sign_vtable hash);
         
+        /// <summary>
+        /// 
+        /// These functions are variants of the
+        ///   <see cref="crypto_sign_init_first_pass"/> family
+        ///   of functions: They provide the ability to replace the EdDSA hash function with
+        ///   any user-provided hash function.
+        /// <br/>
+        /// This is a highly advanced feature. Interoperability
+        ///   of public key signatures with other cryptographic libraries can normally be
+        ///   achieved by using
+        ///   <see cref="crypto_ed25519_sign"/> or
+        ///   <see cref="crypto_ed25519_sign_init_first_pass"/>
+        ///   already. This interface is exposed only for completeness and to handle special
+        ///   situations (e.g. to use the hash function of the future winner of the NIST
+        ///   lightweight crypto competition on a device with highly constrained resources
+        ///   or taking advantage of hardware support for cryptographic hash functions).
+        ///   Whenever possible, these functions should be avoided.
+        /// <br/>
+        /// 
+        /// To make available a custom hash algorithm for use with these functions, a
+        ///   crypto_sign_vtable structure must be
+        ///   provided. It is defined as:
+        /// <br/>
+        /// 
+        /// typedef struct { 
+        ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
+        ///                  size_t message_size); 
+        ///     void (*init  )(void *ctx); 
+        ///     void (*update)(void *ctx, const uint8_t *message, 
+        ///                    size_t message_size); 
+        ///     void (*final )(void *ctx, uint8_t hash[64]); 
+        ///     size_t ctx_size; 
+        /// } crypto_sign_vtable;
+        /// <br/>
+        /// 
+        /// The context argument to the functions shall be referred to as &#x201C;outer
+        ///   signing context&#x201D;. The outer signing context must contain a
+        ///   crypto_sign_ctx_abstract as
+        ///   its first member. Other than that, the outer
+        ///   signing context may be defined freely. Logically, it is required to contain
+        ///   some kind of hash context as well, else it cannot work as a custom hash
+        ///   function.
+        /// <br/>
+        /// 
+        /// Because the calling code cannot know the real type of the outer signing context,
+        ///   it is cast to void * when calling the hash
+        ///   functions in the vtable, but the <paramref name="ctx"/> argument
+        ///   to the functions in the vtable is always guaranteed to be the outer signing
+        ///   context.
+        /// <br/>
+        /// 
+        /// The hash functions must not fail. If they somehow can fail, they have no way to
+        ///   propagate its error status, and thus the only ways to handle errors are to
+        ///   either assume an error never occurs (if reasonable), or to induce a crash in
+        ///   the code when an error occurs.
+        /// <br/>
+        /// 
+        /// The fields of crypto_sign_vtable are:
+        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        ///       computed hash to <paramref name="hash"/>. The output length
+        ///       must be exactly 64 bytes. This will normally
+        ///       be constructed using the functions that provide the
+        ///       <paramref name="init"/>,
+        ///       <paramref name="update"/> and
+        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
+        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       writes the computed hash to <paramref name="hash"/>. The
+        ///       output length must be exactly 64 bytes. This
+        ///       function should wipe the hash context with
+        ///       <see cref="crypto_wipe"/> if it contains
+        ///       pointers to objects outside the outer signing context. Monocypher takes
+        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
+        ///       <see cref="sizeof"/>().<br/>
+        /// 
+        /// The functions indicated in the
+        ///   crypto_sign_vtable must be thread-safe if any
+        ///   of Monocypher's signing functions are accessed from multiple threads.
+        /// <br/>
+        /// 
+        /// After calling
+        ///   <see cref="crypto_sign_init_first_pass_custom_hash"/>()
+        ///   or <see cref="crypto_check_init_custom_hash"/>(), the
+        ///   <see cref="crypto_sign_update"/>,
+        ///   <see cref="crypto_sign_final"/>,
+        ///   <see cref="crypto_sign_init_second_pass"/>,
+        ///   <see cref="crypto_check_update"/>, and
+        ///   <see cref="crypto_check_final"/> functions can be
+        ///   used as usual. They will call into the hash vtable as required. The same
+        ///   security considerations and semantics apply.
+        /// 
+        /// </summary>
+        public static unsafe void crypto_sign_init_first_pass_custom_hash(ref monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key, in monocypher.crypto_sign_vtable hash)
+        {
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            crypto_sign_init_first_pass_custom_hash(ref ctx, in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), in hash);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of the
+        ///   <see cref="crypto_sign_init_first_pass"/> family
+        ///   of functions: They provide the ability to replace the EdDSA hash function with
+        ///   any user-provided hash function.
+        /// <br/>
+        /// This is a highly advanced feature. Interoperability
+        ///   of public key signatures with other cryptographic libraries can normally be
+        ///   achieved by using
+        ///   <see cref="crypto_ed25519_sign"/> or
+        ///   <see cref="crypto_ed25519_sign_init_first_pass"/>
+        ///   already. This interface is exposed only for completeness and to handle special
+        ///   situations (e.g. to use the hash function of the future winner of the NIST
+        ///   lightweight crypto competition on a device with highly constrained resources
+        ///   or taking advantage of hardware support for cryptographic hash functions).
+        ///   Whenever possible, these functions should be avoided.
+        /// <br/>
+        /// 
+        /// To make available a custom hash algorithm for use with these functions, a
+        ///   crypto_sign_vtable structure must be
+        ///   provided. It is defined as:
+        /// <br/>
+        /// 
+        /// typedef struct { 
+        ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
+        ///                  size_t message_size); 
+        ///     void (*init  )(void *ctx); 
+        ///     void (*update)(void *ctx, const uint8_t *message, 
+        ///                    size_t message_size); 
+        ///     void (*final )(void *ctx, uint8_t hash[64]); 
+        ///     size_t ctx_size; 
+        /// } crypto_sign_vtable;
+        /// <br/>
+        /// 
+        /// The context argument to the functions shall be referred to as &#x201C;outer
+        ///   signing context&#x201D;. The outer signing context must contain a
+        ///   crypto_sign_ctx_abstract as
+        ///   its first member. Other than that, the outer
+        ///   signing context may be defined freely. Logically, it is required to contain
+        ///   some kind of hash context as well, else it cannot work as a custom hash
+        ///   function.
+        /// <br/>
+        /// 
+        /// Because the calling code cannot know the real type of the outer signing context,
+        ///   it is cast to void * when calling the hash
+        ///   functions in the vtable, but the <paramref name="ctx"/> argument
+        ///   to the functions in the vtable is always guaranteed to be the outer signing
+        ///   context.
+        /// <br/>
+        /// 
+        /// The hash functions must not fail. If they somehow can fail, they have no way to
+        ///   propagate its error status, and thus the only ways to handle errors are to
+        ///   either assume an error never occurs (if reasonable), or to induce a crash in
+        ///   the code when an error occurs.
+        /// <br/>
+        /// 
+        /// The fields of crypto_sign_vtable are:
+        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        ///       computed hash to <paramref name="hash"/>. The output length
+        ///       must be exactly 64 bytes. This will normally
+        ///       be constructed using the functions that provide the
+        ///       <paramref name="init"/>,
+        ///       <paramref name="update"/> and
+        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
+        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       writes the computed hash to <paramref name="hash"/>. The
+        ///       output length must be exactly 64 bytes. This
+        ///       function should wipe the hash context with
+        ///       <see cref="crypto_wipe"/> if it contains
+        ///       pointers to objects outside the outer signing context. Monocypher takes
+        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
+        ///       <see cref="sizeof"/>().<br/>
+        /// 
+        /// The functions indicated in the
+        ///   crypto_sign_vtable must be thread-safe if any
+        ///   of Monocypher's signing functions are accessed from multiple threads.
+        /// <br/>
+        /// 
+        /// After calling
+        ///   <see cref="crypto_sign_init_first_pass_custom_hash"/>()
+        ///   or <see cref="crypto_check_init_custom_hash"/>(), the
+        ///   <see cref="crypto_sign_update"/>,
+        ///   <see cref="crypto_sign_final"/>,
+        ///   <see cref="crypto_sign_init_second_pass"/>,
+        ///   <see cref="crypto_check_update"/>, and
+        ///   <see cref="crypto_check_final"/> functions can be
+        ///   used as usual. They will call into the hash vtable as required. The same
+        ///   security considerations and semantics apply.
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_check_init_custom_hash(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key, in monocypher.crypto_sign_vtable hash);
         
         /// <summary>
-        /// Elligator mappings proper
+        /// 
+        /// These functions are variants of the
+        ///   <see cref="crypto_sign_init_first_pass"/> family
+        ///   of functions: They provide the ability to replace the EdDSA hash function with
+        ///   any user-provided hash function.
+        /// <br/>
+        /// This is a highly advanced feature. Interoperability
+        ///   of public key signatures with other cryptographic libraries can normally be
+        ///   achieved by using
+        ///   <see cref="crypto_ed25519_sign"/> or
+        ///   <see cref="crypto_ed25519_sign_init_first_pass"/>
+        ///   already. This interface is exposed only for completeness and to handle special
+        ///   situations (e.g. to use the hash function of the future winner of the NIST
+        ///   lightweight crypto competition on a device with highly constrained resources
+        ///   or taking advantage of hardware support for cryptographic hash functions).
+        ///   Whenever possible, these functions should be avoided.
+        /// <br/>
+        /// 
+        /// To make available a custom hash algorithm for use with these functions, a
+        ///   crypto_sign_vtable structure must be
+        ///   provided. It is defined as:
+        /// <br/>
+        /// 
+        /// typedef struct { 
+        ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
+        ///                  size_t message_size); 
+        ///     void (*init  )(void *ctx); 
+        ///     void (*update)(void *ctx, const uint8_t *message, 
+        ///                    size_t message_size); 
+        ///     void (*final )(void *ctx, uint8_t hash[64]); 
+        ///     size_t ctx_size; 
+        /// } crypto_sign_vtable;
+        /// <br/>
+        /// 
+        /// The context argument to the functions shall be referred to as &#x201C;outer
+        ///   signing context&#x201D;. The outer signing context must contain a
+        ///   crypto_sign_ctx_abstract as
+        ///   its first member. Other than that, the outer
+        ///   signing context may be defined freely. Logically, it is required to contain
+        ///   some kind of hash context as well, else it cannot work as a custom hash
+        ///   function.
+        /// <br/>
+        /// 
+        /// Because the calling code cannot know the real type of the outer signing context,
+        ///   it is cast to void * when calling the hash
+        ///   functions in the vtable, but the <paramref name="ctx"/> argument
+        ///   to the functions in the vtable is always guaranteed to be the outer signing
+        ///   context.
+        /// <br/>
+        /// 
+        /// The hash functions must not fail. If they somehow can fail, they have no way to
+        ///   propagate its error status, and thus the only ways to handle errors are to
+        ///   either assume an error never occurs (if reasonable), or to induce a crash in
+        ///   the code when an error occurs.
+        /// <br/>
+        /// 
+        /// The fields of crypto_sign_vtable are:
+        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        ///       computed hash to <paramref name="hash"/>. The output length
+        ///       must be exactly 64 bytes. This will normally
+        ///       be constructed using the functions that provide the
+        ///       <paramref name="init"/>,
+        ///       <paramref name="update"/> and
+        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
+        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       writes the computed hash to <paramref name="hash"/>. The
+        ///       output length must be exactly 64 bytes. This
+        ///       function should wipe the hash context with
+        ///       <see cref="crypto_wipe"/> if it contains
+        ///       pointers to objects outside the outer signing context. Monocypher takes
+        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
+        ///       <see cref="sizeof"/>().<br/>
+        /// 
+        /// The functions indicated in the
+        ///   crypto_sign_vtable must be thread-safe if any
+        ///   of Monocypher's signing functions are accessed from multiple threads.
+        /// <br/>
+        /// 
+        /// After calling
+        ///   <see cref="crypto_sign_init_first_pass_custom_hash"/>()
+        ///   or <see cref="crypto_check_init_custom_hash"/>(), the
+        ///   <see cref="crypto_sign_update"/>,
+        ///   <see cref="crypto_sign_final"/>,
+        ///   <see cref="crypto_sign_init_second_pass"/>,
+        ///   <see cref="crypto_check_update"/>, and
+        ///   <see cref="crypto_check_final"/> functions can be
+        ///   used as usual. They will call into the hash vtable as required. The same
+        ///   security considerations and semantics apply.
+        /// 
         /// </summary>
+        public static unsafe void crypto_check_init_custom_hash(ref monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key, in monocypher.crypto_sign_vtable hash)
+        {
+            ExpectSize64(nameof(signature), signature.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            crypto_check_init_custom_hash(ref ctx, in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), in hash);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions allow obfuscating X25519 public keys by making them appear
+        ///   effectively indistinguishable from random noise. This is of interest for key
+        ///   exchange protocols that require indistinguishability from randomness, such as
+        ///   padded uniform random blobs (PURBs). They are intended for ephemeral
+        ///   (short-lived, possibly just one-time) X25519 keys, not for long-term public
+        ///   keys. After an initial key exchange involving hidden keys, subsequent key
+        ///   exchange messages should be encrypted instead; see, for example, the Noise
+        ///   protocol. This is an advanced feature &#x2013;
+        ///   unless you are implementing an protocol that requires indistinguishability of
+        ///   all communications from random noise, consider
+        ///   <see cref="crypto_key_exchange_public_key"/>
+        ///   instead.
+        /// <br/>
+        /// 
+        /// For understanding what these functions do, it is important to note that a
+        ///   &#x201C;public key&#x201D; in this context refers to a
+        ///   point on Curve25519. This also means that these
+        ///   functions are not compatible with
+        ///   <see cref="crypto_sign"/> and related functions.
+        /// <br/>
+        /// <see cref="crypto_curve_to_hidden"/>() takes a public key
+        ///   <paramref name="curve"/> and a
+        ///   <paramref name="tweak"/>, hiding the public key it so that it is
+        ///   effectively indistinguishable from random noise. Note that only
+        ///   <see cref="crypto_x25519_dirty_fast"/> or
+        ///   <see cref="crypto_x25519_dirty_small"/> can
+        ///   generate a suitable public key; the
+        ///   <see cref="crypto_x25519"/> function is
+        ///   insufficient. The <paramref name="tweak"/> must be chosen at
+        ///   random. Even then, this operation may fail: Not
+        ///   all curve points are capable of being hidden. In this case,
+        ///   <see cref="crypto_curve_to_hidden"/>() must be tried
+        ///   again with a new key pair; the <paramref name="tweak"/> does not
+        ///   need to be changed. On average, two attempts are needed. Once a suitable
+        ///   public key has been found,
+        ///   <see cref="crypto_curve_to_hidden"/>() always succeeds
+        ///   for it. Given the same values for <paramref name="tweak"/> and
+        ///   <paramref name="curve"/>,
+        ///   <see cref="crypto_curve_to_hidden"/>() yields the same
+        ///   output value <paramref name="hidden"/>.
+        /// <br/>
+        /// <see cref="crypto_hidden_to_curve"/>() performs the inverse
+        ///   operation: It decodes a hidden point to a curve point on Curve25519.
+        /// <br/>
+        /// <see cref="crypto_hidden_key_pair"/>() is a convenience
+        ///   function that generates a secret key and its corresponding public key, which
+        ///   is effectively indistinguishable from random noise, from a random seed.
+        ///   The execution time of this function is
+        ///   unpredictable because it may take many failures until a key pair could be
+        ///   generated successfully.
+        ///   <see cref="crypto_hidden_key_pair"/>() uses
+        ///   <see cref="crypto_x25519_dirty_fast"/> internally;
+        ///   if code size is an important concern, its functionality can be replicated with
+        ///   <see cref="crypto_x25519_dirty_small"/> instead.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="curve">A point on the curve, which is a Curve25519 public key generated with
+        ///       either <see cref="crypto_x25519_dirty_fast"/>
+        ///       or
+        ///     <see cref="crypto_x25519_dirty_small"/>.</param>
+        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        ///       indistinguishable from random.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hidden_to_curve(ref Byte32 curve, in Byte32 hidden);
         
+        /// <summary>
+        /// 
+        /// These functions allow obfuscating X25519 public keys by making them appear
+        ///   effectively indistinguishable from random noise. This is of interest for key
+        ///   exchange protocols that require indistinguishability from randomness, such as
+        ///   padded uniform random blobs (PURBs). They are intended for ephemeral
+        ///   (short-lived, possibly just one-time) X25519 keys, not for long-term public
+        ///   keys. After an initial key exchange involving hidden keys, subsequent key
+        ///   exchange messages should be encrypted instead; see, for example, the Noise
+        ///   protocol. This is an advanced feature &#x2013;
+        ///   unless you are implementing an protocol that requires indistinguishability of
+        ///   all communications from random noise, consider
+        ///   <see cref="crypto_key_exchange_public_key"/>
+        ///   instead.
+        /// <br/>
+        /// 
+        /// For understanding what these functions do, it is important to note that a
+        ///   &#x201C;public key&#x201D; in this context refers to a
+        ///   point on Curve25519. This also means that these
+        ///   functions are not compatible with
+        ///   <see cref="crypto_sign"/> and related functions.
+        /// <br/>
+        /// <see cref="crypto_curve_to_hidden"/>() takes a public key
+        ///   <paramref name="curve"/> and a
+        ///   <paramref name="tweak"/>, hiding the public key it so that it is
+        ///   effectively indistinguishable from random noise. Note that only
+        ///   <see cref="crypto_x25519_dirty_fast"/> or
+        ///   <see cref="crypto_x25519_dirty_small"/> can
+        ///   generate a suitable public key; the
+        ///   <see cref="crypto_x25519"/> function is
+        ///   insufficient. The <paramref name="tweak"/> must be chosen at
+        ///   random. Even then, this operation may fail: Not
+        ///   all curve points are capable of being hidden. In this case,
+        ///   <see cref="crypto_curve_to_hidden"/>() must be tried
+        ///   again with a new key pair; the <paramref name="tweak"/> does not
+        ///   need to be changed. On average, two attempts are needed. Once a suitable
+        ///   public key has been found,
+        ///   <see cref="crypto_curve_to_hidden"/>() always succeeds
+        ///   for it. Given the same values for <paramref name="tweak"/> and
+        ///   <paramref name="curve"/>,
+        ///   <see cref="crypto_curve_to_hidden"/>() yields the same
+        ///   output value <paramref name="hidden"/>.
+        /// <br/>
+        /// <see cref="crypto_hidden_to_curve"/>() performs the inverse
+        ///   operation: It decodes a hidden point to a curve point on Curve25519.
+        /// <br/>
+        /// <see cref="crypto_hidden_key_pair"/>() is a convenience
+        ///   function that generates a secret key and its corresponding public key, which
+        ///   is effectively indistinguishable from random noise, from a random seed.
+        ///   The execution time of this function is
+        ///   unpredictable because it may take many failures until a key pair could be
+        ///   generated successfully.
+        ///   <see cref="crypto_hidden_key_pair"/>() uses
+        ///   <see cref="crypto_x25519_dirty_fast"/> internally;
+        ///   if code size is an important concern, its functionality can be replicated with
+        ///   <see cref="crypto_x25519_dirty_small"/> instead.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="curve">A point on the curve, which is a Curve25519 public key generated with
+        ///       either <see cref="crypto_x25519_dirty_fast"/>
+        ///       or
+        ///     <see cref="crypto_x25519_dirty_small"/>.</param>
+        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        ///       indistinguishable from random.</param>
+        public static unsafe void crypto_hidden_to_curve(Span<byte> curve, ReadOnlySpan<byte> hidden)
+        {
+            ExpectSize32(nameof(curve), curve.Length);
+            ExpectSize32(nameof(hidden), hidden.Length);
+            crypto_hidden_to_curve(ref MemoryMarshal.AsRef<Byte32>(curve), in MemoryMarshal.AsRef<Byte32>(hidden));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions allow obfuscating X25519 public keys by making them appear
+        ///   effectively indistinguishable from random noise. This is of interest for key
+        ///   exchange protocols that require indistinguishability from randomness, such as
+        ///   padded uniform random blobs (PURBs). They are intended for ephemeral
+        ///   (short-lived, possibly just one-time) X25519 keys, not for long-term public
+        ///   keys. After an initial key exchange involving hidden keys, subsequent key
+        ///   exchange messages should be encrypted instead; see, for example, the Noise
+        ///   protocol. This is an advanced feature &#x2013;
+        ///   unless you are implementing an protocol that requires indistinguishability of
+        ///   all communications from random noise, consider
+        ///   <see cref="crypto_key_exchange_public_key"/>
+        ///   instead.
+        /// <br/>
+        /// 
+        /// For understanding what these functions do, it is important to note that a
+        ///   &#x201C;public key&#x201D; in this context refers to a
+        ///   point on Curve25519. This also means that these
+        ///   functions are not compatible with
+        ///   <see cref="crypto_sign"/> and related functions.
+        /// <br/>
+        /// <see cref="crypto_curve_to_hidden"/>() takes a public key
+        ///   <paramref name="curve"/> and a
+        ///   <paramref name="tweak"/>, hiding the public key it so that it is
+        ///   effectively indistinguishable from random noise. Note that only
+        ///   <see cref="crypto_x25519_dirty_fast"/> or
+        ///   <see cref="crypto_x25519_dirty_small"/> can
+        ///   generate a suitable public key; the
+        ///   <see cref="crypto_x25519"/> function is
+        ///   insufficient. The <paramref name="tweak"/> must be chosen at
+        ///   random. Even then, this operation may fail: Not
+        ///   all curve points are capable of being hidden. In this case,
+        ///   <see cref="crypto_curve_to_hidden"/>() must be tried
+        ///   again with a new key pair; the <paramref name="tweak"/> does not
+        ///   need to be changed. On average, two attempts are needed. Once a suitable
+        ///   public key has been found,
+        ///   <see cref="crypto_curve_to_hidden"/>() always succeeds
+        ///   for it. Given the same values for <paramref name="tweak"/> and
+        ///   <paramref name="curve"/>,
+        ///   <see cref="crypto_curve_to_hidden"/>() yields the same
+        ///   output value <paramref name="hidden"/>.
+        /// <br/>
+        /// <see cref="crypto_hidden_to_curve"/>() performs the inverse
+        ///   operation: It decodes a hidden point to a curve point on Curve25519.
+        /// <br/>
+        /// <see cref="crypto_hidden_key_pair"/>() is a convenience
+        ///   function that generates a secret key and its corresponding public key, which
+        ///   is effectively indistinguishable from random noise, from a random seed.
+        ///   The execution time of this function is
+        ///   unpredictable because it may take many failures until a key pair could be
+        ///   generated successfully.
+        ///   <see cref="crypto_hidden_key_pair"/>() uses
+        ///   <see cref="crypto_x25519_dirty_fast"/> internally;
+        ///   if code size is an important concern, its functionality can be replicated with
+        ///   <see cref="crypto_x25519_dirty_small"/> instead.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="curve">A point on the curve, which is a Curve25519 public key generated with
+        ///       either <see cref="crypto_x25519_dirty_fast"/>
+        ///       or
+        ///     <see cref="crypto_x25519_dirty_small"/>.</param>
+        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        ///       indistinguishable from random.</param>
+        /// <param name="tweak">A 1-byte random number, which influences the final output of
+        ///       <see cref="crypto_curve_to_hidden"/>().</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_curve_to_hidden(ref Byte32 hidden, in Byte32 curve, byte tweak);
         
         /// <summary>
-        /// Easy to use key pair generation
+        /// 
+        /// These functions allow obfuscating X25519 public keys by making them appear
+        ///   effectively indistinguishable from random noise. This is of interest for key
+        ///   exchange protocols that require indistinguishability from randomness, such as
+        ///   padded uniform random blobs (PURBs). They are intended for ephemeral
+        ///   (short-lived, possibly just one-time) X25519 keys, not for long-term public
+        ///   keys. After an initial key exchange involving hidden keys, subsequent key
+        ///   exchange messages should be encrypted instead; see, for example, the Noise
+        ///   protocol. This is an advanced feature &#x2013;
+        ///   unless you are implementing an protocol that requires indistinguishability of
+        ///   all communications from random noise, consider
+        ///   <see cref="crypto_key_exchange_public_key"/>
+        ///   instead.
+        /// <br/>
+        /// 
+        /// For understanding what these functions do, it is important to note that a
+        ///   &#x201C;public key&#x201D; in this context refers to a
+        ///   point on Curve25519. This also means that these
+        ///   functions are not compatible with
+        ///   <see cref="crypto_sign"/> and related functions.
+        /// <br/>
+        /// <see cref="crypto_curve_to_hidden"/>() takes a public key
+        ///   <paramref name="curve"/> and a
+        ///   <paramref name="tweak"/>, hiding the public key it so that it is
+        ///   effectively indistinguishable from random noise. Note that only
+        ///   <see cref="crypto_x25519_dirty_fast"/> or
+        ///   <see cref="crypto_x25519_dirty_small"/> can
+        ///   generate a suitable public key; the
+        ///   <see cref="crypto_x25519"/> function is
+        ///   insufficient. The <paramref name="tweak"/> must be chosen at
+        ///   random. Even then, this operation may fail: Not
+        ///   all curve points are capable of being hidden. In this case,
+        ///   <see cref="crypto_curve_to_hidden"/>() must be tried
+        ///   again with a new key pair; the <paramref name="tweak"/> does not
+        ///   need to be changed. On average, two attempts are needed. Once a suitable
+        ///   public key has been found,
+        ///   <see cref="crypto_curve_to_hidden"/>() always succeeds
+        ///   for it. Given the same values for <paramref name="tweak"/> and
+        ///   <paramref name="curve"/>,
+        ///   <see cref="crypto_curve_to_hidden"/>() yields the same
+        ///   output value <paramref name="hidden"/>.
+        /// <br/>
+        /// <see cref="crypto_hidden_to_curve"/>() performs the inverse
+        ///   operation: It decodes a hidden point to a curve point on Curve25519.
+        /// <br/>
+        /// <see cref="crypto_hidden_key_pair"/>() is a convenience
+        ///   function that generates a secret key and its corresponding public key, which
+        ///   is effectively indistinguishable from random noise, from a random seed.
+        ///   The execution time of this function is
+        ///   unpredictable because it may take many failures until a key pair could be
+        ///   generated successfully.
+        ///   <see cref="crypto_hidden_key_pair"/>() uses
+        ///   <see cref="crypto_x25519_dirty_fast"/> internally;
+        ///   if code size is an important concern, its functionality can be replicated with
+        ///   <see cref="crypto_x25519_dirty_small"/> instead.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="curve">A point on the curve, which is a Curve25519 public key generated with
+        ///       either <see cref="crypto_x25519_dirty_fast"/>
+        ///       or
+        ///     <see cref="crypto_x25519_dirty_small"/>.</param>
+        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        ///       indistinguishable from random.</param>
+        /// <param name="tweak">A 1-byte random number, which influences the final output of
+        ///       <see cref="crypto_curve_to_hidden"/>().</param>
+        public static unsafe int crypto_curve_to_hidden(Span<byte> hidden, ReadOnlySpan<byte> curve, byte tweak)
+        {
+            ExpectSize32(nameof(hidden), hidden.Length);
+            ExpectSize32(nameof(curve), curve.Length);
+            return crypto_curve_to_hidden(ref MemoryMarshal.AsRef<Byte32>(hidden), in MemoryMarshal.AsRef<Byte32>(curve), tweak);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions allow obfuscating X25519 public keys by making them appear
+        ///   effectively indistinguishable from random noise. This is of interest for key
+        ///   exchange protocols that require indistinguishability from randomness, such as
+        ///   padded uniform random blobs (PURBs). They are intended for ephemeral
+        ///   (short-lived, possibly just one-time) X25519 keys, not for long-term public
+        ///   keys. After an initial key exchange involving hidden keys, subsequent key
+        ///   exchange messages should be encrypted instead; see, for example, the Noise
+        ///   protocol. This is an advanced feature &#x2013;
+        ///   unless you are implementing an protocol that requires indistinguishability of
+        ///   all communications from random noise, consider
+        ///   <see cref="crypto_key_exchange_public_key"/>
+        ///   instead.
+        /// <br/>
+        /// 
+        /// For understanding what these functions do, it is important to note that a
+        ///   &#x201C;public key&#x201D; in this context refers to a
+        ///   point on Curve25519. This also means that these
+        ///   functions are not compatible with
+        ///   <see cref="crypto_sign"/> and related functions.
+        /// <br/>
+        /// <see cref="crypto_curve_to_hidden"/>() takes a public key
+        ///   <paramref name="curve"/> and a
+        ///   <paramref name="tweak"/>, hiding the public key it so that it is
+        ///   effectively indistinguishable from random noise. Note that only
+        ///   <see cref="crypto_x25519_dirty_fast"/> or
+        ///   <see cref="crypto_x25519_dirty_small"/> can
+        ///   generate a suitable public key; the
+        ///   <see cref="crypto_x25519"/> function is
+        ///   insufficient. The <paramref name="tweak"/> must be chosen at
+        ///   random. Even then, this operation may fail: Not
+        ///   all curve points are capable of being hidden. In this case,
+        ///   <see cref="crypto_curve_to_hidden"/>() must be tried
+        ///   again with a new key pair; the <paramref name="tweak"/> does not
+        ///   need to be changed. On average, two attempts are needed. Once a suitable
+        ///   public key has been found,
+        ///   <see cref="crypto_curve_to_hidden"/>() always succeeds
+        ///   for it. Given the same values for <paramref name="tweak"/> and
+        ///   <paramref name="curve"/>,
+        ///   <see cref="crypto_curve_to_hidden"/>() yields the same
+        ///   output value <paramref name="hidden"/>.
+        /// <br/>
+        /// <see cref="crypto_hidden_to_curve"/>() performs the inverse
+        ///   operation: It decodes a hidden point to a curve point on Curve25519.
+        /// <br/>
+        /// <see cref="crypto_hidden_key_pair"/>() is a convenience
+        ///   function that generates a secret key and its corresponding public key, which
+        ///   is effectively indistinguishable from random noise, from a random seed.
+        ///   The execution time of this function is
+        ///   unpredictable because it may take many failures until a key pair could be
+        ///   generated successfully.
+        ///   <see cref="crypto_hidden_key_pair"/>() uses
+        ///   <see cref="crypto_x25519_dirty_fast"/> internally;
+        ///   if code size is an important concern, its functionality can be replicated with
+        ///   <see cref="crypto_x25519_dirty_small"/> instead.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        ///       indistinguishable from random.</param>
+        /// <param name="secret_key">The secret key that was generated from the given
+        ///       <paramref name="seed"/>.</param>
+        /// <param name="seed">A 32-byte random number from which to derive a key pair. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random bytes (use the operating system's random number
+        ///       generator). The <paramref name="seed"/> is wiped
+        ///       automatically.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hidden_key_pair(ref Byte32 hidden, ref Byte32 secret_key, ref Byte32 seed);
         
         /// <summary>
-        /// SHA 512
-        /// -------
+        /// 
+        /// These functions allow obfuscating X25519 public keys by making them appear
+        ///   effectively indistinguishable from random noise. This is of interest for key
+        ///   exchange protocols that require indistinguishability from randomness, such as
+        ///   padded uniform random blobs (PURBs). They are intended for ephemeral
+        ///   (short-lived, possibly just one-time) X25519 keys, not for long-term public
+        ///   keys. After an initial key exchange involving hidden keys, subsequent key
+        ///   exchange messages should be encrypted instead; see, for example, the Noise
+        ///   protocol. This is an advanced feature &#x2013;
+        ///   unless you are implementing an protocol that requires indistinguishability of
+        ///   all communications from random noise, consider
+        ///   <see cref="crypto_key_exchange_public_key"/>
+        ///   instead.
+        /// <br/>
+        /// 
+        /// For understanding what these functions do, it is important to note that a
+        ///   &#x201C;public key&#x201D; in this context refers to a
+        ///   point on Curve25519. This also means that these
+        ///   functions are not compatible with
+        ///   <see cref="crypto_sign"/> and related functions.
+        /// <br/>
+        /// <see cref="crypto_curve_to_hidden"/>() takes a public key
+        ///   <paramref name="curve"/> and a
+        ///   <paramref name="tweak"/>, hiding the public key it so that it is
+        ///   effectively indistinguishable from random noise. Note that only
+        ///   <see cref="crypto_x25519_dirty_fast"/> or
+        ///   <see cref="crypto_x25519_dirty_small"/> can
+        ///   generate a suitable public key; the
+        ///   <see cref="crypto_x25519"/> function is
+        ///   insufficient. The <paramref name="tweak"/> must be chosen at
+        ///   random. Even then, this operation may fail: Not
+        ///   all curve points are capable of being hidden. In this case,
+        ///   <see cref="crypto_curve_to_hidden"/>() must be tried
+        ///   again with a new key pair; the <paramref name="tweak"/> does not
+        ///   need to be changed. On average, two attempts are needed. Once a suitable
+        ///   public key has been found,
+        ///   <see cref="crypto_curve_to_hidden"/>() always succeeds
+        ///   for it. Given the same values for <paramref name="tweak"/> and
+        ///   <paramref name="curve"/>,
+        ///   <see cref="crypto_curve_to_hidden"/>() yields the same
+        ///   output value <paramref name="hidden"/>.
+        /// <br/>
+        /// <see cref="crypto_hidden_to_curve"/>() performs the inverse
+        ///   operation: It decodes a hidden point to a curve point on Curve25519.
+        /// <br/>
+        /// <see cref="crypto_hidden_key_pair"/>() is a convenience
+        ///   function that generates a secret key and its corresponding public key, which
+        ///   is effectively indistinguishable from random noise, from a random seed.
+        ///   The execution time of this function is
+        ///   unpredictable because it may take many failures until a key pair could be
+        ///   generated successfully.
+        ///   <see cref="crypto_hidden_key_pair"/>() uses
+        ///   <see cref="crypto_x25519_dirty_fast"/> internally;
+        ///   if code size is an important concern, its functionality can be replicated with
+        ///   <see cref="crypto_x25519_dirty_small"/> instead.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        ///       indistinguishable from random.</param>
+        /// <param name="secret_key">The secret key that was generated from the given
+        ///       <paramref name="seed"/>.</param>
+        /// <param name="seed">A 32-byte random number from which to derive a key pair. See
+        ///       <see cref="intro"/> for advice about
+        ///       generating random bytes (use the operating system's random number
+        ///       generator). The <paramref name="seed"/> is wiped
+        ///       automatically.</param>
+        public static unsafe void crypto_hidden_key_pair(Span<byte> hidden, Span<byte> secret_key, Span<byte> seed)
+        {
+            ExpectSize32(nameof(hidden), hidden.Length);
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            ExpectSize32(nameof(seed), seed.Length);
+            crypto_hidden_key_pair(ref MemoryMarshal.AsRef<Byte32>(hidden), ref MemoryMarshal.AsRef<Byte32>(secret_key), ref MemoryMarshal.AsRef<Byte32>(seed));
+        }
+        
+        /// <summary>
+        /// 
+        /// SHA-512 is a cryptographically secure hash, provided to enable compatibility
+        ///   with other cryptographic systems. It is generally recommended to use
+        ///   <see cref="crypto_blake2b"/> instead, as it both
+        ///   performs faster on x86_64 CPUs and lacks many of the pitfalls of SHA-512.
+        /// <br/>
+        /// 
+        /// Note that SHA-512 itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// SHA-512 is vulnerable to length extension attacks;
+        ///   using it as a message authentication code (MAC) algorithm or keyed hash
+        ///   requires precautions. The
+        ///   <see cref="crypto_hmac_sha512"/> family of
+        ///   functions provides HMAC with SHA-512. Use
+        ///   <see cref="crypto_verify64"/> to compare MACs
+        ///   created this way.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sha512_init(ref monocypher.crypto_sha512_ctx ctx);
         
+        /// <summary>
+        /// 
+        /// SHA-512 is a cryptographically secure hash, provided to enable compatibility
+        ///   with other cryptographic systems. It is generally recommended to use
+        ///   <see cref="crypto_blake2b"/> instead, as it both
+        ///   performs faster on x86_64 CPUs and lacks many of the pitfalls of SHA-512.
+        /// <br/>
+        /// 
+        /// Note that SHA-512 itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// SHA-512 is vulnerable to length extension attacks;
+        ///   using it as a message authentication code (MAC) algorithm or keyed hash
+        ///   requires precautions. The
+        ///   <see cref="crypto_hmac_sha512"/> family of
+        ///   functions provides HMAC with SHA-512. Use
+        ///   <see cref="crypto_verify64"/> to compare MACs
+        ///   created this way.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sha512_update(ref monocypher.crypto_sha512_ctx ctx, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// 
+        /// SHA-512 is a cryptographically secure hash, provided to enable compatibility
+        ///   with other cryptographic systems. It is generally recommended to use
+        ///   <see cref="crypto_blake2b"/> instead, as it both
+        ///   performs faster on x86_64 CPUs and lacks many of the pitfalls of SHA-512.
+        /// <br/>
+        /// 
+        /// Note that SHA-512 itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// SHA-512 is vulnerable to length extension attacks;
+        ///   using it as a message authentication code (MAC) algorithm or keyed hash
+        ///   requires precautions. The
+        ///   <see cref="crypto_hmac_sha512"/> family of
+        ///   functions provides HMAC with SHA-512. Use
+        ///   <see cref="crypto_verify64"/> to compare MACs
+        ///   created this way.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        public static unsafe void crypto_sha512_update(ref monocypher.crypto_sha512_ctx ctx, ReadOnlySpan<byte> message)
+        {
+            fixed(void* message_ptr = message)
+            crypto_sha512_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// SHA-512 is a cryptographically secure hash, provided to enable compatibility
+        ///   with other cryptographic systems. It is generally recommended to use
+        ///   <see cref="crypto_blake2b"/> instead, as it both
+        ///   performs faster on x86_64 CPUs and lacks many of the pitfalls of SHA-512.
+        /// <br/>
+        /// 
+        /// Note that SHA-512 itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// SHA-512 is vulnerable to length extension attacks;
+        ///   using it as a message authentication code (MAC) algorithm or keyed hash
+        ///   requires precautions. The
+        ///   <see cref="crypto_hmac_sha512"/> family of
+        ///   functions provides HMAC with SHA-512. Use
+        ///   <see cref="crypto_verify64"/> to compare MACs
+        ///   created this way.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sha512_final(ref monocypher.crypto_sha512_ctx ctx, ref Byte64 hash);
         
+        /// <summary>
+        /// 
+        /// SHA-512 is a cryptographically secure hash, provided to enable compatibility
+        ///   with other cryptographic systems. It is generally recommended to use
+        ///   <see cref="crypto_blake2b"/> instead, as it both
+        ///   performs faster on x86_64 CPUs and lacks many of the pitfalls of SHA-512.
+        /// <br/>
+        /// 
+        /// Note that SHA-512 itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// SHA-512 is vulnerable to length extension attacks;
+        ///   using it as a message authentication code (MAC) algorithm or keyed hash
+        ///   requires precautions. The
+        ///   <see cref="crypto_hmac_sha512"/> family of
+        ///   functions provides HMAC with SHA-512. Use
+        ///   <see cref="crypto_verify64"/> to compare MACs
+        ///   created this way.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
+        public static unsafe void crypto_sha512_final(ref monocypher.crypto_sha512_ctx ctx, Span<byte> hash)
+        {
+            ExpectSize64(nameof(hash), hash.Length);
+            crypto_sha512_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(hash));
+        }
+        
+        /// <summary>
+        /// 
+        /// SHA-512 is a cryptographically secure hash, provided to enable compatibility
+        ///   with other cryptographic systems. It is generally recommended to use
+        ///   <see cref="crypto_blake2b"/> instead, as it both
+        ///   performs faster on x86_64 CPUs and lacks many of the pitfalls of SHA-512.
+        /// <br/>
+        /// 
+        /// Note that SHA-512 itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// SHA-512 is vulnerable to length extension attacks;
+        ///   using it as a message authentication code (MAC) algorithm or keyed hash
+        ///   requires precautions. The
+        ///   <see cref="crypto_hmac_sha512"/> family of
+        ///   functions provides HMAC with SHA-512. Use
+        ///   <see cref="crypto_verify64"/> to compare MACs
+        ///   created this way.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sha512(ref Byte64 hash, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
-        /// HMAC SHA 512
-        /// ------------
+        /// 
+        /// SHA-512 is a cryptographically secure hash, provided to enable compatibility
+        ///   with other cryptographic systems. It is generally recommended to use
+        ///   <see cref="crypto_blake2b"/> instead, as it both
+        ///   performs faster on x86_64 CPUs and lacks many of the pitfalls of SHA-512.
+        /// <br/>
+        /// 
+        /// Note that SHA-512 itself is not suitable for hashing passwords and deriving keys
+        ///   from them; use the <see cref="crypto_argon2i"/>
+        ///   family of functions for that purpose instead.
+        /// <br/>
+        /// 
+        /// SHA-512 is vulnerable to length extension attacks;
+        ///   using it as a message authentication code (MAC) algorithm or keyed hash
+        ///   requires precautions. The
+        ///   <see cref="crypto_hmac_sha512"/> family of
+        ///   functions provides HMAC with SHA-512. Use
+        ///   <see cref="crypto_verify64"/> to compare MACs
+        ///   created this way.
+        /// <br/>
+        /// 
         /// </summary>
+        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
+        /// <param name="message">The message to hash. May overlap with
+        ///       <paramref name="hash"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        public static unsafe void crypto_sha512(Span<byte> hash, ReadOnlySpan<byte> message)
+        {
+            ExpectSize64(nameof(hash), hash.Length);
+            fixed(void* message_ptr = message)
+            crypto_sha512(ref MemoryMarshal.AsRef<Byte64>(hash), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// HMAC with SHA-512 is a cryptographically secure message authentication code
+        ///   (MAC), provided to enable compatibility with other cryptographic systems. It
+        ///   is generally recommended to use
+        ///   <see cref="crypto_blake2b_general"/> instead, as
+        ///   it performs faster on x86_64 CPUs.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. Users may
+        ///       want to wipe the key with
+        ///       <see cref="crypto_wipe"/> once they are done
+        ///       with it.</param>
+        /// <param name="key_size">Length of <paramref name="key"/>, in bytes. 32 is a good
+        ///       default. Keys longer than 128 bytes will be reduced to 64 bytes by hashing
+        ///       the key with SHA-512.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hmac_sha512_init(ref monocypher.crypto_hmac_sha512_ctx ctx, IntPtr key, monocypher.size_t key_size);
         
+        /// <summary>
+        /// 
+        /// HMAC with SHA-512 is a cryptographically secure message authentication code
+        ///   (MAC), provided to enable compatibility with other cryptographic systems. It
+        ///   is generally recommended to use
+        ///   <see cref="crypto_blake2b_general"/> instead, as
+        ///   it performs faster on x86_64 CPUs.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. Users may
+        ///       want to wipe the key with
+        ///       <see cref="crypto_wipe"/> once they are done
+        ///       with it.</param>
+        public static unsafe void crypto_hmac_sha512_init(ref monocypher.crypto_hmac_sha512_ctx ctx, ReadOnlySpan<byte> key)
+        {
+            fixed(void* key_ptr = key)
+            crypto_hmac_sha512_init(ref ctx, new IntPtr(key_ptr), (monocypher.size_t)key.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// HMAC with SHA-512 is a cryptographically secure message authentication code
+        ///   (MAC), provided to enable compatibility with other cryptographic systems. It
+        ///   is generally recommended to use
+        ///   <see cref="crypto_blake2b_general"/> instead, as
+        ///   it performs faster on x86_64 CPUs.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="message">The message to compute the HMAC for. May overlap with
+        ///       <paramref name="hmac"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hmac_sha512_update(ref monocypher.crypto_hmac_sha512_ctx ctx, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// 
+        /// HMAC with SHA-512 is a cryptographically secure message authentication code
+        ///   (MAC), provided to enable compatibility with other cryptographic systems. It
+        ///   is generally recommended to use
+        ///   <see cref="crypto_blake2b_general"/> instead, as
+        ///   it performs faster on x86_64 CPUs.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="message">The message to compute the HMAC for. May overlap with
+        ///       <paramref name="hmac"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        public static unsafe void crypto_hmac_sha512_update(ref monocypher.crypto_hmac_sha512_ctx ctx, ReadOnlySpan<byte> message)
+        {
+            fixed(void* message_ptr = message)
+            crypto_hmac_sha512_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// HMAC with SHA-512 is a cryptographically secure message authentication code
+        ///   (MAC), provided to enable compatibility with other cryptographic systems. It
+        ///   is generally recommended to use
+        ///   <see cref="crypto_blake2b_general"/> instead, as
+        ///   it performs faster on x86_64 CPUs.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hmac_sha512_final(ref monocypher.crypto_hmac_sha512_ctx ctx, ref Byte64 hmac);
         
+        /// <summary>
+        /// 
+        /// HMAC with SHA-512 is a cryptographically secure message authentication code
+        ///   (MAC), provided to enable compatibility with other cryptographic systems. It
+        ///   is generally recommended to use
+        ///   <see cref="crypto_blake2b_general"/> instead, as
+        ///   it performs faster on x86_64 CPUs.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
+        public static unsafe void crypto_hmac_sha512_final(ref monocypher.crypto_hmac_sha512_ctx ctx, Span<byte> hmac)
+        {
+            ExpectSize64(nameof(hmac), hmac.Length);
+            crypto_hmac_sha512_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(hmac));
+        }
+        
+        /// <summary>
+        /// 
+        /// HMAC with SHA-512 is a cryptographically secure message authentication code
+        ///   (MAC), provided to enable compatibility with other cryptographic systems. It
+        ///   is generally recommended to use
+        ///   <see cref="crypto_blake2b_general"/> instead, as
+        ///   it performs faster on x86_64 CPUs.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. Users may
+        ///       want to wipe the key with
+        ///       <see cref="crypto_wipe"/> once they are done
+        ///       with it.</param>
+        /// <param name="key_size">Length of <paramref name="key"/>, in bytes. 32 is a good
+        ///       default. Keys longer than 128 bytes will be reduced to 64 bytes by hashing
+        ///       the key with SHA-512.</param>
+        /// <param name="message">The message to compute the HMAC for. May overlap with
+        ///       <paramref name="hmac"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hmac_sha512(ref Byte64 hmac, IntPtr key, monocypher.size_t key_size, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
-        /// Generate public key
+        /// 
+        /// HMAC with SHA-512 is a cryptographically secure message authentication code
+        ///   (MAC), provided to enable compatibility with other cryptographic systems. It
+        ///   is generally recommended to use
+        ///   <see cref="crypto_blake2b_general"/> instead, as
+        ///   it performs faster on x86_64 CPUs.
+        /// <br/>
+        /// 
+        /// </summary>
+        /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
+        /// <param name="key">Some secret key. One cannot predict the final hash without it. Users may
+        ///       want to wipe the key with
+        ///       <see cref="crypto_wipe"/> once they are done
+        ///       with it.</param>
+        /// <param name="message">The message to compute the HMAC for. May overlap with
+        ///       <paramref name="hmac"/>. May be
+        ///       NULL if
+        ///       <paramref name="message_size"/> is 0.</param>
+        public static unsafe void crypto_hmac_sha512(Span<byte> hmac, ReadOnlySpan<byte> key, ReadOnlySpan<byte> message)
+        {
+            ExpectSize64(nameof(hmac), hmac.Length);
+            fixed(void* key_ptr = key)
+            fixed(void* message_ptr = message)
+            crypto_hmac_sha512(ref MemoryMarshal.AsRef<Byte64>(hmac), new IntPtr(key_ptr), (monocypher.size_t)key.Length, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// The <see cref="crypto_ed25519_sign"/>() and
+        ///   <see cref="crypto_ed25519_check"/>() functions provide
+        ///   Ed25519 public key signatures and verification with SHA-512 as the underlying
+        ///   hash function; they are interoperable with other Ed25519 implementations. If
+        ///   you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ed25519_public_key(ref Byte32 public_key, in Byte32 secret_key);
         
         /// <summary>
-        /// Direct interface
+        /// 
+        /// The <see cref="crypto_ed25519_sign"/>() and
+        ///   <see cref="crypto_ed25519_check"/>() functions provide
+        ///   Ed25519 public key signatures and verification with SHA-512 as the underlying
+        ///   hash function; they are interoperable with other Ed25519 implementations. If
+        ///   you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_ed25519_public_key(Span<byte> public_key, ReadOnlySpan<byte> secret_key)
+        {
+            ExpectSize32(nameof(public_key), public_key.Length);
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            crypto_ed25519_public_key(ref MemoryMarshal.AsRef<Byte32>(public_key), in MemoryMarshal.AsRef<Byte32>(secret_key));
+        }
+        
+        /// <summary>
+        /// 
+        /// The <see cref="crypto_ed25519_sign"/>() and
+        ///   <see cref="crypto_ed25519_check"/>() functions provide
+        ///   Ed25519 public key signatures and verification with SHA-512 as the underlying
+        ///   hash function; they are interoperable with other Ed25519 implementations. If
+        ///   you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ed25519_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
         
+        /// <summary>
+        /// 
+        /// The <see cref="crypto_ed25519_sign"/>() and
+        ///   <see cref="crypto_ed25519_check"/>() functions provide
+        ///   Ed25519 public key signatures and verification with SHA-512 as the underlying
+        ///   hash function; they are interoperable with other Ed25519 implementations. If
+        ///   you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_ed25519_sign(Span<byte> signature, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key, ReadOnlySpan<byte> message)
+        {
+            ExpectSize64(nameof(signature), signature.Length);
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            fixed(void* message_ptr = message)
+            crypto_ed25519_sign(ref MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// The <see cref="crypto_ed25519_sign"/>() and
+        ///   <see cref="crypto_ed25519_check"/>() functions provide
+        ///   Ed25519 public key signatures and verification with SHA-512 as the underlying
+        ///   hash function; they are interoperable with other Ed25519 implementations. If
+        ///   you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_ed25519_check(in Byte64 signature, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
         
         /// <summary>
-        /// Incremental interface
+        /// 
+        /// The <see cref="crypto_ed25519_sign"/>() and
+        ///   <see cref="crypto_ed25519_check"/>() functions provide
+        ///   Ed25519 public key signatures and verification with SHA-512 as the underlying
+        ///   hash function; they are interoperable with other Ed25519 implementations. If
+        ///   you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe int crypto_ed25519_check(ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key, ReadOnlySpan<byte> message)
+        {
+            ExpectSize64(nameof(signature), signature.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            fixed(void* message_ptr = message)
+            return crypto_ed25519_check(in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_ed25519_sign"/> and
+        ///   <see cref="crypto_ed25519_check"/>. Prefer those
+        ///   simpler functions if possible.
+        /// <br/>
+        /// 
+        /// These functions provide Ed25519 public key signatures and verification with
+        ///   SHA-512 as the underlying hash function; they are interoperable with other
+        ///   Ed25519 implementations. If you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ed25519_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
         
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_ed25519_sign"/> and
+        ///   <see cref="crypto_ed25519_check"/>. Prefer those
+        ///   simpler functions if possible.
+        /// <br/>
+        /// 
+        /// These functions provide Ed25519 public key signatures and verification with
+        ///   SHA-512 as the underlying hash function; they are interoperable with other
+        ///   Ed25519 implementations. If you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_ed25519_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key)
+        {
+            ExpectSize32(nameof(secret_key), secret_key.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            crypto_ed25519_sign_init_first_pass(ref ctx, in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_ed25519_sign"/> and
+        ///   <see cref="crypto_ed25519_check"/>. Prefer those
+        ///   simpler functions if possible.
+        /// <br/>
+        /// 
+        /// These functions provide Ed25519 public key signatures and verification with
+        ///   SHA-512 as the underlying hash function; they are interoperable with other
+        ///   Ed25519 implementations. If you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ed25519_check_init(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
         
+        /// <summary>
+        /// 
+        /// These functions are variants of
+        ///   <see cref="crypto_ed25519_sign"/> and
+        ///   <see cref="crypto_ed25519_check"/>. Prefer those
+        ///   simpler functions if possible.
+        /// <br/>
+        /// 
+        /// These functions provide Ed25519 public key signatures and verification with
+        ///   SHA-512 as the underlying hash function; they are interoperable with other
+        ///   Ed25519 implementations. If you have no interoperability requirements, prefer
+        ///   <see cref="crypto_sign"/>.
+        /// <br/>
+        /// 
+        /// </summary>
+        public static unsafe void crypto_ed25519_check_init(ref monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key)
+        {
+            ExpectSize64(nameof(signature), signature.Length);
+            ExpectSize32(nameof(public_key), public_key.Length);
+            crypto_ed25519_check_init(ref ctx, in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key));
+        }
+        
+        /// <summary>
+        /// 
+        /// These functions work like
+        ///   <see cref="crypto_from_eddsa_private"/> and
+        ///   <see cref="crypto_from_eddsa_public"/>, except
+        ///   that they operate on Ed25519 key pairs rather than key pairs for EdDSA with
+        ///   BLAKE2b. Please see the documentation for those functions for details.
+        /// 
+        /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_from_ed25519_private(ref Byte32 x25519, in Byte32 eddsa);
+        
+        /// <summary>
+        /// 
+        /// These functions work like
+        ///   <see cref="crypto_from_eddsa_private"/> and
+        ///   <see cref="crypto_from_eddsa_public"/>, except
+        ///   that they operate on Ed25519 key pairs rather than key pairs for EdDSA with
+        ///   BLAKE2b. Please see the documentation for those functions for details.
+        /// 
+        /// </summary>
+        public static unsafe void crypto_from_ed25519_private(Span<byte> x25519, ReadOnlySpan<byte> eddsa)
+        {
+            ExpectSize32(nameof(x25519), x25519.Length);
+            ExpectSize32(nameof(eddsa), eddsa.Length);
+            crypto_from_ed25519_private(ref MemoryMarshal.AsRef<Byte32>(x25519), in MemoryMarshal.AsRef<Byte32>(eddsa));
+        }
     }
 }

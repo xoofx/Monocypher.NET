@@ -32,6 +32,7 @@ function Build-Project {
     $NETSharedLibExtension = "so"
     $CMakeBuilder = "Unix Makefiles"
     $CMakeArch = ""
+    $BuildPlatformSubFolder = ""
     if ($IsMacOS) {
         $NETPlatform = "osx"
         $NETSharedLibExtension = "dylib"
@@ -45,6 +46,7 @@ function Build-Project {
         $NETSharedLibExtension = "dll"
         $CMakeBuilder = "Visual Studio 16 2019"
         $CMakeArch = "-A$MsvcArch"
+        $BuildPlatformSubFolder = "/Release"
     }
 
     Write-Host "Building Monocypher $NETPlatform-$NETArch" -ForegroundColor Green
@@ -62,7 +64,7 @@ function Build-Project {
     }
     
     New-Item -type Directory -Path $PackageFolder -Force
-    Copy-Item "$BuildPlatformFolder/Release/*.$NETSharedLibExtension" -Destination $PackageFolder
+    Copy-Item "$BuildPlatformFolder$BuildPlatformSubFolder/*.$NETSharedLibExtension" -Destination $PackageFolder
 }
 
 if (Test-Path $BuildFolder) {

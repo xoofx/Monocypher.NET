@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Monocypher.Tests": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

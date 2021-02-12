@@ -1,5 +1,5 @@
 #! /usr/bin/env pwsh
-# -------------------------------------------------------------
+#
 # Build script for Monocypher, building the following platforms:
 #
 # On Windows:

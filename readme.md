@@ -1,4 +1,4 @@
-# Monocypher<font color="FF8C44">.NET</font> [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/managed/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/native/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![NuGet](https://img.shields.io/nuget/v/Monocypher.NET.svg)](https://www.nuget.org/packages/Monocypher.NET/)
+# Monocypher<font color="FF8C44">.NET</font> [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/managed/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/native/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![NuGet](https://img.shields.io/nuget/v/Monocypher.svg)](https://www.nuget.org/packages/Monocypher)
 
 <img align="right" width="160px" height="160px" src="img/monocypher_dotnet.png">
 

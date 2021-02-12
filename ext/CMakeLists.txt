@@ -18,3 +18,4 @@ if(MSVC)
 endif()
 
 add_library(monocypher_native SHARED ${MONOCYPHER_SOURCES} Monocypher.def)
+set_property(TARGET monocypher_native PROPERTY ENABLE_EXPORTS 1)

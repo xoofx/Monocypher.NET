@@ -1,11 +1,10 @@
-# Monocypher<font color="A80016">.NET</font> [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/managed/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/native/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![NuGet](https://img.shields.io/nuget/v/Monocypher.NET.svg)](https://www.nuget.org/packages/Monocypher.NET/)
+# Monocypher<font color="FF8C44">.NET</font> [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/managed/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/native/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![NuGet](https://img.shields.io/nuget/v/Monocypher.NET.svg)](https://www.nuget.org/packages/Monocypher.NET/)
 
 <img align="right" width="160px" height="160px" src="img/monocypher_dotnet.png">
 
 Monocypher.NET is a managed wrapper around [Monocypher](https://github.com/LoupVaillant/Monocypher) cryptographic library.
 
 > The current _native_ version of Monocypher used by Monocypher.NET is `3.1.2`
-
 ## Features
 
 - Provides the entire native Monocypher API in an efficient 1-to-1 mapping:
@@ -66,6 +65,15 @@ Monocypher.NET is supported on the following platforms:
 - `linux-x64`, `linux-arm64`, `linux-arm`
 - `osx-x64`
 
+## Performance
+
+The primary usage for Monocypher is for resources constrained platforms (e.g micro-controllers)
+where the [code size and performance must be balanced](https://monocypher.org/speed).
+
+For .NET, this constraint might be less important, so if you are looking for the fastest  cryptographic library, Monocypher.NET might not be the best candidate.
+
+That being said, if you are building an IoT project using the C Monocypher and you want to communicate with a .NET project, you might want to make sure that the cryptographic library used is the same between the client and the server (even though that's not strictly required). In that case **Monocypher.NET is a good compromise**.
+
 ## How to Build?
 
 You need to install the [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0). Then from the root folder:
@@ -76,9 +84,15 @@ $ dotnet build src -c Release
 
 In order to rebuild the native binaries, you need to run the build scripts from [ext](ext/readme.md)
 
+## Credits
+
+Monocypher.NET is just a wrapper and is entirely relying on the [Monocypher](https://monocypher.org/) C implementation developed by [Loup Vaillant](https://loup-vaillant.fr/).
+
 ## License
 
 This software is released under the [BSD-Clause 2 license](https://opensource.org/licenses/BSD-2-Clause).
+
+The native Monocypher is released with the following [BSD-Clause 2 license](https://github.com/LoupVaillant/Monocypher/blob/master/LICENCE.md) terms.
 
 ## Author
 

@@ -42,11 +42,11 @@ namespace Monocypher.Tests
                 builder.Append($"{cipherText[i]:X2}");
             }
             Console.WriteLine($"cipher: {builder}");
-            
-            for (int i = 0; i < cipherText.Length; i++)
-            {
-                Assert.AreNotEqual(inputText[i], cipherText[i], $"Crypto failed: Invalid byte found at position {i}");
-            }
+
+            Assert.AreNotEqual((byte)'a', cipherText[0], $"Crypto failed: Invalid byte found at position 0");
+            Assert.AreNotEqual((byte)'b', cipherText[1], $"Crypto failed: Invalid byte found at position 1");
+            Assert.AreNotEqual((byte)'c', cipherText[2], $"Crypto failed: Invalid byte found at position 2");
+            Assert.AreNotEqual((byte)'d', cipherText[3], $"Crypto failed: Invalid byte found at position 3");
 
             Span<byte> outputText = stackalloc byte[16];
             crypto_unlock(outputText, key, nonce, mac, cipherText);

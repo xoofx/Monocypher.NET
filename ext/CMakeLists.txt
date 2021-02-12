@@ -15,7 +15,8 @@ include_directories(${MONOCYPHER_SRC_FOLDER})
 if(MSVC)
     # use static linking with CRT
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
 endif()
 
-add_library(monocypher_native SHARED ${MONOCYPHER_SOURCES} Monocypher.def)
+add_library(monocypher_native SHARED ${MONOCYPHER_SOURCES})
 set_property(TARGET monocypher_native PROPERTY ENABLE_EXPORTS 1)

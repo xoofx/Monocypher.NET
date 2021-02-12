@@ -1,0 +1,38 @@
+name: native
+
+on:
+  push:
+    paths-ignore:
+    - 'img/**'
+    - 'doc/**'
+    - 'src/**'
+    - '*.md'
+    - '*.txt'
+  pull_request:
+
+defaults:
+  run:
+    working-directory: ext
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Setup Linux
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+          sudo apt-get install gcc-aarch64-linux-gnu      
+          sudo apt-get install gcc-arm-linux-gnueabihf      
+    - name: Build
+      run: |
+          ./build_monocypher_native.ps1
+    - name: Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: monocypher-native-${{ matrix.os }}
+        path: ext/build/package

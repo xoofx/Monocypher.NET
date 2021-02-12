@@ -251,7 +251,7 @@ namespace Monocypher
         /// 
         /// Cryptographic operations often require comparison of secrets or values derived
         ///   from secrets. Standard comparison functions like
-        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   memcmp() tend to exit when they find the
         ///   first difference, leaking information through timing differences.
         /// <br/>
         /// 
@@ -275,7 +275,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// When in doubt, prefer these functions over
-        ///   <see cref="memcmp"/>().
+        ///   memcmp().
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
@@ -285,7 +285,7 @@ namespace Monocypher
         /// 
         /// Cryptographic operations often require comparison of secrets or values derived
         ///   from secrets. Standard comparison functions like
-        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   memcmp() tend to exit when they find the
         ///   first difference, leaking information through timing differences.
         /// <br/>
         /// 
@@ -309,7 +309,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// When in doubt, prefer these functions over
-        ///   <see cref="memcmp"/>().
+        ///   memcmp().
         /// 
         /// </summary>
         public static unsafe int crypto_verify16(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
@@ -323,7 +323,7 @@ namespace Monocypher
         /// 
         /// Cryptographic operations often require comparison of secrets or values derived
         ///   from secrets. Standard comparison functions like
-        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   memcmp() tend to exit when they find the
         ///   first difference, leaking information through timing differences.
         /// <br/>
         /// 
@@ -347,7 +347,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// When in doubt, prefer these functions over
-        ///   <see cref="memcmp"/>().
+        ///   memcmp().
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
@@ -357,7 +357,7 @@ namespace Monocypher
         /// 
         /// Cryptographic operations often require comparison of secrets or values derived
         ///   from secrets. Standard comparison functions like
-        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   memcmp() tend to exit when they find the
         ///   first difference, leaking information through timing differences.
         /// <br/>
         /// 
@@ -381,7 +381,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// When in doubt, prefer these functions over
-        ///   <see cref="memcmp"/>().
+        ///   memcmp().
         /// 
         /// </summary>
         public static unsafe int crypto_verify32(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
@@ -395,7 +395,7 @@ namespace Monocypher
         /// 
         /// Cryptographic operations often require comparison of secrets or values derived
         ///   from secrets. Standard comparison functions like
-        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   memcmp() tend to exit when they find the
         ///   first difference, leaking information through timing differences.
         /// <br/>
         /// 
@@ -419,7 +419,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// When in doubt, prefer these functions over
-        ///   <see cref="memcmp"/>().
+        ///   memcmp().
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
@@ -429,7 +429,7 @@ namespace Monocypher
         /// 
         /// Cryptographic operations often require comparison of secrets or values derived
         ///   from secrets. Standard comparison functions like
-        ///   <see cref="memcmp"/>() tend to exit when they find the
+        ///   memcmp() tend to exit when they find the
         ///   first difference, leaking information through timing differences.
         /// <br/>
         /// 
@@ -453,7 +453,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// When in doubt, prefer these functions over
-        ///   <see cref="memcmp"/>().
+        ///   memcmp().
         /// 
         /// </summary>
         public static unsafe int crypto_verify64(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
@@ -517,7 +517,7 @@ namespace Monocypher
         ///       key. This would reveal the XOR of 2 different messages, which allows
         ///       decryption and forgeries. The easiest (and recommended) way to generate
         ///       this nonce is to select it at random. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator).</param>
         /// <param name="mac">A 16-byte message authentication code (MAC),
         ///       that can only be produced by someone who knows the session key. This
@@ -528,7 +528,7 @@ namespace Monocypher
         /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
         ///       length however, will not. Be careful when
         ///       combining encryption with compression. See
-        ///       <see cref="intro"/> for details.</param>
+        ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
@@ -553,7 +553,7 @@ namespace Monocypher
         ///       key. This would reveal the XOR of 2 different messages, which allows
         ///       decryption and forgeries. The easiest (and recommended) way to generate
         ///       this nonce is to select it at random. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator).</param>
         /// <param name="mac">A 16-byte message authentication code (MAC),
         ///       that can only be produced by someone who knows the session key. This
@@ -564,7 +564,7 @@ namespace Monocypher
         /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
         ///       length however, will not. Be careful when
         ///       combining encryption with compression. See
-        ///       <see cref="intro"/> for details.</param>
+        ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         public static unsafe void crypto_lock(Span<byte> mac, Span<byte> cipher_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> plain_text)
         {
@@ -596,7 +596,7 @@ namespace Monocypher
         ///       key. This would reveal the XOR of 2 different messages, which allows
         ///       decryption and forgeries. The easiest (and recommended) way to generate
         ///       this nonce is to select it at random. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator).</param>
         /// <param name="mac">A 16-byte message authentication code (MAC),
         ///       that can only be produced by someone who knows the session key. This
@@ -607,7 +607,7 @@ namespace Monocypher
         /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
         ///       length however, will not. Be careful when
         ///       combining encryption with compression. See
-        ///       <see cref="intro"/> for details.</param>
+        ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
@@ -632,7 +632,7 @@ namespace Monocypher
         ///       key. This would reveal the XOR of 2 different messages, which allows
         ///       decryption and forgeries. The easiest (and recommended) way to generate
         ///       this nonce is to select it at random. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator).</param>
         /// <param name="mac">A 16-byte message authentication code (MAC),
         ///       that can only be produced by someone who knows the session key. This
@@ -643,7 +643,7 @@ namespace Monocypher
         /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
         ///       length however, will not. Be careful when
         ///       combining encryption with compression. See
-        ///       <see cref="intro"/> for details.</param>
+        ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         public static unsafe int crypto_unlock(Span<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> mac, ReadOnlySpan<byte> cipher_text)
         {
@@ -675,7 +675,7 @@ namespace Monocypher
         ///       key. This would reveal the XOR of 2 different messages, which allows
         ///       decryption and forgeries. The easiest (and recommended) way to generate
         ///       this nonce is to select it at random. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator).</param>
         /// <param name="mac">A 16-byte message authentication code (MAC),
         ///       that can only be produced by someone who knows the session key. This
@@ -686,7 +686,7 @@ namespace Monocypher
         /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
         ///       length however, will not. Be careful when
         ///       combining encryption with compression. See
-        ///       <see cref="intro"/> for details.</param>
+        ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
@@ -711,7 +711,7 @@ namespace Monocypher
         ///       key. This would reveal the XOR of 2 different messages, which allows
         ///       decryption and forgeries. The easiest (and recommended) way to generate
         ///       this nonce is to select it at random. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator).</param>
         /// <param name="mac">A 16-byte message authentication code (MAC),
         ///       that can only be produced by someone who knows the session key. This
@@ -722,7 +722,7 @@ namespace Monocypher
         /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
         ///       length however, will not. Be careful when
         ///       combining encryption with compression. See
-        ///       <see cref="intro"/> for details.</param>
+        ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         public static unsafe void crypto_lock_aead(Span<byte> mac, Span<byte> cipher_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> ad, ReadOnlySpan<byte> plain_text)
         {
@@ -755,7 +755,7 @@ namespace Monocypher
         ///       key. This would reveal the XOR of 2 different messages, which allows
         ///       decryption and forgeries. The easiest (and recommended) way to generate
         ///       this nonce is to select it at random. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator).</param>
         /// <param name="mac">A 16-byte message authentication code (MAC),
         ///       that can only be produced by someone who knows the session key. This
@@ -766,7 +766,7 @@ namespace Monocypher
         /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
         ///       length however, will not. Be careful when
         ///       combining encryption with compression. See
-        ///       <see cref="intro"/> for details.</param>
+        ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
@@ -791,7 +791,7 @@ namespace Monocypher
         ///       key. This would reveal the XOR of 2 different messages, which allows
         ///       decryption and forgeries. The easiest (and recommended) way to generate
         ///       this nonce is to select it at random. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator).</param>
         /// <param name="mac">A 16-byte message authentication code (MAC),
         ///       that can only be produced by someone who knows the session key. This
@@ -802,7 +802,7 @@ namespace Monocypher
         /// <param name="plain_text">The secret message. Its contents will be kept hidden from attackers. Its
         ///       length however, will not. Be careful when
         ///       combining encryption with compression. See
-        ///       <see cref="intro"/> for details.</param>
+        ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         public static unsafe int crypto_unlock_aead(Span<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> mac, ReadOnlySpan<byte> ad, ReadOnlySpan<byte> cipher_text)
         {
@@ -1262,7 +1262,7 @@ namespace Monocypher
         ///       with the <see cref="crypto_lock"/> family of
         ///       functions.</param>
         /// <param name="your_secret_key">A 32-byte random number, known only to you. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator).</param>
         /// <param name="their_public_key">The public key of the other party.</param>
@@ -1283,7 +1283,7 @@ namespace Monocypher
         ///       with the <see cref="crypto_lock"/> family of
         ///       functions.</param>
         /// <param name="your_secret_key">A 32-byte random number, known only to you. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator).</param>
         /// <param name="their_public_key">The public key of the other party.</param>
@@ -1303,7 +1303,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="secret_key">A 32-byte random number, known only to you. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator). Do not
         ///       use the same private key for both signatures and key exchanges. The public
         ///       keys are different, and revealing both may leak information.</param>
@@ -1320,7 +1320,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="secret_key">A 32-byte random number, known only to you. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator). Do not
         ///       use the same private key for both signatures and key exchanges. The public
         ///       keys are different, and revealing both may leak information.</param>
@@ -1342,7 +1342,7 @@ namespace Monocypher
         /// </summary>
         /// <param name="signature">The signature.</param>
         /// <param name="secret_key">A 32-byte random number, known only to you. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator). Do not
         ///       use the same private key for both signatures and key exchanges. The public
         ///       keys are different, and revealing both may leak information.</param>
@@ -1362,7 +1362,7 @@ namespace Monocypher
         /// </summary>
         /// <param name="signature">The signature.</param>
         /// <param name="secret_key">A 32-byte random number, known only to you. See
-        ///       <see cref="intro"/> about random number
+        ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator). Do not
         ///       use the same private key for both signatures and key exchanges. The public
         ///       keys are different, and revealing both may leak information.</param>
@@ -1462,7 +1462,7 @@ namespace Monocypher
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
         ///       cannot. They are too small, and the same
         ///       nonce may be selected twice by accident. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random numbers (use the operating system's random number
         ///       generator).</param>
         /// <param name="plain_text">The message to encrypt. It is allowed to be
@@ -1493,7 +1493,7 @@ namespace Monocypher
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
         ///       cannot. They are too small, and the same
         ///       nonce may be selected twice by accident. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random numbers (use the operating system's random number
         ///       generator).</param>
         /// <param name="plain_text">The message to encrypt. It is allowed to be
@@ -1529,7 +1529,7 @@ namespace Monocypher
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
         ///       cannot. They are too small, and the same
         ///       nonce may be selected twice by accident. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random numbers (use the operating system's random number
         ///       generator).</param>
         /// <param name="plain_text">The message to encrypt. It is allowed to be
@@ -1560,7 +1560,7 @@ namespace Monocypher
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
         ///       cannot. They are too small, and the same
         ///       nonce may be selected twice by accident. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random numbers (use the operating system's random number
         ///       generator).</param>
         /// <param name="plain_text">The message to encrypt. It is allowed to be
@@ -1659,7 +1659,7 @@ namespace Monocypher
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
         ///       cannot. They are too small, and the same
         ///       nonce may be selected twice by accident. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random numbers (use the operating system's random number
         ///       generator).</param>
         /// <param name="plain_text">The message to encrypt. It is allowed to be
@@ -1691,7 +1691,7 @@ namespace Monocypher
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
         ///       cannot. They are too small, and the same
         ///       nonce may be selected twice by accident. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random numbers (use the operating system's random number
         ///       generator).</param>
         /// <param name="plain_text">The message to encrypt. It is allowed to be
@@ -1728,7 +1728,7 @@ namespace Monocypher
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
         ///       cannot. They are too small, and the same
         ///       nonce may be selected twice by accident. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random numbers (use the operating system's random number
         ///       generator).</param>
         /// <param name="plain_text">The message to encrypt. It is allowed to be
@@ -1760,7 +1760,7 @@ namespace Monocypher
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
         ///       cannot. They are too small, and the same
         ///       nonce may be selected twice by accident. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random numbers (use the operating system's random number
         ///       generator).</param>
         /// <param name="plain_text">The message to encrypt. It is allowed to be
@@ -2066,7 +2066,7 @@ namespace Monocypher
         ///       <see cref="crypto_hchacha20"/> or
         ///       <see cref="crypto_blake2b"/> first.</param>
         /// <param name="your_secret_key">A 32-byte secret random number. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator).</param>
         /// <param name="their_public_key">The public key of the other party.
@@ -2096,7 +2096,7 @@ namespace Monocypher
         ///       <see cref="crypto_hchacha20"/> or
         ///       <see cref="crypto_blake2b"/> first.</param>
         /// <param name="your_secret_key">A 32-byte secret random number. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator).</param>
         /// <param name="their_public_key">The public key of the other party.
@@ -2665,7 +2665,8 @@ namespace Monocypher
         ///   crypto_sign_vtable structure must be
         ///   provided. It is defined as:
         /// <br/>
-        /// 
+        /// <pre>
+        /// <code class="language-c">
         /// typedef struct { 
         ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
         ///                  size_t message_size); 
@@ -2675,6 +2676,8 @@ namespace Monocypher
         ///     void (*final )(void *ctx, uint8_t hash[64]); 
         ///     size_t ctx_size; 
         /// } crypto_sign_vtable;
+        /// </code>
+        /// </pre>
         /// <br/>
         /// 
         /// The context argument to the functions shall be referred to as &#x201C;outer
@@ -2700,22 +2703,55 @@ namespace Monocypher
         /// <br/>
         /// 
         /// The fields of crypto_sign_vtable are:
-        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        /// <dl>
+        /// <dt>
+        /// <paramref name="hash"/>
+        /// </dt>
+        /// <dd>
+        /// Function that computes a 64-byte hash for a given message and writes the
         ///       computed hash to <paramref name="hash"/>. The output length
         ///       must be exactly 64 bytes. This will normally
         ///       be constructed using the functions that provide the
         ///       <paramref name="init"/>,
         ///       <paramref name="update"/> and
-        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
-        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
-        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       <paramref name="final"/> members.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="init"/>
+        /// </dt>
+        /// <dd>
+        /// Function that initialises the hash context of an outer signing
+        ///     context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="update"/>
+        /// </dt>
+        /// <dd>
+        /// Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="final"/>
+        /// </dt>
+        /// <dd>
+        /// Function that finalises the hash context of an outer signing context and
         ///       writes the computed hash to <paramref name="hash"/>. The
         ///       output length must be exactly 64 bytes. This
         ///       function should wipe the hash context with
         ///       <see cref="crypto_wipe"/> if it contains
         ///       pointers to objects outside the outer signing context. Monocypher takes
-        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
-        ///       <see cref="sizeof"/>().<br/>
+        ///       care of wiping the outer signing context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="ctx_size"/>
+        /// </dt>
+        /// <dd>
+        /// The size of the outer signing context as determined by
+        ///       sizeof().
+        /// </dd>
+        /// 
+        /// </dl>
+        /// <br/>
         /// 
         /// The functions indicated in the
         ///   crypto_sign_vtable must be thread-safe if any
@@ -2760,7 +2796,8 @@ namespace Monocypher
         ///   crypto_sign_vtable structure must be
         ///   provided. It is defined as:
         /// <br/>
-        /// 
+        /// <pre>
+        /// <code class="language-c">
         /// typedef struct { 
         ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
         ///                  size_t message_size); 
@@ -2770,6 +2807,8 @@ namespace Monocypher
         ///     void (*final )(void *ctx, uint8_t hash[64]); 
         ///     size_t ctx_size; 
         /// } crypto_sign_vtable;
+        /// </code>
+        /// </pre>
         /// <br/>
         /// 
         /// The context argument to the functions shall be referred to as &#x201C;outer
@@ -2795,22 +2834,55 @@ namespace Monocypher
         /// <br/>
         /// 
         /// The fields of crypto_sign_vtable are:
-        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        /// <dl>
+        /// <dt>
+        /// <paramref name="hash"/>
+        /// </dt>
+        /// <dd>
+        /// Function that computes a 64-byte hash for a given message and writes the
         ///       computed hash to <paramref name="hash"/>. The output length
         ///       must be exactly 64 bytes. This will normally
         ///       be constructed using the functions that provide the
         ///       <paramref name="init"/>,
         ///       <paramref name="update"/> and
-        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
-        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
-        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       <paramref name="final"/> members.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="init"/>
+        /// </dt>
+        /// <dd>
+        /// Function that initialises the hash context of an outer signing
+        ///     context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="update"/>
+        /// </dt>
+        /// <dd>
+        /// Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="final"/>
+        /// </dt>
+        /// <dd>
+        /// Function that finalises the hash context of an outer signing context and
         ///       writes the computed hash to <paramref name="hash"/>. The
         ///       output length must be exactly 64 bytes. This
         ///       function should wipe the hash context with
         ///       <see cref="crypto_wipe"/> if it contains
         ///       pointers to objects outside the outer signing context. Monocypher takes
-        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
-        ///       <see cref="sizeof"/>().<br/>
+        ///       care of wiping the outer signing context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="ctx_size"/>
+        /// </dt>
+        /// <dd>
+        /// The size of the outer signing context as determined by
+        ///       sizeof().
+        /// </dd>
+        /// 
+        /// </dl>
+        /// <br/>
         /// 
         /// The functions indicated in the
         ///   crypto_sign_vtable must be thread-safe if any
@@ -2859,7 +2931,8 @@ namespace Monocypher
         ///   crypto_sign_vtable structure must be
         ///   provided. It is defined as:
         /// <br/>
-        /// 
+        /// <pre>
+        /// <code class="language-c">
         /// typedef struct { 
         ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
         ///                  size_t message_size); 
@@ -2869,6 +2942,8 @@ namespace Monocypher
         ///     void (*final )(void *ctx, uint8_t hash[64]); 
         ///     size_t ctx_size; 
         /// } crypto_sign_vtable;
+        /// </code>
+        /// </pre>
         /// <br/>
         /// 
         /// The context argument to the functions shall be referred to as &#x201C;outer
@@ -2894,22 +2969,55 @@ namespace Monocypher
         /// <br/>
         /// 
         /// The fields of crypto_sign_vtable are:
-        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        /// <dl>
+        /// <dt>
+        /// <paramref name="hash"/>
+        /// </dt>
+        /// <dd>
+        /// Function that computes a 64-byte hash for a given message and writes the
         ///       computed hash to <paramref name="hash"/>. The output length
         ///       must be exactly 64 bytes. This will normally
         ///       be constructed using the functions that provide the
         ///       <paramref name="init"/>,
         ///       <paramref name="update"/> and
-        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
-        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
-        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       <paramref name="final"/> members.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="init"/>
+        /// </dt>
+        /// <dd>
+        /// Function that initialises the hash context of an outer signing
+        ///     context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="update"/>
+        /// </dt>
+        /// <dd>
+        /// Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="final"/>
+        /// </dt>
+        /// <dd>
+        /// Function that finalises the hash context of an outer signing context and
         ///       writes the computed hash to <paramref name="hash"/>. The
         ///       output length must be exactly 64 bytes. This
         ///       function should wipe the hash context with
         ///       <see cref="crypto_wipe"/> if it contains
         ///       pointers to objects outside the outer signing context. Monocypher takes
-        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
-        ///       <see cref="sizeof"/>().<br/>
+        ///       care of wiping the outer signing context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="ctx_size"/>
+        /// </dt>
+        /// <dd>
+        /// The size of the outer signing context as determined by
+        ///       sizeof().
+        /// </dd>
+        /// 
+        /// </dl>
+        /// <br/>
         /// 
         /// The functions indicated in the
         ///   crypto_sign_vtable must be thread-safe if any
@@ -2954,7 +3062,8 @@ namespace Monocypher
         ///   crypto_sign_vtable structure must be
         ///   provided. It is defined as:
         /// <br/>
-        /// 
+        /// <pre>
+        /// <code class="language-c">
         /// typedef struct { 
         ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
         ///                  size_t message_size); 
@@ -2964,6 +3073,8 @@ namespace Monocypher
         ///     void (*final )(void *ctx, uint8_t hash[64]); 
         ///     size_t ctx_size; 
         /// } crypto_sign_vtable;
+        /// </code>
+        /// </pre>
         /// <br/>
         /// 
         /// The context argument to the functions shall be referred to as &#x201C;outer
@@ -2989,22 +3100,55 @@ namespace Monocypher
         /// <br/>
         /// 
         /// The fields of crypto_sign_vtable are:
-        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        /// <dl>
+        /// <dt>
+        /// <paramref name="hash"/>
+        /// </dt>
+        /// <dd>
+        /// Function that computes a 64-byte hash for a given message and writes the
         ///       computed hash to <paramref name="hash"/>. The output length
         ///       must be exactly 64 bytes. This will normally
         ///       be constructed using the functions that provide the
         ///       <paramref name="init"/>,
         ///       <paramref name="update"/> and
-        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
-        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
-        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       <paramref name="final"/> members.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="init"/>
+        /// </dt>
+        /// <dd>
+        /// Function that initialises the hash context of an outer signing
+        ///     context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="update"/>
+        /// </dt>
+        /// <dd>
+        /// Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="final"/>
+        /// </dt>
+        /// <dd>
+        /// Function that finalises the hash context of an outer signing context and
         ///       writes the computed hash to <paramref name="hash"/>. The
         ///       output length must be exactly 64 bytes. This
         ///       function should wipe the hash context with
         ///       <see cref="crypto_wipe"/> if it contains
         ///       pointers to objects outside the outer signing context. Monocypher takes
-        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
-        ///       <see cref="sizeof"/>().<br/>
+        ///       care of wiping the outer signing context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="ctx_size"/>
+        /// </dt>
+        /// <dd>
+        /// The size of the outer signing context as determined by
+        ///       sizeof().
+        /// </dd>
+        /// 
+        /// </dl>
+        /// <br/>
         /// 
         /// The functions indicated in the
         ///   crypto_sign_vtable must be thread-safe if any
@@ -3053,7 +3197,8 @@ namespace Monocypher
         ///   crypto_sign_vtable structure must be
         ///   provided. It is defined as:
         /// <br/>
-        /// 
+        /// <pre>
+        /// <code class="language-c">
         /// typedef struct { 
         ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
         ///                  size_t message_size); 
@@ -3063,6 +3208,8 @@ namespace Monocypher
         ///     void (*final )(void *ctx, uint8_t hash[64]); 
         ///     size_t ctx_size; 
         /// } crypto_sign_vtable;
+        /// </code>
+        /// </pre>
         /// <br/>
         /// 
         /// The context argument to the functions shall be referred to as &#x201C;outer
@@ -3088,22 +3235,55 @@ namespace Monocypher
         /// <br/>
         /// 
         /// The fields of crypto_sign_vtable are:
-        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        /// <dl>
+        /// <dt>
+        /// <paramref name="hash"/>
+        /// </dt>
+        /// <dd>
+        /// Function that computes a 64-byte hash for a given message and writes the
         ///       computed hash to <paramref name="hash"/>. The output length
         ///       must be exactly 64 bytes. This will normally
         ///       be constructed using the functions that provide the
         ///       <paramref name="init"/>,
         ///       <paramref name="update"/> and
-        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
-        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
-        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       <paramref name="final"/> members.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="init"/>
+        /// </dt>
+        /// <dd>
+        /// Function that initialises the hash context of an outer signing
+        ///     context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="update"/>
+        /// </dt>
+        /// <dd>
+        /// Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="final"/>
+        /// </dt>
+        /// <dd>
+        /// Function that finalises the hash context of an outer signing context and
         ///       writes the computed hash to <paramref name="hash"/>. The
         ///       output length must be exactly 64 bytes. This
         ///       function should wipe the hash context with
         ///       <see cref="crypto_wipe"/> if it contains
         ///       pointers to objects outside the outer signing context. Monocypher takes
-        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
-        ///       <see cref="sizeof"/>().<br/>
+        ///       care of wiping the outer signing context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="ctx_size"/>
+        /// </dt>
+        /// <dd>
+        /// The size of the outer signing context as determined by
+        ///       sizeof().
+        /// </dd>
+        /// 
+        /// </dl>
+        /// <br/>
         /// 
         /// The functions indicated in the
         ///   crypto_sign_vtable must be thread-safe if any
@@ -3148,7 +3328,8 @@ namespace Monocypher
         ///   crypto_sign_vtable structure must be
         ///   provided. It is defined as:
         /// <br/>
-        /// 
+        /// <pre>
+        /// <code class="language-c">
         /// typedef struct { 
         ///     void (*hash)(uint8_t hash[64], const uint8_t *message, 
         ///                  size_t message_size); 
@@ -3158,6 +3339,8 @@ namespace Monocypher
         ///     void (*final )(void *ctx, uint8_t hash[64]); 
         ///     size_t ctx_size; 
         /// } crypto_sign_vtable;
+        /// </code>
+        /// </pre>
         /// <br/>
         /// 
         /// The context argument to the functions shall be referred to as &#x201C;outer
@@ -3183,22 +3366,55 @@ namespace Monocypher
         /// <br/>
         /// 
         /// The fields of crypto_sign_vtable are:
-        /// <paramref name="hash"/>Function that computes a 64-byte hash for a given message and writes the
+        /// <dl>
+        /// <dt>
+        /// <paramref name="hash"/>
+        /// </dt>
+        /// <dd>
+        /// Function that computes a 64-byte hash for a given message and writes the
         ///       computed hash to <paramref name="hash"/>. The output length
         ///       must be exactly 64 bytes. This will normally
         ///       be constructed using the functions that provide the
         ///       <paramref name="init"/>,
         ///       <paramref name="update"/> and
-        ///       <paramref name="final"/> members.<paramref name="init"/>Function that initialises the hash context of an outer signing
-        ///     context.<paramref name="update"/>Function that updates the hash context of an outer signing context. It
-        ///       must be able to handle message sizes of at least 32 bytes.<paramref name="final"/>Function that finalises the hash context of an outer signing context and
+        ///       <paramref name="final"/> members.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="init"/>
+        /// </dt>
+        /// <dd>
+        /// Function that initialises the hash context of an outer signing
+        ///     context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="update"/>
+        /// </dt>
+        /// <dd>
+        /// Function that updates the hash context of an outer signing context. It
+        ///       must be able to handle message sizes of at least 32 bytes.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="final"/>
+        /// </dt>
+        /// <dd>
+        /// Function that finalises the hash context of an outer signing context and
         ///       writes the computed hash to <paramref name="hash"/>. The
         ///       output length must be exactly 64 bytes. This
         ///       function should wipe the hash context with
         ///       <see cref="crypto_wipe"/> if it contains
         ///       pointers to objects outside the outer signing context. Monocypher takes
-        ///       care of wiping the outer signing context.<paramref name="ctx_size"/>The size of the outer signing context as determined by
-        ///       <see cref="sizeof"/>().<br/>
+        ///       care of wiping the outer signing context.
+        /// </dd>
+        /// <dt>
+        /// <paramref name="ctx_size"/>
+        /// </dt>
+        /// <dd>
+        /// The size of the outer signing context as determined by
+        ///       sizeof().
+        /// </dd>
+        /// 
+        /// </dl>
+        /// <br/>
         /// 
         /// The functions indicated in the
         ///   crypto_sign_vtable must be thread-safe if any
@@ -3572,7 +3788,7 @@ namespace Monocypher
         /// <param name="secret_key">The secret key that was generated from the given
         ///       <paramref name="seed"/>.</param>
         /// <param name="seed">A 32-byte random number from which to derive a key pair. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator). The <paramref name="seed"/> is wiped
         ///       automatically.</param>
@@ -3643,7 +3859,7 @@ namespace Monocypher
         /// <param name="secret_key">The secret key that was generated from the given
         ///       <paramref name="seed"/>.</param>
         /// <param name="seed">A 32-byte random number from which to derive a key pair. See
-        ///       <see cref="intro"/> for advice about
+        ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator). The <paramref name="seed"/> is wiped
         ///       automatically.</param>

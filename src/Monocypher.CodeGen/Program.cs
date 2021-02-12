@@ -29,17 +29,8 @@ namespace Monocypher.CodeGen
         }
 
         
-
-
-        public void ProcessDoc()
+        private void ProcessDoc()
         {
-
-            // mandoc -Thtml advanced/crypto_x25519_public_key.3monocypher
-
-
-            // wsl --distribution Ubuntu-20.04 --exec mandoc -Thtml ext/Monocypher/doc/man/man3/advanced/crypto_x25519_public_key.3monocypher
-
-
             var docFolder  = Path.Combine(MonocypherFolder, "doc");
 
             foreach (var file in Directory.EnumerateFiles(docFolder, "*.3monocypher", SearchOption.AllDirectories))
@@ -54,15 +45,14 @@ namespace Monocypher.CodeGen
                 }
                 else
                 {
+                    Console.WriteLine($"Generate html for function: {Path.GetFileName(file)}");
                     output = LinuxUtil.RunLinuxExe("mandoc", $"-Thtml {Path.GetFileName(file)}", currentDirectory: Path.GetDirectoryName(file));
                     File.WriteAllText(Path.ChangeExtension(Path.GetFileName(file), "html"), output);
                 }
 
                 var doc = new HtmlDocument();
                 doc.LoadHtml(output);
-
-                Console.WriteLine($"Function: {Path.GetFileName(file)}");
-
+                
                 var desc = doc.GetElementbyId("DESCRIPTION");
                 var next = desc.NextSibling;
 
@@ -74,7 +64,7 @@ namespace Monocypher.CodeGen
                         break;
                     }
 
-                    var text = ProcessTextElement(next, out var shouldExit);
+                    var text = ProcessDocNodes(next, out var shouldExit, true);
                     if (text != null)
                     {
                         builder.Children.Add(text);
@@ -134,7 +124,7 @@ namespace Monocypher.CodeGen
                         {
                             if (node.Name == "dd")
                             {
-                                var paramDesc = ProcessTextElement(node, out _);
+                                var paramDesc = ProcessDocNodes(node, out _);
                                 var paramComment = new CSharpParamComment(paramName);
                                 paramComment.Children.Add(paramDesc);
                                 parameters.Add(paramComment);
@@ -169,13 +159,19 @@ namespace Monocypher.CodeGen
             return node;
         }
 
-        private CSharpComment ProcessTextElement(HtmlNode node, out bool shouldExit)
+
+        private static readonly HashSet<string> KeepHtmlElements = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "dl", "dt", "dd", "ul", "ol", "li"
+        };
+
+        private CSharpComment ProcessDocNodes(HtmlNode node, out bool shouldExit, bool keepStructuralElements = false)
         {
             shouldExit = false;
             // <a class="Xr" title="Xr">crypto_curve_to_hidden(3monocypher)</a>
             // <code class="Fn" title="Fn">crypto_verify16</code>
-            if ((node.Name == "a" && node.HasAttributes && node.Attributes["class"].Value == "Xr") ||
-                (node.Name == "code" && node.HasAttributes && node.Attributes["class"].Value == "Fn")
+            if (((node.Name == "a" && node.HasAttributes && node.Attributes["class"].Value == "Xr") ||
+                (node.Name == "code" && node.HasAttributes && node.Attributes["class"].Value == "Fn")) && node.InnerText.Trim().StartsWith("crypto_")
                 )
             {
                 var name = Regex.Match(node.InnerText.Trim(), @"^\w+").Groups[0].Value;
@@ -213,15 +209,41 @@ namespace Monocypher.CodeGen
                     }
                 };
             }
-            
+
+            // C Language formatted code
+            if (node.Name == "pre")
+            {
+                return new CSharpXmlComment("pre")
+                {
+                    Children =
+                    {
+                        new CSharpXmlComment("code")
+                        {
+                            IsInline = true,
+                            Children =
+                            {
+                                new CSharpTextComment(node.InnerText)
+                                {
+                                    IsHtmlText = true
+                                }
+                            },
+                            Attributes =
+                            {
+                                new CSharpXmlAttribute("class", "language-c")
+                            }
+                        }
+                    }
+                };
+            }
+
             // Process sub nodes
             if (node.HasChildNodes)
             {
-                var groupComment = new CSharpGroupComment();
+                CSharpComment groupComment = keepStructuralElements && KeepHtmlElements.Contains(node.Name) ? new CSharpXmlComment(node.Name) : new CSharpGroupComment();
                 node = node.FirstChild;
                 while (node != null)
                 {
-                    var comment = ProcessTextElement(node, out shouldExit);
+                    var comment = ProcessDocNodes(node, out shouldExit, keepStructuralElements);
                     if (comment != null)
                     {
                         groupComment.Children.Add(comment);

@@ -13,7 +13,7 @@ namespace Monocypher
 {
     using System.Runtime.InteropServices;
     
-    public static partial class monocypher
+    public static partial class Monocypher
     {
         /// <summary>
         /// Vtable for EdDSA with a custom hash.
@@ -23,27 +23,27 @@ namespace Monocypher
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public partial struct crypto_sign_vtable
         {
-            public monocypher.crypto_sign_vtable.hash_delegate hash;
+            public Monocypher.crypto_sign_vtable.hash_delegate hash;
             
             [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-            public delegate void hash_delegate(ref Byte64 hash, IntPtr message, monocypher.size_t message_size);
+            public delegate void hash_delegate(ref Byte64 hash, IntPtr message, Monocypher.size_t message_size);
             
-            public monocypher.crypto_sign_vtable.init_delegate init;
+            public Monocypher.crypto_sign_vtable.init_delegate init;
             
             [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
             public delegate void init_delegate(IntPtr ctx);
             
-            public monocypher.crypto_sign_vtable.update_delegate update;
+            public Monocypher.crypto_sign_vtable.update_delegate update;
             
             [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-            public delegate void update_delegate(IntPtr ctx, IntPtr message, monocypher.size_t message_size);
+            public delegate void update_delegate(IntPtr ctx, IntPtr message, Monocypher.size_t message_size);
             
-            public monocypher.crypto_sign_vtable.final_delegate final;
+            public Monocypher.crypto_sign_vtable.final_delegate final;
             
             [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
             public delegate void final_delegate(IntPtr ctx, ref Byte64 hash);
             
-            public monocypher.size_t ctx_size;
+            public Monocypher.size_t ctx_size;
         }
         
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -99,7 +99,7 @@ namespace Monocypher
             /// <summary>
             /// How many bytes are there in the chunk.
             /// </summary>
-            public monocypher.size_t c_idx;
+            public Monocypher.size_t c_idx;
         }
         
         /// <summary>
@@ -114,9 +114,9 @@ namespace Monocypher
             
             public fixed ulong input[16];
             
-            public monocypher.size_t input_idx;
+            public Monocypher.size_t input_idx;
             
-            public monocypher.size_t hash_size;
+            public Monocypher.size_t hash_size;
         }
         
         /// <summary>
@@ -135,9 +135,9 @@ namespace Monocypher
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public partial struct crypto_sign_ctx
         {
-            public monocypher.crypto_sign_ctx_abstract ctx;
+            public Monocypher.crypto_sign_ctx_abstract ctx;
             
-            public monocypher.crypto_blake2b_ctx hash;
+            public Monocypher.crypto_blake2b_ctx hash;
         }
         
         /// <summary>
@@ -153,7 +153,7 @@ namespace Monocypher
             
             public fixed ulong input_size[2];
             
-            public monocypher.size_t input_idx;
+            public Monocypher.size_t input_idx;
         }
         
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -161,15 +161,15 @@ namespace Monocypher
         {
             public fixed byte key[128];
             
-            public monocypher.crypto_sha512_ctx ctx;
+            public Monocypher.crypto_sha512_ctx ctx;
         }
         
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public partial struct crypto_sign_ed25519_ctx
         {
-            public monocypher.crypto_sign_ctx_abstract ctx;
+            public Monocypher.crypto_sign_ctx_abstract ctx;
             
-            public monocypher.crypto_sha512_ctx hash;
+            public Monocypher.crypto_sha512_ctx hash;
         }
         
         /// <summary>
@@ -178,9 +178,9 @@ namespace Monocypher
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public readonly partial struct crypto_check_ctx_abstract : IEquatable<crypto_check_ctx_abstract>
         {
-            public crypto_check_ctx_abstract(monocypher.crypto_sign_ctx_abstract value) => this.Value = value;
+            public crypto_check_ctx_abstract(Monocypher.crypto_sign_ctx_abstract value) => this.Value = value;
             
-            public readonly monocypher.crypto_sign_ctx_abstract Value;
+            public readonly Monocypher.crypto_sign_ctx_abstract Value;
             
             public bool Equals(crypto_check_ctx_abstract other) =>  Value.Equals(other.Value);
             
@@ -190,9 +190,9 @@ namespace Monocypher
             
             public override string ToString() => Value.ToString();
             
-            public static implicit operator monocypher.crypto_sign_ctx_abstract(crypto_check_ctx_abstract from) => from.Value;
+            public static implicit operator Monocypher.crypto_sign_ctx_abstract(crypto_check_ctx_abstract from) => from.Value;
             
-            public static implicit operator crypto_check_ctx_abstract(monocypher.crypto_sign_ctx_abstract from) => new crypto_check_ctx_abstract(from);
+            public static implicit operator crypto_check_ctx_abstract(Monocypher.crypto_sign_ctx_abstract from) => new crypto_check_ctx_abstract(from);
             
             public static bool operator ==(crypto_check_ctx_abstract left, crypto_check_ctx_abstract right) => left.Equals(right);
             
@@ -202,9 +202,9 @@ namespace Monocypher
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public readonly partial struct crypto_check_ctx : IEquatable<crypto_check_ctx>
         {
-            public crypto_check_ctx(monocypher.crypto_sign_ctx value) => this.Value = value;
+            public crypto_check_ctx(Monocypher.crypto_sign_ctx value) => this.Value = value;
             
-            public readonly monocypher.crypto_sign_ctx Value;
+            public readonly Monocypher.crypto_sign_ctx Value;
             
             public bool Equals(crypto_check_ctx other) =>  Value.Equals(other.Value);
             
@@ -214,9 +214,9 @@ namespace Monocypher
             
             public override string ToString() => Value.ToString();
             
-            public static implicit operator monocypher.crypto_sign_ctx(crypto_check_ctx from) => from.Value;
+            public static implicit operator Monocypher.crypto_sign_ctx(crypto_check_ctx from) => from.Value;
             
-            public static implicit operator crypto_check_ctx(monocypher.crypto_sign_ctx from) => new crypto_check_ctx(from);
+            public static implicit operator crypto_check_ctx(Monocypher.crypto_sign_ctx from) => new crypto_check_ctx(from);
             
             public static bool operator ==(crypto_check_ctx left, crypto_check_ctx right) => left.Equals(right);
             
@@ -226,9 +226,9 @@ namespace Monocypher
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public readonly partial struct crypto_check_ed25519_ctx : IEquatable<crypto_check_ed25519_ctx>
         {
-            public crypto_check_ed25519_ctx(monocypher.crypto_sign_ed25519_ctx value) => this.Value = value;
+            public crypto_check_ed25519_ctx(Monocypher.crypto_sign_ed25519_ctx value) => this.Value = value;
             
-            public readonly monocypher.crypto_sign_ed25519_ctx Value;
+            public readonly Monocypher.crypto_sign_ed25519_ctx Value;
             
             public bool Equals(crypto_check_ed25519_ctx other) =>  Value.Equals(other.Value);
             
@@ -238,9 +238,9 @@ namespace Monocypher
             
             public override string ToString() => Value.ToString();
             
-            public static implicit operator monocypher.crypto_sign_ed25519_ctx(crypto_check_ed25519_ctx from) => from.Value;
+            public static implicit operator Monocypher.crypto_sign_ed25519_ctx(crypto_check_ed25519_ctx from) => from.Value;
             
-            public static implicit operator crypto_check_ed25519_ctx(monocypher.crypto_sign_ed25519_ctx from) => new crypto_check_ed25519_ctx(from);
+            public static implicit operator crypto_check_ed25519_ctx(Monocypher.crypto_sign_ed25519_ctx from) => new crypto_check_ed25519_ctx(from);
             
             public static bool operator ==(crypto_check_ed25519_ctx left, crypto_check_ed25519_ctx right) => left.Equals(right);
             
@@ -477,7 +477,7 @@ namespace Monocypher
         /// </summary>
         /// <param name="secret">The buffer to erase.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_wipe(IntPtr secret, monocypher.size_t size);
+        public static extern void crypto_wipe(IntPtr secret, Monocypher.size_t size);
         
         /// <summary>
         /// <see cref="crypto_wipe"/>() securely erases sensitive data
@@ -495,7 +495,7 @@ namespace Monocypher
         public static unsafe void crypto_wipe(Span<byte> secret)
         {
             fixed(void* secret_ptr = secret)
-            crypto_wipe(new IntPtr(secret_ptr), (monocypher.size_t)secret.Length);
+            crypto_wipe(new IntPtr(secret_ptr), (Monocypher.size_t)secret.Length);
         }
         
         /// <summary>
@@ -532,7 +532,7 @@ namespace Monocypher
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_lock(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr plain_text, monocypher.size_t text_size);
+        public static extern void crypto_lock(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr plain_text, Monocypher.size_t text_size);
         
         /// <summary>
         /// <see cref="crypto_lock"/>() encrypts and authenticates a
@@ -574,7 +574,7 @@ namespace Monocypher
             ExpectSize24(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_lock(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length);
+            crypto_lock(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length);
         }
         
         /// <summary>
@@ -611,7 +611,7 @@ namespace Monocypher
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_unlock(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr cipher_text, monocypher.size_t text_size);
+        public static extern int crypto_unlock(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr cipher_text, Monocypher.size_t text_size);
         
         /// <summary>
         /// <see cref="crypto_lock"/>() encrypts and authenticates a
@@ -653,7 +653,7 @@ namespace Monocypher
             ExpectSize16(nameof(mac), mac.Length);
             fixed(void* plain_text_ptr = plain_text)
             fixed(void* cipher_text_ptr = cipher_text)
-            return crypto_unlock(new IntPtr(plain_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), in MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), (monocypher.size_t)plain_text.Length);
+            return crypto_unlock(new IntPtr(plain_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), in MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), (Monocypher.size_t)plain_text.Length);
         }
         
         /// <summary>
@@ -690,7 +690,7 @@ namespace Monocypher
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_lock_aead(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr ad, monocypher.size_t ad_size, IntPtr plain_text, monocypher.size_t text_size);
+        public static extern void crypto_lock_aead(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr ad, Monocypher.size_t ad_size, IntPtr plain_text, Monocypher.size_t text_size);
         
         /// <summary>
         /// <see cref="crypto_lock"/>() encrypts and authenticates a
@@ -733,7 +733,7 @@ namespace Monocypher
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* ad_ptr = ad)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_lock_aead(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), new IntPtr(ad_ptr), (monocypher.size_t)ad.Length, new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length);
+            crypto_lock_aead(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), new IntPtr(ad_ptr), (Monocypher.size_t)ad.Length, new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length);
         }
         
         /// <summary>
@@ -770,7 +770,7 @@ namespace Monocypher
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_unlock_aead(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr ad, monocypher.size_t ad_size, IntPtr cipher_text, monocypher.size_t text_size);
+        public static extern int crypto_unlock_aead(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr ad, Monocypher.size_t ad_size, IntPtr cipher_text, Monocypher.size_t text_size);
         
         /// <summary>
         /// <see cref="crypto_lock"/>() encrypts and authenticates a
@@ -813,7 +813,7 @@ namespace Monocypher
             fixed(void* plain_text_ptr = plain_text)
             fixed(void* ad_ptr = ad)
             fixed(void* cipher_text_ptr = cipher_text)
-            return crypto_unlock_aead(new IntPtr(plain_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), in MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(ad_ptr), (monocypher.size_t)ad.Length, new IntPtr(cipher_text_ptr), (monocypher.size_t)plain_text.Length);
+            return crypto_unlock_aead(new IntPtr(plain_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), in MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(ad_ptr), (Monocypher.size_t)ad.Length, new IntPtr(cipher_text_ptr), (Monocypher.size_t)plain_text.Length);
         }
         
         /// <summary>
@@ -839,7 +839,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_blake2b(ref Byte64 hash, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_blake2b(ref Byte64 hash, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -866,7 +866,7 @@ namespace Monocypher
         {
             ExpectSize64(nameof(hash), hash.Length);
             fixed(void* message_ptr = message)
-            crypto_blake2b(ref MemoryMarshal.AsRef<Byte64>(hash), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_blake2b(ref MemoryMarshal.AsRef<Byte64>(hash), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -908,7 +908,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_blake2b_general(IntPtr hash, monocypher.size_t hash_size, IntPtr key, monocypher.size_t key_size, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_blake2b_general(IntPtr hash, Monocypher.size_t hash_size, IntPtr key, Monocypher.size_t key_size, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -946,7 +946,7 @@ namespace Monocypher
             fixed(void* hash_ptr = hash)
             fixed(void* key_ptr = key)
             fixed(void* message_ptr = message)
-            crypto_blake2b_general(new IntPtr(hash_ptr), (monocypher.size_t)hash.Length, new IntPtr(key_ptr), (monocypher.size_t)key.Length, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_blake2b_general(new IntPtr(hash_ptr), (Monocypher.size_t)hash.Length, new IntPtr(key_ptr), (Monocypher.size_t)key.Length, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -988,7 +988,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_blake2b_init(ref monocypher.crypto_blake2b_ctx ctx);
+        public static extern void crypto_blake2b_init(ref Monocypher.crypto_blake2b_ctx ctx);
         
         /// <summary>
         /// 
@@ -1012,7 +1012,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_blake2b_update(ref monocypher.crypto_blake2b_ctx ctx, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_blake2b_update(ref Monocypher.crypto_blake2b_ctx ctx, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -1034,10 +1034,10 @@ namespace Monocypher
         ///       <paramref name="hash"/>. May be
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
-        public static unsafe void crypto_blake2b_update(ref monocypher.crypto_blake2b_ctx ctx, ReadOnlySpan<byte> message)
+        public static unsafe void crypto_blake2b_update(ref Monocypher.crypto_blake2b_ctx ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
-            crypto_blake2b_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_blake2b_update(ref ctx, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -1058,7 +1058,7 @@ namespace Monocypher
         /// </summary>
         /// <param name="hash">The output hash.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_blake2b_final(ref monocypher.crypto_blake2b_ctx ctx, IntPtr hash);
+        public static extern void crypto_blake2b_final(ref Monocypher.crypto_blake2b_ctx ctx, IntPtr hash);
         
         /// <summary>
         /// 
@@ -1077,7 +1077,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="hash">The output hash.</param>
-        public static unsafe void crypto_blake2b_final(ref monocypher.crypto_blake2b_ctx ctx, Span<byte> hash)
+        public static unsafe void crypto_blake2b_final(ref Monocypher.crypto_blake2b_ctx ctx, Span<byte> hash)
         {
             fixed(void* hash_ptr = hash)
             crypto_blake2b_final(ref ctx, new IntPtr(hash_ptr));
@@ -1116,7 +1116,7 @@ namespace Monocypher
         /// <param name="key_size">Length of <paramref name="key"/>, in bytes. Must be between
         ///       0 and 64. 32 is a good default.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_blake2b_general_init(ref monocypher.crypto_blake2b_ctx ctx, monocypher.size_t hash_size, IntPtr key, monocypher.size_t key_size);
+        public static extern void crypto_blake2b_general_init(ref Monocypher.crypto_blake2b_ctx ctx, Monocypher.size_t hash_size, IntPtr key, Monocypher.size_t key_size);
         
         /// <summary>
         /// 
@@ -1148,10 +1148,10 @@ namespace Monocypher
         ///       created this way. Choose the size of the hash accordingly. Users may want
         ///       to wipe the key with <see cref="crypto_wipe"/>
         ///       once they are done with it.</param>
-        public static unsafe void crypto_blake2b_general_init(ref monocypher.crypto_blake2b_ctx ctx, monocypher.size_t hash_size, ReadOnlySpan<byte> key)
+        public static unsafe void crypto_blake2b_general_init(ref Monocypher.crypto_blake2b_ctx ctx, Monocypher.size_t hash_size, ReadOnlySpan<byte> key)
         {
             fixed(void* key_ptr = key)
-            crypto_blake2b_general_init(ref ctx, hash_size, new IntPtr(key_ptr), (monocypher.size_t)key.Length);
+            crypto_blake2b_general_init(ref ctx, hash_size, new IntPtr(key_ptr), (Monocypher.size_t)key.Length);
         }
         
         /// <summary>
@@ -1351,7 +1351,7 @@ namespace Monocypher
         /// <param name="message">Message to sign.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// <see cref="crypto_sign"/>() and
@@ -1375,7 +1375,7 @@ namespace Monocypher
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
             fixed(void* message_ptr = message)
-            crypto_sign(ref MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_sign(ref MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -1391,7 +1391,7 @@ namespace Monocypher
         /// <param name="message">Message to sign.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_check(in Byte64 signature, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
+        public static extern int crypto_check(in Byte64 signature, in Byte32 public_key, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// <see cref="crypto_sign"/>() and
@@ -1409,7 +1409,7 @@ namespace Monocypher
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
             fixed(void* message_ptr = message)
-            return crypto_check(in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            return crypto_check(in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -1474,7 +1474,7 @@ namespace Monocypher
         /// <param name="text_size">Length of both <paramref name="plain_text"/> and
         ///       <paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_chacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte8 nonce);
+        public static extern void crypto_chacha20(IntPtr cipher_text, IntPtr plain_text, Monocypher.size_t text_size, in Byte32 key, in Byte8 nonce);
         
         /// <summary>
         /// 
@@ -1509,7 +1509,7 @@ namespace Monocypher
             ExpectSize8(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte8>(nonce));
+            crypto_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte8>(nonce));
         }
         
         /// <summary>
@@ -1541,7 +1541,7 @@ namespace Monocypher
         /// <param name="text_size">Length of both <paramref name="plain_text"/> and
         ///       <paramref name="cipher_text"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_xchacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte24 nonce);
+        public static extern void crypto_xchacha20(IntPtr cipher_text, IntPtr plain_text, Monocypher.size_t text_size, in Byte32 key, in Byte24 nonce);
         
         /// <summary>
         /// 
@@ -1576,7 +1576,7 @@ namespace Monocypher
             ExpectSize24(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_xchacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce));
+            crypto_xchacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce));
         }
         
         /// <summary>
@@ -1605,7 +1605,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ietf_chacha20(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte12 nonce);
+        public static extern void crypto_ietf_chacha20(IntPtr cipher_text, IntPtr plain_text, Monocypher.size_t text_size, in Byte32 key, in Byte12 nonce);
         
         /// <summary>
         /// 
@@ -1639,7 +1639,7 @@ namespace Monocypher
             ExpectSize12(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_ietf_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte12>(nonce));
+            crypto_ietf_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte12>(nonce));
         }
         
         /// <summary>
@@ -1672,7 +1672,7 @@ namespace Monocypher
         ///       <paramref name="cipher_text"/>, in bytes.</param>
         /// <param name="ctr">The number of 64-byte blocks since the beginning of the stream.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong crypto_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte8 nonce, ulong ctr);
+        public static extern ulong crypto_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, Monocypher.size_t text_size, in Byte32 key, in Byte8 nonce, ulong ctr);
         
         /// <summary>
         /// 
@@ -1708,7 +1708,7 @@ namespace Monocypher
             ExpectSize8(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            return crypto_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte8>(nonce), ctr);
+            return crypto_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte8>(nonce), ctr);
         }
         
         /// <summary>
@@ -1741,7 +1741,7 @@ namespace Monocypher
         ///       <paramref name="cipher_text"/>, in bytes.</param>
         /// <param name="ctr">The number of 64-byte blocks since the beginning of the stream.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong crypto_xchacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte24 nonce, ulong ctr);
+        public static extern ulong crypto_xchacha20_ctr(IntPtr cipher_text, IntPtr plain_text, Monocypher.size_t text_size, in Byte32 key, in Byte24 nonce, ulong ctr);
         
         /// <summary>
         /// 
@@ -1777,7 +1777,7 @@ namespace Monocypher
             ExpectSize24(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            return crypto_xchacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), ctr);
+            return crypto_xchacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), ctr);
         }
         
         /// <summary>
@@ -1806,7 +1806,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint crypto_ietf_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, monocypher.size_t text_size, in Byte32 key, in Byte12 nonce, uint ctr);
+        public static extern uint crypto_ietf_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, Monocypher.size_t text_size, in Byte32 key, in Byte12 nonce, uint ctr);
         
         /// <summary>
         /// 
@@ -1840,7 +1840,7 @@ namespace Monocypher
             ExpectSize12(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            return crypto_ietf_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte12>(nonce), ctr);
+            return crypto_ietf_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte12>(nonce), ctr);
         }
         
         /// <summary>
@@ -1864,7 +1864,7 @@ namespace Monocypher
         ///       <paramref name="mac"/> argument.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_poly1305(ref Byte16 mac, IntPtr message, monocypher.size_t message_size, in Byte32 key);
+        public static extern void crypto_poly1305(ref Byte16 mac, IntPtr message, Monocypher.size_t message_size, in Byte32 key);
         
         /// <summary>
         /// 
@@ -1890,7 +1890,7 @@ namespace Monocypher
             ExpectSize16(nameof(mac), mac.Length);
             ExpectSize32(nameof(key), key.Length);
             fixed(void* message_ptr = message)
-            crypto_poly1305(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(message_ptr), (monocypher.size_t)message.Length, in MemoryMarshal.AsRef<Byte32>(key));
+            crypto_poly1305(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(message_ptr), (Monocypher.size_t)message.Length, in MemoryMarshal.AsRef<Byte32>(key));
         }
         
         /// <summary>
@@ -1910,7 +1910,7 @@ namespace Monocypher
         ///       session key to authenticate messages. It should be wiped with
         ///       <see cref="crypto_wipe"/> after use.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_poly1305_init(ref monocypher.crypto_poly1305_ctx ctx, in Byte32 key);
+        public static extern void crypto_poly1305_init(ref Monocypher.crypto_poly1305_ctx ctx, in Byte32 key);
         
         /// <summary>
         /// 
@@ -1928,7 +1928,7 @@ namespace Monocypher
         /// <param name="key">The secret authentication key. Use only once per message. Do not use the
         ///       session key to authenticate messages. It should be wiped with
         ///       <see cref="crypto_wipe"/> after use.</param>
-        public static unsafe void crypto_poly1305_init(ref monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> key)
+        public static unsafe void crypto_poly1305_init(ref Monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> key)
         {
             ExpectSize32(nameof(key), key.Length);
             crypto_poly1305_init(ref ctx, in MemoryMarshal.AsRef<Byte32>(key));
@@ -1951,7 +1951,7 @@ namespace Monocypher
         ///       <paramref name="mac"/> argument.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_poly1305_update(ref monocypher.crypto_poly1305_ctx ctx, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_poly1305_update(ref Monocypher.crypto_poly1305_ctx ctx, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -1968,10 +1968,10 @@ namespace Monocypher
         /// </summary>
         /// <param name="message">The message to authenticate. May overlap with the
         ///       <paramref name="mac"/> argument.</param>
-        public static unsafe void crypto_poly1305_update(ref monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> message)
+        public static unsafe void crypto_poly1305_update(ref Monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
-            crypto_poly1305_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_poly1305_update(ref ctx, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -1989,7 +1989,7 @@ namespace Monocypher
         /// </summary>
         /// <param name="mac">The authentication code.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_poly1305_final(ref monocypher.crypto_poly1305_ctx ctx, ref Byte16 mac);
+        public static extern void crypto_poly1305_final(ref Monocypher.crypto_poly1305_ctx ctx, ref Byte16 mac);
         
         /// <summary>
         /// 
@@ -2005,7 +2005,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="mac">The authentication code.</param>
-        public static unsafe void crypto_poly1305_final(ref monocypher.crypto_poly1305_ctx ctx, Span<byte> mac)
+        public static unsafe void crypto_poly1305_final(ref Monocypher.crypto_poly1305_ctx ctx, Span<byte> mac)
         {
             ExpectSize16(nameof(mac), mac.Length);
             crypto_poly1305_final(ref ctx, ref MemoryMarshal.AsRef<Byte16>(mac));
@@ -2491,7 +2491,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
+        public static extern void crypto_sign_init_first_pass(ref Monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
         
         /// <summary>
         /// 
@@ -2502,7 +2502,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        public static unsafe void crypto_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key)
+        public static unsafe void crypto_sign_init_first_pass(ref Monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key)
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
@@ -2519,7 +2519,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_update(ref monocypher.crypto_sign_ctx_abstract ctx, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_sign_update(ref Monocypher.crypto_sign_ctx_abstract ctx, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -2530,10 +2530,10 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        public static unsafe void crypto_sign_update(ref monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> message)
+        public static unsafe void crypto_sign_update(ref Monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
-            crypto_sign_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_sign_update(ref ctx, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -2546,7 +2546,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_init_second_pass(ref monocypher.crypto_sign_ctx_abstract ctx);
+        public static extern void crypto_sign_init_second_pass(ref Monocypher.crypto_sign_ctx_abstract ctx);
         
         /// <summary>
         /// 
@@ -2558,7 +2558,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_final(ref monocypher.crypto_sign_ctx_abstract ctx, ref Byte64 signature);
+        public static extern void crypto_sign_final(ref Monocypher.crypto_sign_ctx_abstract ctx, ref Byte64 signature);
         
         /// <summary>
         /// 
@@ -2569,7 +2569,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        public static unsafe void crypto_sign_final(ref monocypher.crypto_sign_ctx_abstract ctx, Span<byte> signature)
+        public static unsafe void crypto_sign_final(ref Monocypher.crypto_sign_ctx_abstract ctx, Span<byte> signature)
         {
             ExpectSize64(nameof(signature), signature.Length);
             crypto_sign_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(signature));
@@ -2585,7 +2585,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_check_init(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
+        public static extern void crypto_check_init(ref Monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
         
         /// <summary>
         /// 
@@ -2596,7 +2596,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        public static unsafe void crypto_check_init(ref monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key)
+        public static unsafe void crypto_check_init(ref Monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key)
         {
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
@@ -2613,7 +2613,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_check_update(ref monocypher.crypto_check_ctx_abstract ctx, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_check_update(ref Monocypher.crypto_check_ctx_abstract ctx, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -2624,10 +2624,10 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        public static unsafe void crypto_check_update(ref monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> message)
+        public static unsafe void crypto_check_update(ref Monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
-            crypto_check_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_check_update(ref ctx, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -2640,7 +2640,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_check_final(ref monocypher.crypto_check_ctx_abstract ctx);
+        public static extern int crypto_check_final(ref Monocypher.crypto_check_ctx_abstract ctx);
         
         /// <summary>
         /// 
@@ -2771,7 +2771,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_public_key_custom_hash(ref Byte32 public_key, in Byte32 secret_key, in monocypher.crypto_sign_vtable hash);
+        public static extern void crypto_sign_public_key_custom_hash(ref Byte32 public_key, in Byte32 secret_key, in Monocypher.crypto_sign_vtable hash);
         
         /// <summary>
         /// 
@@ -2901,7 +2901,7 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
-        public static unsafe void crypto_sign_public_key_custom_hash(Span<byte> public_key, ReadOnlySpan<byte> secret_key, in monocypher.crypto_sign_vtable hash)
+        public static unsafe void crypto_sign_public_key_custom_hash(Span<byte> public_key, ReadOnlySpan<byte> secret_key, in Monocypher.crypto_sign_vtable hash)
         {
             ExpectSize32(nameof(public_key), public_key.Length);
             ExpectSize32(nameof(secret_key), secret_key.Length);
@@ -3037,7 +3037,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sign_init_first_pass_custom_hash(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key, in monocypher.crypto_sign_vtable hash);
+        public static extern void crypto_sign_init_first_pass_custom_hash(ref Monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key, in Monocypher.crypto_sign_vtable hash);
         
         /// <summary>
         /// 
@@ -3167,7 +3167,7 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
-        public static unsafe void crypto_sign_init_first_pass_custom_hash(ref monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key, in monocypher.crypto_sign_vtable hash)
+        public static unsafe void crypto_sign_init_first_pass_custom_hash(ref Monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key, in Monocypher.crypto_sign_vtable hash)
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
@@ -3303,7 +3303,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_check_init_custom_hash(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key, in monocypher.crypto_sign_vtable hash);
+        public static extern void crypto_check_init_custom_hash(ref Monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key, in Monocypher.crypto_sign_vtable hash);
         
         /// <summary>
         /// 
@@ -3433,7 +3433,7 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
-        public static unsafe void crypto_check_init_custom_hash(ref monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key, in monocypher.crypto_sign_vtable hash)
+        public static unsafe void crypto_check_init_custom_hash(ref Monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key, in Monocypher.crypto_sign_vtable hash)
         {
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
@@ -3901,7 +3901,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sha512_init(ref monocypher.crypto_sha512_ctx ctx);
+        public static extern void crypto_sha512_init(ref Monocypher.crypto_sha512_ctx ctx);
         
         /// <summary>
         /// 
@@ -3932,7 +3932,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sha512_update(ref monocypher.crypto_sha512_ctx ctx, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_sha512_update(ref Monocypher.crypto_sha512_ctx ctx, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -3961,10 +3961,10 @@ namespace Monocypher
         ///       <paramref name="hash"/>. May be
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
-        public static unsafe void crypto_sha512_update(ref monocypher.crypto_sha512_ctx ctx, ReadOnlySpan<byte> message)
+        public static unsafe void crypto_sha512_update(ref Monocypher.crypto_sha512_ctx ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
-            crypto_sha512_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_sha512_update(ref ctx, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -3992,7 +3992,7 @@ namespace Monocypher
         /// </summary>
         /// <param name="hash">The output hash, which is always 64 bytes long.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sha512_final(ref monocypher.crypto_sha512_ctx ctx, ref Byte64 hash);
+        public static extern void crypto_sha512_final(ref Monocypher.crypto_sha512_ctx ctx, ref Byte64 hash);
         
         /// <summary>
         /// 
@@ -4018,7 +4018,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="hash">The output hash, which is always 64 bytes long.</param>
-        public static unsafe void crypto_sha512_final(ref monocypher.crypto_sha512_ctx ctx, Span<byte> hash)
+        public static unsafe void crypto_sha512_final(ref Monocypher.crypto_sha512_ctx ctx, Span<byte> hash)
         {
             ExpectSize64(nameof(hash), hash.Length);
             crypto_sha512_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(hash));
@@ -4054,7 +4054,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_sha512(ref Byte64 hash, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_sha512(ref Byte64 hash, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -4088,7 +4088,7 @@ namespace Monocypher
         {
             ExpectSize64(nameof(hash), hash.Length);
             fixed(void* message_ptr = message)
-            crypto_sha512(ref MemoryMarshal.AsRef<Byte64>(hash), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_sha512(ref MemoryMarshal.AsRef<Byte64>(hash), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4109,7 +4109,7 @@ namespace Monocypher
         ///       default. Keys longer than 128 bytes will be reduced to 64 bytes by hashing
         ///       the key with SHA-512.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hmac_sha512_init(ref monocypher.crypto_hmac_sha512_ctx ctx, IntPtr key, monocypher.size_t key_size);
+        public static extern void crypto_hmac_sha512_init(ref Monocypher.crypto_hmac_sha512_ctx ctx, IntPtr key, Monocypher.size_t key_size);
         
         /// <summary>
         /// 
@@ -4125,10 +4125,10 @@ namespace Monocypher
         ///       want to wipe the key with
         ///       <see cref="crypto_wipe"/> once they are done
         ///       with it.</param>
-        public static unsafe void crypto_hmac_sha512_init(ref monocypher.crypto_hmac_sha512_ctx ctx, ReadOnlySpan<byte> key)
+        public static unsafe void crypto_hmac_sha512_init(ref Monocypher.crypto_hmac_sha512_ctx ctx, ReadOnlySpan<byte> key)
         {
             fixed(void* key_ptr = key)
-            crypto_hmac_sha512_init(ref ctx, new IntPtr(key_ptr), (monocypher.size_t)key.Length);
+            crypto_hmac_sha512_init(ref ctx, new IntPtr(key_ptr), (Monocypher.size_t)key.Length);
         }
         
         /// <summary>
@@ -4147,7 +4147,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hmac_sha512_update(ref monocypher.crypto_hmac_sha512_ctx ctx, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_hmac_sha512_update(ref Monocypher.crypto_hmac_sha512_ctx ctx, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -4163,10 +4163,10 @@ namespace Monocypher
         ///       <paramref name="hmac"/>. May be
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
-        public static unsafe void crypto_hmac_sha512_update(ref monocypher.crypto_hmac_sha512_ctx ctx, ReadOnlySpan<byte> message)
+        public static unsafe void crypto_hmac_sha512_update(ref Monocypher.crypto_hmac_sha512_ctx ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
-            crypto_hmac_sha512_update(ref ctx, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_hmac_sha512_update(ref ctx, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4181,7 +4181,7 @@ namespace Monocypher
         /// </summary>
         /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hmac_sha512_final(ref monocypher.crypto_hmac_sha512_ctx ctx, ref Byte64 hmac);
+        public static extern void crypto_hmac_sha512_final(ref Monocypher.crypto_hmac_sha512_ctx ctx, ref Byte64 hmac);
         
         /// <summary>
         /// 
@@ -4194,7 +4194,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
-        public static unsafe void crypto_hmac_sha512_final(ref monocypher.crypto_hmac_sha512_ctx ctx, Span<byte> hmac)
+        public static unsafe void crypto_hmac_sha512_final(ref Monocypher.crypto_hmac_sha512_ctx ctx, Span<byte> hmac)
         {
             ExpectSize64(nameof(hmac), hmac.Length);
             crypto_hmac_sha512_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(hmac));
@@ -4224,7 +4224,7 @@ namespace Monocypher
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_hmac_sha512(ref Byte64 hmac, IntPtr key, monocypher.size_t key_size, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_hmac_sha512(ref Byte64 hmac, IntPtr key, Monocypher.size_t key_size, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -4250,7 +4250,7 @@ namespace Monocypher
             ExpectSize64(nameof(hmac), hmac.Length);
             fixed(void* key_ptr = key)
             fixed(void* message_ptr = message)
-            crypto_hmac_sha512(ref MemoryMarshal.AsRef<Byte64>(hmac), new IntPtr(key_ptr), (monocypher.size_t)key.Length, new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_hmac_sha512(ref MemoryMarshal.AsRef<Byte64>(hmac), new IntPtr(key_ptr), (Monocypher.size_t)key.Length, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4297,7 +4297,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ed25519_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
+        public static extern void crypto_ed25519_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -4316,7 +4316,7 @@ namespace Monocypher
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
             fixed(void* message_ptr = message)
-            crypto_ed25519_sign(ref MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            crypto_ed25519_sign(ref MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4331,7 +4331,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int crypto_ed25519_check(in Byte64 signature, in Byte32 public_key, IntPtr message, monocypher.size_t message_size);
+        public static extern int crypto_ed25519_check(in Byte64 signature, in Byte32 public_key, IntPtr message, Monocypher.size_t message_size);
         
         /// <summary>
         /// 
@@ -4349,7 +4349,7 @@ namespace Monocypher
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
             fixed(void* message_ptr = message)
-            return crypto_ed25519_check(in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (monocypher.size_t)message.Length);
+            return crypto_ed25519_check(in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4368,7 +4368,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ed25519_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
+        public static extern void crypto_ed25519_sign_init_first_pass(ref Monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
         
         /// <summary>
         /// 
@@ -4385,7 +4385,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        public static unsafe void crypto_ed25519_sign_init_first_pass(ref monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key)
+        public static unsafe void crypto_ed25519_sign_init_first_pass(ref Monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key)
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
@@ -4408,7 +4408,7 @@ namespace Monocypher
         /// 
         /// </summary>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void crypto_ed25519_check_init(ref monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
+        public static extern void crypto_ed25519_check_init(ref Monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
         
         /// <summary>
         /// 
@@ -4425,7 +4425,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        public static unsafe void crypto_ed25519_check_init(ref monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key)
+        public static unsafe void crypto_ed25519_check_init(ref Monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key)
         {
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);

@@ -16,9 +16,7 @@ namespace Monocypher.CodeGen
     class Program
     {
         private static readonly string MonocypherFolder = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\..\..\..\ext\Monocypher"));
-
-
-        private Dictionary<string, FunctionDoc> _functionDocs = new Dictionary<string, FunctionDoc>();
+        private readonly Dictionary<string, FunctionDoc> _functionDocs = new Dictionary<string, FunctionDoc>();
 
 
         static void Main(string[] args)
@@ -27,7 +25,6 @@ namespace Monocypher.CodeGen
             program.ProcessDoc();
             program.Run();
         }
-
         
         private void ProcessDoc()
         {
@@ -289,9 +286,9 @@ namespace Monocypher.CodeGen
 
             var csOptions = new CSharpConverterOptions()
             {
-                DefaultClassLib = "monocypher",
+                DefaultClassLib = "Monocypher",
                 DefaultNamespace = "Monocypher",
-                DefaultOutputFilePath = "/monocypher.generated.cs",
+                DefaultOutputFilePath = "/Monocypher.generated.cs",
                 DefaultDllImportNameAndArguments = "MonocypherDll",
                 GenerateAsInternal = false,
                 DispatchOutputPerInclude = false,

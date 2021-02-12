@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using NUnit.Framework;
 
-using static Monocypher.monocypher;
+using static Monocypher.Monocypher2;
 
 namespace Monocypher.Tests
 {
@@ -21,6 +21,7 @@ namespace Monocypher.Tests
         public void CryptoLockUnlock()
         {
             Span<byte> mac = stackalloc byte[16];
+            Span<byte> emptyText = stackalloc byte[16];
             Span<byte> cipherText = stackalloc byte[16];
             Span<byte> inputText = stackalloc byte[16];
             inputText[0] = (byte)'a';
@@ -43,11 +44,10 @@ namespace Monocypher.Tests
             }
             Console.WriteLine($"cipher: {builder}");
 
-            Assert.AreNotEqual((byte)'a', cipherText[0], $"Crypto failed: Invalid byte found at position 0");
-            Assert.AreNotEqual((byte)'b', cipherText[1], $"Crypto failed: Invalid byte found at position 1");
-            Assert.AreNotEqual((byte)'c', cipherText[2], $"Crypto failed: Invalid byte found at position 2");
-            Assert.AreNotEqual((byte)'d', cipherText[3], $"Crypto failed: Invalid byte found at position 3");
+            Assert.False(cipherText.SequenceEqual(inputText), "crypto_lock failed. Spans are the same");
+            Assert.False(cipherText.SequenceEqual(emptyText), "crypto_lock failed. cipher text is empty");
 
+            // Verify that we get the same output from unlock
             Span<byte> outputText = stackalloc byte[16];
             crypto_unlock(outputText, key, nonce, mac, cipherText);
 

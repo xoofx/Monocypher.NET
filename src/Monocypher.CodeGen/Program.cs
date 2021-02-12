@@ -540,7 +540,7 @@ namespace Monocypher.CodeGen
                             else if (inputParameter.Kind == ParameterKind.FixedBuffer)
                             {
                                 var interopParameterType = (CSharpFreeType)((CSharpRefType) interopParameter.ParameterType).ElementType;
-                                builder.Append($"MemoryMarshal.AsRef<{interopParameterType.Text}>({inputParameter.Parameter.Name})");
+                                builder.Append($"{inputParameter.Parameter.Name}.As{interopParameterType.Text}()");
                             }
                             else if (inputParameter.Kind == ParameterKind.Size && inputParameter.SizedBufferParameters.Count > 0)
                             {

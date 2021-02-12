@@ -316,7 +316,7 @@ namespace Monocypher
         {
             ExpectSize16(nameof(a), a.Length);
             ExpectSize16(nameof(b), b.Length);
-            return crypto_verify16(in MemoryMarshal.AsRef<Byte16>(a), in MemoryMarshal.AsRef<Byte16>(b));
+            return crypto_verify16(in a.AsByte16(), in b.AsByte16());
         }
         
         /// <summary>
@@ -388,7 +388,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(a), a.Length);
             ExpectSize32(nameof(b), b.Length);
-            return crypto_verify32(in MemoryMarshal.AsRef<Byte32>(a), in MemoryMarshal.AsRef<Byte32>(b));
+            return crypto_verify32(in a.AsByte32(), in b.AsByte32());
         }
         
         /// <summary>
@@ -460,7 +460,7 @@ namespace Monocypher
         {
             ExpectSize64(nameof(a), a.Length);
             ExpectSize64(nameof(b), b.Length);
-            return crypto_verify64(in MemoryMarshal.AsRef<Byte64>(a), in MemoryMarshal.AsRef<Byte64>(b));
+            return crypto_verify64(in a.AsByte64(), in b.AsByte64());
         }
         
         /// <summary>
@@ -574,7 +574,7 @@ namespace Monocypher
             ExpectSize24(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_lock(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length);
+            crypto_lock(ref mac.AsByte16(), new IntPtr(cipher_text_ptr), in key.AsByte32(), in nonce.AsByte24(), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length);
         }
         
         /// <summary>
@@ -653,7 +653,7 @@ namespace Monocypher
             ExpectSize16(nameof(mac), mac.Length);
             fixed(void* plain_text_ptr = plain_text)
             fixed(void* cipher_text_ptr = cipher_text)
-            return crypto_unlock(new IntPtr(plain_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), in MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), (Monocypher.size_t)plain_text.Length);
+            return crypto_unlock(new IntPtr(plain_text_ptr), in key.AsByte32(), in nonce.AsByte24(), in mac.AsByte16(), new IntPtr(cipher_text_ptr), (Monocypher.size_t)plain_text.Length);
         }
         
         /// <summary>
@@ -733,7 +733,7 @@ namespace Monocypher
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* ad_ptr = ad)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_lock_aead(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(cipher_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), new IntPtr(ad_ptr), (Monocypher.size_t)ad.Length, new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length);
+            crypto_lock_aead(ref mac.AsByte16(), new IntPtr(cipher_text_ptr), in key.AsByte32(), in nonce.AsByte24(), new IntPtr(ad_ptr), (Monocypher.size_t)ad.Length, new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length);
         }
         
         /// <summary>
@@ -813,7 +813,7 @@ namespace Monocypher
             fixed(void* plain_text_ptr = plain_text)
             fixed(void* ad_ptr = ad)
             fixed(void* cipher_text_ptr = cipher_text)
-            return crypto_unlock_aead(new IntPtr(plain_text_ptr), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), in MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(ad_ptr), (Monocypher.size_t)ad.Length, new IntPtr(cipher_text_ptr), (Monocypher.size_t)plain_text.Length);
+            return crypto_unlock_aead(new IntPtr(plain_text_ptr), in key.AsByte32(), in nonce.AsByte24(), in mac.AsByte16(), new IntPtr(ad_ptr), (Monocypher.size_t)ad.Length, new IntPtr(cipher_text_ptr), (Monocypher.size_t)plain_text.Length);
         }
         
         /// <summary>
@@ -866,7 +866,7 @@ namespace Monocypher
         {
             ExpectSize64(nameof(hash), hash.Length);
             fixed(void* message_ptr = message)
-            crypto_blake2b(ref MemoryMarshal.AsRef<Byte64>(hash), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
+            crypto_blake2b(ref hash.AsByte64(), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -1292,7 +1292,7 @@ namespace Monocypher
             ExpectSize32(nameof(shared_key), shared_key.Length);
             ExpectSize32(nameof(your_secret_key), your_secret_key.Length);
             ExpectSize32(nameof(their_public_key), their_public_key.Length);
-            crypto_key_exchange(ref MemoryMarshal.AsRef<Byte32>(shared_key), in MemoryMarshal.AsRef<Byte32>(your_secret_key), in MemoryMarshal.AsRef<Byte32>(their_public_key));
+            crypto_key_exchange(ref shared_key.AsByte32(), in your_secret_key.AsByte32(), in their_public_key.AsByte32());
         }
         
         /// <summary>
@@ -1330,7 +1330,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(public_key), public_key.Length);
             ExpectSize32(nameof(secret_key), secret_key.Length);
-            crypto_sign_public_key(ref MemoryMarshal.AsRef<Byte32>(public_key), in MemoryMarshal.AsRef<Byte32>(secret_key));
+            crypto_sign_public_key(ref public_key.AsByte32(), in secret_key.AsByte32());
         }
         
         /// <summary>
@@ -1375,7 +1375,7 @@ namespace Monocypher
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
             fixed(void* message_ptr = message)
-            crypto_sign(ref MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
+            crypto_sign(ref signature.AsByte64(), in secret_key.AsByte32(), in public_key.AsByte32(), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -1409,7 +1409,7 @@ namespace Monocypher
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
             fixed(void* message_ptr = message)
-            return crypto_check(in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
+            return crypto_check(in signature.AsByte64(), in public_key.AsByte32(), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -1442,7 +1442,7 @@ namespace Monocypher
             ExpectSize32(nameof(@out), @out.Length);
             ExpectSize32(nameof(key), key.Length);
             ExpectSize16(nameof(@in), @in.Length);
-            crypto_hchacha20(ref MemoryMarshal.AsRef<Byte32>(@out), in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte16>(@in));
+            crypto_hchacha20(ref @out.AsByte32(), in key.AsByte32(), in @in.AsByte16());
         }
         
         /// <summary>
@@ -1509,7 +1509,7 @@ namespace Monocypher
             ExpectSize8(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte8>(nonce));
+            crypto_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in key.AsByte32(), in nonce.AsByte8());
         }
         
         /// <summary>
@@ -1576,7 +1576,7 @@ namespace Monocypher
             ExpectSize24(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_xchacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce));
+            crypto_xchacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in key.AsByte32(), in nonce.AsByte24());
         }
         
         /// <summary>
@@ -1639,7 +1639,7 @@ namespace Monocypher
             ExpectSize12(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            crypto_ietf_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte12>(nonce));
+            crypto_ietf_chacha20(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in key.AsByte32(), in nonce.AsByte12());
         }
         
         /// <summary>
@@ -1708,7 +1708,7 @@ namespace Monocypher
             ExpectSize8(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            return crypto_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte8>(nonce), ctr);
+            return crypto_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in key.AsByte32(), in nonce.AsByte8(), ctr);
         }
         
         /// <summary>
@@ -1777,7 +1777,7 @@ namespace Monocypher
             ExpectSize24(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            return crypto_xchacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte24>(nonce), ctr);
+            return crypto_xchacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in key.AsByte32(), in nonce.AsByte24(), ctr);
         }
         
         /// <summary>
@@ -1840,7 +1840,7 @@ namespace Monocypher
             ExpectSize12(nameof(nonce), nonce.Length);
             fixed(void* cipher_text_ptr = cipher_text)
             fixed(void* plain_text_ptr = plain_text)
-            return crypto_ietf_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in MemoryMarshal.AsRef<Byte32>(key), in MemoryMarshal.AsRef<Byte12>(nonce), ctr);
+            return crypto_ietf_chacha20_ctr(new IntPtr(cipher_text_ptr), new IntPtr(plain_text_ptr), (Monocypher.size_t)cipher_text.Length, in key.AsByte32(), in nonce.AsByte12(), ctr);
         }
         
         /// <summary>
@@ -1890,7 +1890,7 @@ namespace Monocypher
             ExpectSize16(nameof(mac), mac.Length);
             ExpectSize32(nameof(key), key.Length);
             fixed(void* message_ptr = message)
-            crypto_poly1305(ref MemoryMarshal.AsRef<Byte16>(mac), new IntPtr(message_ptr), (Monocypher.size_t)message.Length, in MemoryMarshal.AsRef<Byte32>(key));
+            crypto_poly1305(ref mac.AsByte16(), new IntPtr(message_ptr), (Monocypher.size_t)message.Length, in key.AsByte32());
         }
         
         /// <summary>
@@ -1931,7 +1931,7 @@ namespace Monocypher
         public static unsafe void crypto_poly1305_init(ref Monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> key)
         {
             ExpectSize32(nameof(key), key.Length);
-            crypto_poly1305_init(ref ctx, in MemoryMarshal.AsRef<Byte32>(key));
+            crypto_poly1305_init(ref ctx, in key.AsByte32());
         }
         
         /// <summary>
@@ -2008,7 +2008,7 @@ namespace Monocypher
         public static unsafe void crypto_poly1305_final(ref Monocypher.crypto_poly1305_ctx ctx, Span<byte> mac)
         {
             ExpectSize16(nameof(mac), mac.Length);
-            crypto_poly1305_final(ref ctx, ref MemoryMarshal.AsRef<Byte16>(mac));
+            crypto_poly1305_final(ref ctx, ref mac.AsByte16());
         }
         
         /// <summary>
@@ -2044,7 +2044,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(public_key), public_key.Length);
             ExpectSize32(nameof(secret_key), secret_key.Length);
-            crypto_x25519_public_key(ref MemoryMarshal.AsRef<Byte32>(public_key), in MemoryMarshal.AsRef<Byte32>(secret_key));
+            crypto_x25519_public_key(ref public_key.AsByte32(), in secret_key.AsByte32());
         }
         
         /// <summary>
@@ -2109,7 +2109,7 @@ namespace Monocypher
             ExpectSize32(nameof(raw_shared_secret), raw_shared_secret.Length);
             ExpectSize32(nameof(your_secret_key), your_secret_key.Length);
             ExpectSize32(nameof(their_public_key), their_public_key.Length);
-            crypto_x25519(ref MemoryMarshal.AsRef<Byte32>(raw_shared_secret), in MemoryMarshal.AsRef<Byte32>(your_secret_key), in MemoryMarshal.AsRef<Byte32>(their_public_key));
+            crypto_x25519(ref raw_shared_secret.AsByte32(), in your_secret_key.AsByte32(), in their_public_key.AsByte32());
         }
         
         /// <summary>
@@ -2189,7 +2189,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(pk), pk.Length);
             ExpectSize32(nameof(sk), sk.Length);
-            crypto_x25519_dirty_small(ref MemoryMarshal.AsRef<Byte32>(pk), in MemoryMarshal.AsRef<Byte32>(sk));
+            crypto_x25519_dirty_small(ref pk.AsByte32(), in sk.AsByte32());
         }
         
         /// <summary>
@@ -2269,7 +2269,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(pk), pk.Length);
             ExpectSize32(nameof(sk), sk.Length);
-            crypto_x25519_dirty_fast(ref MemoryMarshal.AsRef<Byte32>(pk), in MemoryMarshal.AsRef<Byte32>(sk));
+            crypto_x25519_dirty_fast(ref pk.AsByte32(), in sk.AsByte32());
         }
         
         /// <summary>
@@ -2330,7 +2330,7 @@ namespace Monocypher
             ExpectSize32(nameof(blind_salt), blind_salt.Length);
             ExpectSize32(nameof(private_key), private_key.Length);
             ExpectSize32(nameof(curve_point), curve_point.Length);
-            crypto_x25519_inverse(ref MemoryMarshal.AsRef<Byte32>(blind_salt), in MemoryMarshal.AsRef<Byte32>(private_key), in MemoryMarshal.AsRef<Byte32>(curve_point));
+            crypto_x25519_inverse(ref blind_salt.AsByte32(), in private_key.AsByte32(), in curve_point.AsByte32());
         }
         
         /// <summary>
@@ -2404,7 +2404,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(x25519), x25519.Length);
             ExpectSize32(nameof(eddsa), eddsa.Length);
-            crypto_from_eddsa_private(ref MemoryMarshal.AsRef<Byte32>(x25519), in MemoryMarshal.AsRef<Byte32>(eddsa));
+            crypto_from_eddsa_private(ref x25519.AsByte32(), in eddsa.AsByte32());
         }
         
         /// <summary>
@@ -2478,7 +2478,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(x25519), x25519.Length);
             ExpectSize32(nameof(eddsa), eddsa.Length);
-            crypto_from_eddsa_public(ref MemoryMarshal.AsRef<Byte32>(x25519), in MemoryMarshal.AsRef<Byte32>(eddsa));
+            crypto_from_eddsa_public(ref x25519.AsByte32(), in eddsa.AsByte32());
         }
         
         /// <summary>
@@ -2506,7 +2506,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
-            crypto_sign_init_first_pass(ref ctx, in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key));
+            crypto_sign_init_first_pass(ref ctx, in secret_key.AsByte32(), in public_key.AsByte32());
         }
         
         /// <summary>
@@ -2572,7 +2572,7 @@ namespace Monocypher
         public static unsafe void crypto_sign_final(ref Monocypher.crypto_sign_ctx_abstract ctx, Span<byte> signature)
         {
             ExpectSize64(nameof(signature), signature.Length);
-            crypto_sign_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(signature));
+            crypto_sign_final(ref ctx, ref signature.AsByte64());
         }
         
         /// <summary>
@@ -2600,7 +2600,7 @@ namespace Monocypher
         {
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
-            crypto_check_init(ref ctx, in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key));
+            crypto_check_init(ref ctx, in signature.AsByte64(), in public_key.AsByte32());
         }
         
         /// <summary>
@@ -2905,7 +2905,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(public_key), public_key.Length);
             ExpectSize32(nameof(secret_key), secret_key.Length);
-            crypto_sign_public_key_custom_hash(ref MemoryMarshal.AsRef<Byte32>(public_key), in MemoryMarshal.AsRef<Byte32>(secret_key), in hash);
+            crypto_sign_public_key_custom_hash(ref public_key.AsByte32(), in secret_key.AsByte32(), in hash);
         }
         
         /// <summary>
@@ -3171,7 +3171,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
-            crypto_sign_init_first_pass_custom_hash(ref ctx, in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), in hash);
+            crypto_sign_init_first_pass_custom_hash(ref ctx, in secret_key.AsByte32(), in public_key.AsByte32(), in hash);
         }
         
         /// <summary>
@@ -3437,7 +3437,7 @@ namespace Monocypher
         {
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
-            crypto_check_init_custom_hash(ref ctx, in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), in hash);
+            crypto_check_init_custom_hash(ref ctx, in signature.AsByte64(), in public_key.AsByte32(), in hash);
         }
         
         /// <summary>
@@ -3577,7 +3577,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(curve), curve.Length);
             ExpectSize32(nameof(hidden), hidden.Length);
-            crypto_hidden_to_curve(ref MemoryMarshal.AsRef<Byte32>(curve), in MemoryMarshal.AsRef<Byte32>(hidden));
+            crypto_hidden_to_curve(ref curve.AsByte32(), in hidden.AsByte32());
         }
         
         /// <summary>
@@ -3721,7 +3721,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(hidden), hidden.Length);
             ExpectSize32(nameof(curve), curve.Length);
-            return crypto_curve_to_hidden(ref MemoryMarshal.AsRef<Byte32>(hidden), in MemoryMarshal.AsRef<Byte32>(curve), tweak);
+            return crypto_curve_to_hidden(ref hidden.AsByte32(), in curve.AsByte32(), tweak);
         }
         
         /// <summary>
@@ -3868,7 +3868,7 @@ namespace Monocypher
             ExpectSize32(nameof(hidden), hidden.Length);
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(seed), seed.Length);
-            crypto_hidden_key_pair(ref MemoryMarshal.AsRef<Byte32>(hidden), ref MemoryMarshal.AsRef<Byte32>(secret_key), ref MemoryMarshal.AsRef<Byte32>(seed));
+            crypto_hidden_key_pair(ref hidden.AsByte32(), ref secret_key.AsByte32(), ref seed.AsByte32());
         }
         
         /// <summary>
@@ -4021,7 +4021,7 @@ namespace Monocypher
         public static unsafe void crypto_sha512_final(ref Monocypher.crypto_sha512_ctx ctx, Span<byte> hash)
         {
             ExpectSize64(nameof(hash), hash.Length);
-            crypto_sha512_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(hash));
+            crypto_sha512_final(ref ctx, ref hash.AsByte64());
         }
         
         /// <summary>
@@ -4088,7 +4088,7 @@ namespace Monocypher
         {
             ExpectSize64(nameof(hash), hash.Length);
             fixed(void* message_ptr = message)
-            crypto_sha512(ref MemoryMarshal.AsRef<Byte64>(hash), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
+            crypto_sha512(ref hash.AsByte64(), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4197,7 +4197,7 @@ namespace Monocypher
         public static unsafe void crypto_hmac_sha512_final(ref Monocypher.crypto_hmac_sha512_ctx ctx, Span<byte> hmac)
         {
             ExpectSize64(nameof(hmac), hmac.Length);
-            crypto_hmac_sha512_final(ref ctx, ref MemoryMarshal.AsRef<Byte64>(hmac));
+            crypto_hmac_sha512_final(ref ctx, ref hmac.AsByte64());
         }
         
         /// <summary>
@@ -4250,7 +4250,7 @@ namespace Monocypher
             ExpectSize64(nameof(hmac), hmac.Length);
             fixed(void* key_ptr = key)
             fixed(void* message_ptr = message)
-            crypto_hmac_sha512(ref MemoryMarshal.AsRef<Byte64>(hmac), new IntPtr(key_ptr), (Monocypher.size_t)key.Length, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
+            crypto_hmac_sha512(ref hmac.AsByte64(), new IntPtr(key_ptr), (Monocypher.size_t)key.Length, new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4282,7 +4282,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(public_key), public_key.Length);
             ExpectSize32(nameof(secret_key), secret_key.Length);
-            crypto_ed25519_public_key(ref MemoryMarshal.AsRef<Byte32>(public_key), in MemoryMarshal.AsRef<Byte32>(secret_key));
+            crypto_ed25519_public_key(ref public_key.AsByte32(), in secret_key.AsByte32());
         }
         
         /// <summary>
@@ -4316,7 +4316,7 @@ namespace Monocypher
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
             fixed(void* message_ptr = message)
-            crypto_ed25519_sign(ref MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
+            crypto_ed25519_sign(ref signature.AsByte64(), in secret_key.AsByte32(), in public_key.AsByte32(), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4349,7 +4349,7 @@ namespace Monocypher
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
             fixed(void* message_ptr = message)
-            return crypto_ed25519_check(in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
+            return crypto_ed25519_check(in signature.AsByte64(), in public_key.AsByte32(), new IntPtr(message_ptr), (Monocypher.size_t)message.Length);
         }
         
         /// <summary>
@@ -4389,7 +4389,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
-            crypto_ed25519_sign_init_first_pass(ref ctx, in MemoryMarshal.AsRef<Byte32>(secret_key), in MemoryMarshal.AsRef<Byte32>(public_key));
+            crypto_ed25519_sign_init_first_pass(ref ctx, in secret_key.AsByte32(), in public_key.AsByte32());
         }
         
         /// <summary>
@@ -4429,7 +4429,7 @@ namespace Monocypher
         {
             ExpectSize64(nameof(signature), signature.Length);
             ExpectSize32(nameof(public_key), public_key.Length);
-            crypto_ed25519_check_init(ref ctx, in MemoryMarshal.AsRef<Byte64>(signature), in MemoryMarshal.AsRef<Byte32>(public_key));
+            crypto_ed25519_check_init(ref ctx, in signature.AsByte64(), in public_key.AsByte32());
         }
         
         /// <summary>
@@ -4457,7 +4457,7 @@ namespace Monocypher
         {
             ExpectSize32(nameof(x25519), x25519.Length);
             ExpectSize32(nameof(eddsa), eddsa.Length);
-            crypto_from_ed25519_private(ref MemoryMarshal.AsRef<Byte32>(x25519), in MemoryMarshal.AsRef<Byte32>(eddsa));
+            crypto_from_ed25519_private(ref x25519.AsByte32(), in eddsa.AsByte32());
         }
     }
 }

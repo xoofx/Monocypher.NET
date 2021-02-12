@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{95775E17-DD0A-4A31-AD7F-9D9C099D9B18}"
 	ProjectSection(SolutionItems) = preProject
 		..\ext\build_monocypher_native.ps1 = ..\ext\build_monocypher_native.ps1
+		..\changelog.md = ..\changelog.md
 		..\license.txt = ..\license.txt
 		..\.github\workflows\managed.yml = ..\.github\workflows\managed.yml
 		..\.github\workflows\native.yml = ..\.github\workflows\native.yml

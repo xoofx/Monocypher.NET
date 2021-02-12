@@ -17,7 +17,7 @@ Monocypher.NET is a managed wrapper around [Monocypher](https://github.com/LoupV
   - Constant Time Comparison
   - ...and more...
 - For each function, a duplicated API is provided using `Span`/`ReadOnlySpan` parameters.
-- Compatible with .NET 5.0+ and .NET Standard 2.0+
+- Compatible with `.NET 5.0+` and `.NET Standard 2.0+`
 
 ## Usage
 

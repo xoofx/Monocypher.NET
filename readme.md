@@ -8,7 +8,7 @@ Monocypher.NET is a managed wrapper around [Monocypher](https://github.com/LoupV
 
 ## Features
 
-- Provides the entire native Monocypher API in a 1-to-1 mapping. It covers the following cryptographic functions for:
+- Provides the entire native Monocypher API in an efficient 1-to-1 mapping:
   - Authenticated Encryption
   - Hashing
   - Password Key Derivation

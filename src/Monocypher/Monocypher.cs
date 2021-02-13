@@ -5,10 +5,17 @@ using System.Text;
 
 namespace Monocypher
 {
+    /// <summary>
+    /// Static class containing all cryptographic functions.
+    /// </summary>
     public static partial class Monocypher
     {
-        public const string MonocypherDll = "monocypher_native";
+        private static readonly char[] HexBytes = new char[16] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+        private const string MonocypherDll = "monocypher_native";
 
+        /// <summary>
+        /// A native int size (e.g 8 bytes for a 64bit processor, 4 bytes for a 32bit processor).
+        /// </summary>
         public partial struct size_t
         {
             public static implicit operator size_t(int value)
@@ -17,8 +24,10 @@ namespace Monocypher
             }
         }
 
-        private static readonly char[] HexBytes = new char[16] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
+        /// <summary>
+        /// A 8-byte struct.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Size = 8)]
         public struct Byte8
         {
@@ -45,6 +54,10 @@ namespace Monocypher
                 return builder.ToString();
             }
         }
+
+        /// <summary>
+        /// A 12-byte struct.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Size = 12)]
         public struct Byte12
         {
@@ -78,6 +91,10 @@ namespace Monocypher
                 return builder.ToString();
             }
         }
+
+        /// <summary>
+        /// A 16-byte struct.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Size = 16)]
         public struct Byte16
         {
@@ -120,6 +137,9 @@ namespace Monocypher
             }
         }
 
+        /// <summary>
+        /// A 24-byte struct.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Size = 24)]
         public struct Byte24
         {
@@ -178,6 +198,10 @@ namespace Monocypher
                 return builder.ToString();
             }
         }
+
+        /// <summary>
+        /// A 32-byte struct.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Size = 32)]
         public struct Byte32
         {
@@ -252,6 +276,10 @@ namespace Monocypher
                 return builder.ToString();
             }
         }
+
+        /// <summary>
+        /// A 64-byte struct.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, Size = 64)]
         public struct Byte64
         {

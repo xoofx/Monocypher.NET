@@ -46,6 +46,8 @@ namespace Monocypher
             public Monocypher.size_t ctx_size;
         }
         
+        #if NETSTANDARD2_0
+        
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public readonly partial struct size_t : IEquatable<size_t>
         {
@@ -69,6 +71,8 @@ namespace Monocypher
             
             public static bool operator !=(size_t left, size_t right) => !left.Equals(right);
         }
+        
+        #endif
         
         /// <summary>
         /// Poly1305

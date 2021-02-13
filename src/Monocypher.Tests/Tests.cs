@@ -14,7 +14,7 @@ namespace Monocypher.Tests
         {
             crypto_blake2b_ctx ctx = default;
             crypto_blake2b_init(ref ctx);
-            Assert.AreNotEqual(0, ctx.hash_size.Value.ToInt32(), "Invalid hash_size returned from blake2b_init");
+            Assert.AreNotEqual(0, (int)ctx.hash_size.Value, "Invalid hash_size returned from blake2b_init");
         }
 
         [Test]

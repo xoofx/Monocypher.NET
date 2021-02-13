@@ -110,8 +110,14 @@ namespace Monocypher.CodeGen
         /// <param name="monocypher">The Monocypher static class containing all generated raw PInvoke functions.</param>
         private void ProcessInvokeFunctions(CSharpClass monocypher)
         {
-            var newMethods = new List<CSharpCustomMethod>();
+            var sizeType = monocypher.Members.OfType<CSharpStruct>().First(x => x.Name == "size_t");
+            var indexOfSize = monocypher.Members.IndexOf(sizeType);
 
+            // Embrace size_t only for NETSTANDARD_20, NET5.0 is using nint
+            monocypher.Members.Insert(indexOfSize+1, new CSharpFreeMember() {Text = "#endif"});
+            monocypher.Members.Insert(indexOfSize, new CSharpFreeMember() { Text = "#if NETSTANDARD2_0" });
+            
+            var newMethods = new List<CSharpCustomMethod>();
             // Loop on all raw PInvoke functions
             foreach (var function in monocypher.Members.OfType<CSharpMethod>())
             {

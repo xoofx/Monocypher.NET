@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.30" />
-    <PackageReference Include="CppAst.CodeGen" Version="0.6.0-alpha-001" />
+    <PackageReference Include="CppAst.CodeGen" Version="0.6.0-alpha-002" />
   </ItemGroup>
 
 </Project>

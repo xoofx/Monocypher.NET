@@ -13,14 +13,49 @@ namespace Monocypher
         private static readonly char[] HexBytes = new char[16] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
         private const string MonocypherDll = "monocypher_native";
 
+#if NET5_0
+        // size_t in NET5.0 is relying on nint
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+        public readonly partial struct size_t : IEquatable<size_t>
+        {
+            public size_t(nint value) => this.Value = value;
+
+            public readonly nint Value;
+
+            public bool Equals(size_t other) => Value.Equals(other.Value);
+
+            public override bool Equals(object obj) => obj is size_t other && Equals(other);
+
+            public override int GetHashCode() => Value.GetHashCode();
+
+            public override string ToString() => Value.ToString();
+
+            public static implicit operator nint(size_t from) => from.Value;
+
+            public static implicit operator size_t(nint from) => new size_t(from);
+
+            public static bool operator ==(size_t left, size_t right) => left.Equals(right);
+
+            public static bool operator !=(size_t left, size_t right) => !left.Equals(right);
+        }
+#endif
         /// <summary>
         /// A native int size (e.g 8 bytes for a 64bit processor, 4 bytes for a 32bit processor).
         /// </summary>
         public partial struct size_t
         {
+            public static explicit operator int(size_t value)
+            {
+                return (int)value.Value;
+            }
+
             public static implicit operator size_t(int value)
             {
+#if NET5_0
+                return new size_t(value);
+#else
                 return new size_t(new IntPtr(value));
+#endif
             }
         }
 

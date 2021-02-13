@@ -2,13 +2,11 @@ name: native
 
 on:
   push:
-    paths-ignore:
-    - 'img/**'
-    - 'doc/**'
-    - 'src/**'
-    - '*.md'
-    - '*.txt'
+    paths:
+    - 'ext/**'
   pull_request:
+    paths:
+    - 'ext/**'
 
 defaults:
   run:

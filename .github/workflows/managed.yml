@@ -5,13 +5,11 @@ env:
 
 on:
   push:
-    paths-ignore:
-    - 'doc/**'
-    - 'img/**'
-    - 'ext/**'
-    - '*.md'
-    - '*.txt'
+    paths:
+    - 'src/**'
   pull_request:
+    paths:
+    - 'src/**'
 
 jobs:
   build:

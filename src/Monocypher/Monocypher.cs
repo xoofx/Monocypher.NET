@@ -24,7 +24,6 @@ namespace Monocypher
             }
         }
 
-
         /// <summary>
         /// A 8-byte struct.
         /// </summary>

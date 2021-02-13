@@ -278,6 +278,8 @@ namespace Monocypher
         ///   memcmp().
         /// 
         /// </summary>
+        /// <param name="a">A 16-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="b">A 16-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_verify16(in Byte16 a, in Byte16 b);
         
@@ -312,6 +314,8 @@ namespace Monocypher
         ///   memcmp().
         /// 
         /// </summary>
+        /// <param name="a">A 16-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="b">A 16-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe int crypto_verify16(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
         {
             ExpectSize16(nameof(a), a.Length);
@@ -350,6 +354,8 @@ namespace Monocypher
         ///   memcmp().
         /// 
         /// </summary>
+        /// <param name="a">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="b">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_verify32(in Byte32 a, in Byte32 b);
         
@@ -384,6 +390,8 @@ namespace Monocypher
         ///   memcmp().
         /// 
         /// </summary>
+        /// <param name="a">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="b">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe int crypto_verify32(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
         {
             ExpectSize32(nameof(a), a.Length);
@@ -422,6 +430,8 @@ namespace Monocypher
         ///   memcmp().
         /// 
         /// </summary>
+        /// <param name="a">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="b">A 64-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_verify64(in Byte64 a, in Byte64 b);
         
@@ -456,6 +466,8 @@ namespace Monocypher
         ///   memcmp().
         /// 
         /// </summary>
+        /// <param name="a">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="b">A 64-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe int crypto_verify64(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
         {
             ExpectSize64(nameof(a), a.Length);
@@ -476,6 +488,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="secret">The buffer to erase.</param>
+        /// <param name="size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_wipe(IntPtr secret, Monocypher.size_t size);
         
@@ -689,6 +702,8 @@ namespace Monocypher
         ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
+        /// <param name="ad">See Monocypher manual for more details.</param>
+        /// <param name="ad_size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_lock_aead(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr ad, Monocypher.size_t ad_size, IntPtr plain_text, Monocypher.size_t text_size);
         
@@ -724,6 +739,7 @@ namespace Monocypher
         ///       combining encryption with compression. See
         ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="ad">See Monocypher manual for more details.</param>
         public static unsafe void crypto_lock_aead(Span<byte> mac, Span<byte> cipher_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> ad, ReadOnlySpan<byte> plain_text)
         {
             ExpectSize16(nameof(mac), mac.Length);
@@ -769,6 +785,8 @@ namespace Monocypher
         ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
         /// <param name="text_size">Length of both <paramref name="plain_text and"/><paramref name="cipher_text"/>, in bytes.</param>
+        /// <param name="ad">See Monocypher manual for more details.</param>
+        /// <param name="ad_size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_unlock_aead(IntPtr plain_text, in Byte32 key, in Byte24 nonce, in Byte16 mac, IntPtr ad, Monocypher.size_t ad_size, IntPtr cipher_text, Monocypher.size_t text_size);
         
@@ -804,6 +822,7 @@ namespace Monocypher
         ///       combining encryption with compression. See
         ///       intro(3monocypher) for details.</param>
         /// <param name="cipher_text">The encrypted message.</param>
+        /// <param name="ad">See Monocypher manual for more details.</param>
         public static unsafe int crypto_unlock_aead(Span<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> mac, ReadOnlySpan<byte> ad, ReadOnlySpan<byte> cipher_text)
         {
             ExpectSameBufferSize(nameof(plain_text), plain_text.Length, nameof(cipher_text), cipher_text.Length);
@@ -832,7 +851,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hash">The output hash.</param>
+        /// <param name="hash">A 64-byte buffer. The output hash.</param>
         /// <param name="message">The message to hash. May overlap with
         ///       <paramref name="hash"/>. May be
         ///       NULL if
@@ -857,7 +876,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hash">The output hash.</param>
+        /// <param name="hash">A 64-byte buffer. The output hash.</param>
         /// <param name="message">The message to hash. May overlap with
         ///       <paramref name="hash"/>. May be
         ///       NULL if
@@ -1011,6 +1030,7 @@ namespace Monocypher
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_update(ref Monocypher.crypto_blake2b_ctx ctx, IntPtr message, Monocypher.size_t message_size);
         
@@ -1034,6 +1054,7 @@ namespace Monocypher
         ///       <paramref name="hash"/>. May be
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_blake2b_update(ref Monocypher.crypto_blake2b_ctx ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
@@ -1057,6 +1078,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="hash">The output hash.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_final(ref Monocypher.crypto_blake2b_ctx ctx, IntPtr hash);
         
@@ -1077,6 +1099,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="hash">The output hash.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_blake2b_final(ref Monocypher.crypto_blake2b_ctx ctx, Span<byte> hash)
         {
             fixed(void* hash_ptr = hash)
@@ -1115,6 +1138,7 @@ namespace Monocypher
         ///       once they are done with it.</param>
         /// <param name="key_size">Length of <paramref name="key"/>, in bytes. Must be between
         ///       0 and 64. 32 is a good default.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_blake2b_general_init(ref Monocypher.crypto_blake2b_ctx ctx, Monocypher.size_t hash_size, IntPtr key, Monocypher.size_t key_size);
         
@@ -1148,6 +1172,7 @@ namespace Monocypher
         ///       created this way. Choose the size of the hash accordingly. Users may want
         ///       to wipe the key with <see cref="crypto_wipe"/>
         ///       once they are done with it.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_blake2b_general_init(ref Monocypher.crypto_blake2b_ctx ctx, Monocypher.size_t hash_size, ReadOnlySpan<byte> key)
         {
             fixed(void* key_ptr = key)
@@ -1171,6 +1196,15 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="hash">See Monocypher manual for more details.</param>
+        /// <param name="hash_size">See Monocypher manual for more details.</param>
+        /// <param name="work_area">See Monocypher manual for more details.</param>
+        /// <param name="nb_blocks">See Monocypher manual for more details.</param>
+        /// <param name="nb_iterations">See Monocypher manual for more details.</param>
+        /// <param name="password">See Monocypher manual for more details.</param>
+        /// <param name="password_size">See Monocypher manual for more details.</param>
+        /// <param name="salt">See Monocypher manual for more details.</param>
+        /// <param name="salt_size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_argon2i(IntPtr hash, uint hash_size, IntPtr work_area, uint nb_blocks, uint nb_iterations, IntPtr password, uint password_size, IntPtr salt, uint salt_size);
         
@@ -1191,6 +1225,12 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="hash">See Monocypher manual for more details.</param>
+        /// <param name="work_area">See Monocypher manual for more details.</param>
+        /// <param name="nb_blocks">See Monocypher manual for more details.</param>
+        /// <param name="nb_iterations">See Monocypher manual for more details.</param>
+        /// <param name="password">See Monocypher manual for more details.</param>
+        /// <param name="salt">See Monocypher manual for more details.</param>
         public static unsafe void crypto_argon2i(Span<byte> hash, Span<byte> work_area, uint nb_blocks, uint nb_iterations, ReadOnlySpan<byte> password, ReadOnlySpan<byte> salt)
         {
             fixed(void* hash_ptr = hash)
@@ -1217,6 +1257,19 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="hash">See Monocypher manual for more details.</param>
+        /// <param name="hash_size">See Monocypher manual for more details.</param>
+        /// <param name="work_area">See Monocypher manual for more details.</param>
+        /// <param name="nb_blocks">See Monocypher manual for more details.</param>
+        /// <param name="nb_iterations">See Monocypher manual for more details.</param>
+        /// <param name="password">See Monocypher manual for more details.</param>
+        /// <param name="password_size">See Monocypher manual for more details.</param>
+        /// <param name="salt">See Monocypher manual for more details.</param>
+        /// <param name="salt_size">See Monocypher manual for more details.</param>
+        /// <param name="key">See Monocypher manual for more details.</param>
+        /// <param name="key_size">See Monocypher manual for more details.</param>
+        /// <param name="ad">See Monocypher manual for more details.</param>
+        /// <param name="ad_size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_argon2i_general(IntPtr hash, uint hash_size, IntPtr work_area, uint nb_blocks, uint nb_iterations, IntPtr password, uint password_size, IntPtr salt, uint salt_size, IntPtr key, uint key_size, IntPtr ad, uint ad_size);
         
@@ -1237,6 +1290,14 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="hash">See Monocypher manual for more details.</param>
+        /// <param name="work_area">See Monocypher manual for more details.</param>
+        /// <param name="nb_blocks">See Monocypher manual for more details.</param>
+        /// <param name="nb_iterations">See Monocypher manual for more details.</param>
+        /// <param name="password">See Monocypher manual for more details.</param>
+        /// <param name="salt">See Monocypher manual for more details.</param>
+        /// <param name="key">See Monocypher manual for more details.</param>
+        /// <param name="ad">See Monocypher manual for more details.</param>
         public static unsafe void crypto_argon2i_general(Span<byte> hash, Span<byte> work_area, uint nb_blocks, uint nb_iterations, ReadOnlySpan<byte> password, ReadOnlySpan<byte> salt, ReadOnlySpan<byte> key, ReadOnlySpan<byte> ad)
         {
             fixed(void* hash_ptr = hash)
@@ -1257,7 +1318,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="shared_key">The shared secret, known only to those who know a relevant secret key
+        /// <param name="shared_key">A 32-byte buffer. The shared secret, known only to those who know a relevant secret key
         ///       (yours or theirs). It is cryptographically random, and suitable for use
         ///       with the <see cref="crypto_lock"/> family of
         ///       functions.</param>
@@ -1265,7 +1326,7 @@ namespace Monocypher
         ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator).</param>
-        /// <param name="their_public_key">The public key of the other party.</param>
+        /// <param name="their_public_key">A 32-byte buffer. The public key of the other party.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_key_exchange(ref Byte32 shared_key, in Byte32 your_secret_key, in Byte32 their_public_key);
         
@@ -1278,7 +1339,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="shared_key">The shared secret, known only to those who know a relevant secret key
+        /// <param name="shared_key">A 32-byte buffer. The shared secret, known only to those who know a relevant secret key
         ///       (yours or theirs). It is cryptographically random, and suitable for use
         ///       with the <see cref="crypto_lock"/> family of
         ///       functions.</param>
@@ -1286,7 +1347,7 @@ namespace Monocypher
         ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator).</param>
-        /// <param name="their_public_key">The public key of the other party.</param>
+        /// <param name="their_public_key">A 32-byte buffer. The public key of the other party.</param>
         public static unsafe void crypto_key_exchange(Span<byte> shared_key, ReadOnlySpan<byte> your_secret_key, ReadOnlySpan<byte> their_public_key)
         {
             ExpectSize32(nameof(shared_key), shared_key.Length);
@@ -1307,7 +1368,7 @@ namespace Monocypher
         ///       generation (use your operating system's random number generator). Do not
         ///       use the same private key for both signatures and key exchanges. The public
         ///       keys are different, and revealing both may leak information.</param>
-        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        /// <param name="public_key">A 32-byte buffer. The public key, generated from <paramref name="secret_key"/>
         ///       with <see cref="crypto_sign_public_key"/>().</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_public_key(ref Byte32 public_key, in Byte32 secret_key);
@@ -1324,7 +1385,7 @@ namespace Monocypher
         ///       generation (use your operating system's random number generator). Do not
         ///       use the same private key for both signatures and key exchanges. The public
         ///       keys are different, and revealing both may leak information.</param>
-        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        /// <param name="public_key">A 32-byte buffer. The public key, generated from <paramref name="secret_key"/>
         ///       with <see cref="crypto_sign_public_key"/>().</param>
         public static unsafe void crypto_sign_public_key(Span<byte> public_key, ReadOnlySpan<byte> secret_key)
         {
@@ -1340,13 +1401,13 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="signature">The signature.</param>
+        /// <param name="signature">A 64-byte buffer. The signature.</param>
         /// <param name="secret_key">A 32-byte random number, known only to you. See
         ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator). Do not
         ///       use the same private key for both signatures and key exchanges. The public
         ///       keys are different, and revealing both may leak information.</param>
-        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        /// <param name="public_key">A 32-byte buffer. The public key, generated from <paramref name="secret_key"/>
         ///       with <see cref="crypto_sign_public_key"/>().</param>
         /// <param name="message">Message to sign.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
@@ -1360,13 +1421,13 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="signature">The signature.</param>
+        /// <param name="signature">A 64-byte buffer. The signature.</param>
         /// <param name="secret_key">A 32-byte random number, known only to you. See
         ///       intro(3monocypher) about random number
         ///       generation (use your operating system's random number generator). Do not
         ///       use the same private key for both signatures and key exchanges. The public
         ///       keys are different, and revealing both may leak information.</param>
-        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        /// <param name="public_key">A 32-byte buffer. The public key, generated from <paramref name="secret_key"/>
         ///       with <see cref="crypto_sign_public_key"/>().</param>
         /// <param name="message">Message to sign.</param>
         public static unsafe void crypto_sign(Span<byte> signature, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key, ReadOnlySpan<byte> message)
@@ -1385,8 +1446,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="signature">The signature.</param>
-        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        /// <param name="signature">A 64-byte buffer. The signature.</param>
+        /// <param name="public_key">A 32-byte buffer. The public key, generated from <paramref name="secret_key"/>
         ///       with <see cref="crypto_sign_public_key"/>().</param>
         /// <param name="message">Message to sign.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
@@ -1400,8 +1461,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="signature">The signature.</param>
-        /// <param name="public_key">The public key, generated from <paramref name="secret_key"/>
+        /// <param name="signature">A 64-byte buffer. The signature.</param>
+        /// <param name="public_key">A 32-byte buffer. The public key, generated from <paramref name="secret_key"/>
         ///       with <see cref="crypto_sign_public_key"/>().</param>
         /// <param name="message">Message to sign.</param>
         public static unsafe int crypto_check(ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key, ReadOnlySpan<byte> message)
@@ -1421,8 +1482,10 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="key">A sufficiently random key, such as the output of
+        /// <param name="key">A 32-byte buffer. A sufficiently random key, such as the output of
         ///       <see cref="crypto_x25519"/>.</param>
+        /// <param name="@out">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="@in">A 16-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hchacha20(ref Byte32 @out, in Byte32 key, in Byte16 @in);
         
@@ -1435,8 +1498,10 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="key">A sufficiently random key, such as the output of
+        /// <param name="key">A 32-byte buffer. A sufficiently random key, such as the output of
         ///       <see cref="crypto_x25519"/>.</param>
+        /// <param name="@out">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="@in">A 16-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_hchacha20(Span<byte> @out, ReadOnlySpan<byte> key, ReadOnlySpan<byte> @in)
         {
             ExpectSize32(nameof(@out), @out.Length);
@@ -1456,7 +1521,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="key">A 32-byte secret key.</param>
-        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        /// <param name="nonce">A 8-byte buffer. An 8-byte or 24-byte number, used only once with any given key. It does
         ///       not need to be secret or random, but it does have to be unique. Repeating
         ///       a nonce with the same key reveals the XOR of two different messages, which
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
@@ -1487,7 +1552,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="key">A 32-byte secret key.</param>
-        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        /// <param name="nonce">A 8-byte buffer. An 8-byte or 24-byte number, used only once with any given key. It does
         ///       not need to be secret or random, but it does have to be unique. Repeating
         ///       a nonce with the same key reveals the XOR of two different messages, which
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
@@ -1523,7 +1588,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="key">A 32-byte secret key.</param>
-        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        /// <param name="nonce">A 24-byte buffer. An 8-byte or 24-byte number, used only once with any given key. It does
         ///       not need to be secret or random, but it does have to be unique. Repeating
         ///       a nonce with the same key reveals the XOR of two different messages, which
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
@@ -1554,7 +1619,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="key">A 32-byte secret key.</param>
-        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        /// <param name="nonce">A 24-byte buffer. An 8-byte or 24-byte number, used only once with any given key. It does
         ///       not need to be secret or random, but it does have to be unique. Repeating
         ///       a nonce with the same key reveals the XOR of two different messages, which
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
@@ -1604,6 +1669,11 @@ namespace Monocypher
         ///   shift registers to generate nonces.
         /// 
         /// </summary>
+        /// <param name="cipher_text">See Monocypher manual for more details.</param>
+        /// <param name="plain_text">See Monocypher manual for more details.</param>
+        /// <param name="text_size">See Monocypher manual for more details.</param>
+        /// <param name="key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="nonce">A 12-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ietf_chacha20(IntPtr cipher_text, IntPtr plain_text, Monocypher.size_t text_size, in Byte32 key, in Byte12 nonce);
         
@@ -1632,6 +1702,10 @@ namespace Monocypher
         ///   shift registers to generate nonces.
         /// 
         /// </summary>
+        /// <param name="cipher_text">See Monocypher manual for more details.</param>
+        /// <param name="plain_text">See Monocypher manual for more details.</param>
+        /// <param name="key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="nonce">A 12-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_ietf_chacha20(Span<byte> cipher_text, ReadOnlySpan<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce)
         {
             ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
@@ -1653,7 +1727,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="key">A 32-byte secret key.</param>
-        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        /// <param name="nonce">A 8-byte buffer. An 8-byte or 24-byte number, used only once with any given key. It does
         ///       not need to be secret or random, but it does have to be unique. Repeating
         ///       a nonce with the same key reveals the XOR of two different messages, which
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
@@ -1685,7 +1759,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="key">A 32-byte secret key.</param>
-        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        /// <param name="nonce">A 8-byte buffer. An 8-byte or 24-byte number, used only once with any given key. It does
         ///       not need to be secret or random, but it does have to be unique. Repeating
         ///       a nonce with the same key reveals the XOR of two different messages, which
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
@@ -1722,7 +1796,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="key">A 32-byte secret key.</param>
-        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        /// <param name="nonce">A 24-byte buffer. An 8-byte or 24-byte number, used only once with any given key. It does
         ///       not need to be secret or random, but it does have to be unique. Repeating
         ///       a nonce with the same key reveals the XOR of two different messages, which
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
@@ -1754,7 +1828,7 @@ namespace Monocypher
         /// 
         /// </summary>
         /// <param name="key">A 32-byte secret key.</param>
-        /// <param name="nonce">An 8-byte or 24-byte number, used only once with any given key. It does
+        /// <param name="nonce">A 24-byte buffer. An 8-byte or 24-byte number, used only once with any given key. It does
         ///       not need to be secret or random, but it does have to be unique. Repeating
         ///       a nonce with the same key reveals the XOR of two different messages, which
         ///       allows decryption. 24-byte nonces can be selected at random. 8-byte nonces
@@ -1805,6 +1879,12 @@ namespace Monocypher
         ///   shift registers to generate nonces.
         /// 
         /// </summary>
+        /// <param name="cipher_text">See Monocypher manual for more details.</param>
+        /// <param name="plain_text">See Monocypher manual for more details.</param>
+        /// <param name="text_size">See Monocypher manual for more details.</param>
+        /// <param name="key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="nonce">A 12-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="ctr">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern uint crypto_ietf_chacha20_ctr(IntPtr cipher_text, IntPtr plain_text, Monocypher.size_t text_size, in Byte32 key, in Byte12 nonce, uint ctr);
         
@@ -1833,6 +1913,11 @@ namespace Monocypher
         ///   shift registers to generate nonces.
         /// 
         /// </summary>
+        /// <param name="cipher_text">See Monocypher manual for more details.</param>
+        /// <param name="plain_text">See Monocypher manual for more details.</param>
+        /// <param name="key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="nonce">A 12-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="ctr">See Monocypher manual for more details.</param>
         public static unsafe uint crypto_ietf_chacha20_ctr(Span<byte> cipher_text, ReadOnlySpan<byte> plain_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, uint ctr)
         {
             ExpectSameBufferSize(nameof(cipher_text), cipher_text.Length, nameof(plain_text), plain_text.Length);
@@ -1856,8 +1941,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="mac">The authentication code.</param>
-        /// <param name="key">The secret authentication key. Use only once per message. Do not use the
+        /// <param name="mac">A 16-byte buffer. The authentication code.</param>
+        /// <param name="key">A 32-byte buffer. The secret authentication key. Use only once per message. Do not use the
         ///       session key to authenticate messages. It should be wiped with
         ///       <see cref="crypto_wipe"/> after use.</param>
         /// <param name="message">The message to authenticate. May overlap with the
@@ -1879,8 +1964,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="mac">The authentication code.</param>
-        /// <param name="key">The secret authentication key. Use only once per message. Do not use the
+        /// <param name="mac">A 16-byte buffer. The authentication code.</param>
+        /// <param name="key">A 32-byte buffer. The secret authentication key. Use only once per message. Do not use the
         ///       session key to authenticate messages. It should be wiped with
         ///       <see cref="crypto_wipe"/> after use.</param>
         /// <param name="message">The message to authenticate. May overlap with the
@@ -1906,9 +1991,10 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="key">The secret authentication key. Use only once per message. Do not use the
+        /// <param name="key">A 32-byte buffer. The secret authentication key. Use only once per message. Do not use the
         ///       session key to authenticate messages. It should be wiped with
         ///       <see cref="crypto_wipe"/> after use.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_poly1305_init(ref Monocypher.crypto_poly1305_ctx ctx, in Byte32 key);
         
@@ -1925,9 +2011,10 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="key">The secret authentication key. Use only once per message. Do not use the
+        /// <param name="key">A 32-byte buffer. The secret authentication key. Use only once per message. Do not use the
         ///       session key to authenticate messages. It should be wiped with
         ///       <see cref="crypto_wipe"/> after use.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_poly1305_init(ref Monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> key)
         {
             ExpectSize32(nameof(key), key.Length);
@@ -1950,6 +2037,7 @@ namespace Monocypher
         /// <param name="message">The message to authenticate. May overlap with the
         ///       <paramref name="mac"/> argument.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_poly1305_update(ref Monocypher.crypto_poly1305_ctx ctx, IntPtr message, Monocypher.size_t message_size);
         
@@ -1968,6 +2056,7 @@ namespace Monocypher
         /// </summary>
         /// <param name="message">The message to authenticate. May overlap with the
         ///       <paramref name="mac"/> argument.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_poly1305_update(ref Monocypher.crypto_poly1305_ctx ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
@@ -1987,7 +2076,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="mac">The authentication code.</param>
+        /// <param name="mac">A 16-byte buffer. The authentication code.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_poly1305_final(ref Monocypher.crypto_poly1305_ctx ctx, ref Byte16 mac);
         
@@ -2004,7 +2094,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="mac">The authentication code.</param>
+        /// <param name="mac">A 16-byte buffer. The authentication code.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_poly1305_final(ref Monocypher.crypto_poly1305_ctx ctx, Span<byte> mac)
         {
             ExpectSize16(nameof(mac), mac.Length);
@@ -2024,6 +2115,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_x25519_public_key(ref Byte32 public_key, in Byte32 secret_key);
         
@@ -2040,6 +2133,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_x25519_public_key(Span<byte> public_key, ReadOnlySpan<byte> secret_key)
         {
             ExpectSize32(nameof(public_key), public_key.Length);
@@ -2060,7 +2155,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="raw_shared_secret">The shared secret, known only to those who know a relevant secret key
+        /// <param name="raw_shared_secret">A 32-byte buffer. The shared secret, known only to those who know a relevant secret key
         ///       (yours or theirs). It is not cryptographically random. Do not use it
         ///       directly as a key. Hash it with
         ///       <see cref="crypto_hchacha20"/> or
@@ -2069,7 +2164,7 @@ namespace Monocypher
         ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator).</param>
-        /// <param name="their_public_key">The public key of the other party.
+        /// <param name="their_public_key">A 32-byte buffer. The public key of the other party.
         ///     <br/>
         /// <paramref name="raw_shared_secret"/> and
         ///       <paramref name="your_secret_key"/> may overlap if your
@@ -2090,7 +2185,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="raw_shared_secret">The shared secret, known only to those who know a relevant secret key
+        /// <param name="raw_shared_secret">A 32-byte buffer. The shared secret, known only to those who know a relevant secret key
         ///       (yours or theirs). It is not cryptographically random. Do not use it
         ///       directly as a key. Hash it with
         ///       <see cref="crypto_hchacha20"/> or
@@ -2099,7 +2194,7 @@ namespace Monocypher
         ///       intro(3monocypher) for advice about
         ///       generating random bytes (use the operating system's random number
         ///       generator).</param>
-        /// <param name="their_public_key">The public key of the other party.
+        /// <param name="their_public_key">A 32-byte buffer. The public key of the other party.
         ///     <br/>
         /// <paramref name="raw_shared_secret"/> and
         ///       <paramref name="your_secret_key"/> may overlap if your
@@ -2147,6 +2242,8 @@ namespace Monocypher
         ///   cofactor.
         /// 
         /// </summary>
+        /// <param name="pk">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="sk">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_x25519_dirty_small(ref Byte32 pk, in Byte32 sk);
         
@@ -2185,6 +2282,8 @@ namespace Monocypher
         ///   cofactor.
         /// 
         /// </summary>
+        /// <param name="pk">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="sk">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_x25519_dirty_small(Span<byte> pk, ReadOnlySpan<byte> sk)
         {
             ExpectSize32(nameof(pk), pk.Length);
@@ -2227,6 +2326,8 @@ namespace Monocypher
         ///   cofactor.
         /// 
         /// </summary>
+        /// <param name="pk">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="sk">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_x25519_dirty_fast(ref Byte32 pk, in Byte32 sk);
         
@@ -2265,6 +2366,8 @@ namespace Monocypher
         ///   cofactor.
         /// 
         /// </summary>
+        /// <param name="pk">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="sk">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_x25519_dirty_fast(Span<byte> pk, ReadOnlySpan<byte> sk)
         {
             ExpectSize32(nameof(pk), pk.Length);
@@ -2288,13 +2391,13 @@ namespace Monocypher
         /// This function is used, for example, with exponential blinding in oblivious
         ///   pseudo-random functions (OPRFs).
         /// </summary>
-        /// <param name="blind_salt">The output point.</param>
-        /// <param name="private_key">The private key (scalar) to use. First, the value is clamped; then the
+        /// <param name="blind_salt">A 32-byte buffer. The output point.</param>
+        /// <param name="private_key">A 32-byte buffer. The private key (scalar) to use. First, the value is clamped; then the
         ///       clamped value's multiplicative inverse (modulo the curve order) is
         ///       determined; the clamped value's multiplicative inverse then has its
         ///       cofactor cleared, and that final value is then used for scalar
         ///       multiplication.</param>
-        /// <param name="curve_point">The curve point on X25519 to multiply with the multiplicative inverse
+        /// <param name="curve_point">A 32-byte buffer. The curve point on X25519 to multiply with the multiplicative inverse
         ///       (modulo the curve order) of
         ///     <paramref name="private_key"/>.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
@@ -2316,13 +2419,13 @@ namespace Monocypher
         /// This function is used, for example, with exponential blinding in oblivious
         ///   pseudo-random functions (OPRFs).
         /// </summary>
-        /// <param name="blind_salt">The output point.</param>
-        /// <param name="private_key">The private key (scalar) to use. First, the value is clamped; then the
+        /// <param name="blind_salt">A 32-byte buffer. The output point.</param>
+        /// <param name="private_key">A 32-byte buffer. The private key (scalar) to use. First, the value is clamped; then the
         ///       clamped value's multiplicative inverse (modulo the curve order) is
         ///       determined; the clamped value's multiplicative inverse then has its
         ///       cofactor cleared, and that final value is then used for scalar
         ///       multiplication.</param>
-        /// <param name="curve_point">The curve point on X25519 to multiply with the multiplicative inverse
+        /// <param name="curve_point">A 32-byte buffer. The curve point on X25519 to multiply with the multiplicative inverse
         ///       (modulo the curve order) of
         ///     <paramref name="private_key"/>.</param>
         public static unsafe void crypto_x25519_inverse(Span<byte> blind_salt, ReadOnlySpan<byte> private_key, ReadOnlySpan<byte> curve_point)
@@ -2362,9 +2465,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="eddsa">The signing public key or private key to convert to a X25519 public key or
+        /// <param name="eddsa">A 32-byte buffer. The signing public key or private key to convert to a X25519 public key or
         ///       private key, respectively.</param>
-        /// <param name="x25519">The converted private key or public key.</param>
+        /// <param name="x25519">A 32-byte buffer. The converted private key or public key.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_from_eddsa_private(ref Byte32 x25519, in Byte32 eddsa);
         
@@ -2397,9 +2500,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="eddsa">The signing public key or private key to convert to a X25519 public key or
+        /// <param name="eddsa">A 32-byte buffer. The signing public key or private key to convert to a X25519 public key or
         ///       private key, respectively.</param>
-        /// <param name="x25519">The converted private key or public key.</param>
+        /// <param name="x25519">A 32-byte buffer. The converted private key or public key.</param>
         public static unsafe void crypto_from_eddsa_private(Span<byte> x25519, ReadOnlySpan<byte> eddsa)
         {
             ExpectSize32(nameof(x25519), x25519.Length);
@@ -2436,9 +2539,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="eddsa">The signing public key or private key to convert to a X25519 public key or
+        /// <param name="eddsa">A 32-byte buffer. The signing public key or private key to convert to a X25519 public key or
         ///       private key, respectively.</param>
-        /// <param name="x25519">The converted private key or public key.</param>
+        /// <param name="x25519">A 32-byte buffer. The converted private key or public key.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_from_eddsa_public(ref Byte32 x25519, in Byte32 eddsa);
         
@@ -2471,9 +2574,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="eddsa">The signing public key or private key to convert to a X25519 public key or
+        /// <param name="eddsa">A 32-byte buffer. The signing public key or private key to convert to a X25519 public key or
         ///       private key, respectively.</param>
-        /// <param name="x25519">The converted private key or public key.</param>
+        /// <param name="x25519">A 32-byte buffer. The converted private key or public key.</param>
         public static unsafe void crypto_from_eddsa_public(Span<byte> x25519, ReadOnlySpan<byte> eddsa)
         {
             ExpectSize32(nameof(x25519), x25519.Length);
@@ -2490,6 +2593,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_init_first_pass(ref Monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
         
@@ -2502,6 +2608,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_sign_init_first_pass(ref Monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key)
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
@@ -2518,6 +2627,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="message">See Monocypher manual for more details.</param>
+        /// <param name="message_size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_update(ref Monocypher.crypto_sign_ctx_abstract ctx, IntPtr message, Monocypher.size_t message_size);
         
@@ -2530,6 +2642,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="message">See Monocypher manual for more details.</param>
         public static unsafe void crypto_sign_update(ref Monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
@@ -2557,6 +2671,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_final(ref Monocypher.crypto_sign_ctx_abstract ctx, ref Byte64 signature);
         
@@ -2569,6 +2685,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_sign_final(ref Monocypher.crypto_sign_ctx_abstract ctx, Span<byte> signature)
         {
             ExpectSize64(nameof(signature), signature.Length);
@@ -2584,6 +2702,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_check_init(ref Monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
         
@@ -2596,6 +2717,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_check_init(ref Monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key)
         {
             ExpectSize64(nameof(signature), signature.Length);
@@ -2612,6 +2736,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="message">See Monocypher manual for more details.</param>
+        /// <param name="message_size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_check_update(ref Monocypher.crypto_check_ctx_abstract ctx, IntPtr message, Monocypher.size_t message_size);
         
@@ -2624,6 +2751,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="message">See Monocypher manual for more details.</param>
         public static unsafe void crypto_check_update(ref Monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
@@ -2770,6 +2899,9 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="hash">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_public_key_custom_hash(ref Byte32 public_key, in Byte32 secret_key, in Monocypher.crypto_sign_vtable hash);
         
@@ -2901,6 +3033,9 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="hash">See Monocypher manual for more details.</param>
         public static unsafe void crypto_sign_public_key_custom_hash(Span<byte> public_key, ReadOnlySpan<byte> secret_key, in Monocypher.crypto_sign_vtable hash)
         {
             ExpectSize32(nameof(public_key), public_key.Length);
@@ -3036,6 +3171,10 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="hash">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sign_init_first_pass_custom_hash(ref Monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key, in Monocypher.crypto_sign_vtable hash);
         
@@ -3167,6 +3306,10 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="hash">See Monocypher manual for more details.</param>
         public static unsafe void crypto_sign_init_first_pass_custom_hash(ref Monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key, in Monocypher.crypto_sign_vtable hash)
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
@@ -3302,6 +3445,10 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="hash">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_check_init_custom_hash(ref Monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key, in Monocypher.crypto_sign_vtable hash);
         
@@ -3433,6 +3580,10 @@ namespace Monocypher
         ///   security considerations and semantics apply.
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="hash">See Monocypher manual for more details.</param>
         public static unsafe void crypto_check_init_custom_hash(ref Monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key, in Monocypher.crypto_sign_vtable hash)
         {
             ExpectSize64(nameof(signature), signature.Length);
@@ -3499,11 +3650,11 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="curve">A point on the curve, which is a Curve25519 public key generated with
+        /// <param name="curve">A 32-byte buffer. A point on the curve, which is a Curve25519 public key generated with
         ///       either <see cref="crypto_x25519_dirty_fast"/>
         ///       or
         ///     <see cref="crypto_x25519_dirty_small"/>.</param>
-        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        /// <param name="hidden">A 32-byte buffer. The hidden encoding of a point on the curve which is effectively
         ///       indistinguishable from random.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hidden_to_curve(ref Byte32 curve, in Byte32 hidden);
@@ -3567,11 +3718,11 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="curve">A point on the curve, which is a Curve25519 public key generated with
+        /// <param name="curve">A 32-byte buffer. A point on the curve, which is a Curve25519 public key generated with
         ///       either <see cref="crypto_x25519_dirty_fast"/>
         ///       or
         ///     <see cref="crypto_x25519_dirty_small"/>.</param>
-        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        /// <param name="hidden">A 32-byte buffer. The hidden encoding of a point on the curve which is effectively
         ///       indistinguishable from random.</param>
         public static unsafe void crypto_hidden_to_curve(Span<byte> curve, ReadOnlySpan<byte> hidden)
         {
@@ -3639,11 +3790,11 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="curve">A point on the curve, which is a Curve25519 public key generated with
+        /// <param name="curve">A 32-byte buffer. A point on the curve, which is a Curve25519 public key generated with
         ///       either <see cref="crypto_x25519_dirty_fast"/>
         ///       or
         ///     <see cref="crypto_x25519_dirty_small"/>.</param>
-        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        /// <param name="hidden">A 32-byte buffer. The hidden encoding of a point on the curve which is effectively
         ///       indistinguishable from random.</param>
         /// <param name="tweak">A 1-byte random number, which influences the final output of
         ///       <see cref="crypto_curve_to_hidden"/>().</param>
@@ -3709,11 +3860,11 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="curve">A point on the curve, which is a Curve25519 public key generated with
+        /// <param name="curve">A 32-byte buffer. A point on the curve, which is a Curve25519 public key generated with
         ///       either <see cref="crypto_x25519_dirty_fast"/>
         ///       or
         ///     <see cref="crypto_x25519_dirty_small"/>.</param>
-        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        /// <param name="hidden">A 32-byte buffer. The hidden encoding of a point on the curve which is effectively
         ///       indistinguishable from random.</param>
         /// <param name="tweak">A 1-byte random number, which influences the final output of
         ///       <see cref="crypto_curve_to_hidden"/>().</param>
@@ -3783,9 +3934,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        /// <param name="hidden">A 32-byte buffer. The hidden encoding of a point on the curve which is effectively
         ///       indistinguishable from random.</param>
-        /// <param name="secret_key">The secret key that was generated from the given
+        /// <param name="secret_key">A 32-byte buffer. The secret key that was generated from the given
         ///       <paramref name="seed"/>.</param>
         /// <param name="seed">A 32-byte random number from which to derive a key pair. See
         ///       intro(3monocypher) for advice about
@@ -3854,9 +4005,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hidden">The hidden encoding of a point on the curve which is effectively
+        /// <param name="hidden">A 32-byte buffer. The hidden encoding of a point on the curve which is effectively
         ///       indistinguishable from random.</param>
-        /// <param name="secret_key">The secret key that was generated from the given
+        /// <param name="secret_key">A 32-byte buffer. The secret key that was generated from the given
         ///       <paramref name="seed"/>.</param>
         /// <param name="seed">A 32-byte random number from which to derive a key pair. See
         ///       intro(3monocypher) for advice about
@@ -3931,6 +4082,7 @@ namespace Monocypher
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sha512_update(ref Monocypher.crypto_sha512_ctx ctx, IntPtr message, Monocypher.size_t message_size);
         
@@ -3961,6 +4113,7 @@ namespace Monocypher
         ///       <paramref name="hash"/>. May be
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_sha512_update(ref Monocypher.crypto_sha512_ctx ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
@@ -3990,7 +4143,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
+        /// <param name="hash">A 64-byte buffer. The output hash, which is always 64 bytes long.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_sha512_final(ref Monocypher.crypto_sha512_ctx ctx, ref Byte64 hash);
         
@@ -4017,7 +4171,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
+        /// <param name="hash">A 64-byte buffer. The output hash, which is always 64 bytes long.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_sha512_final(ref Monocypher.crypto_sha512_ctx ctx, Span<byte> hash)
         {
             ExpectSize64(nameof(hash), hash.Length);
@@ -4047,7 +4202,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
+        /// <param name="hash">A 64-byte buffer. The output hash, which is always 64 bytes long.</param>
         /// <param name="message">The message to hash. May overlap with
         ///       <paramref name="hash"/>. May be
         ///       NULL if
@@ -4079,7 +4234,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hash">The output hash, which is always 64 bytes long.</param>
+        /// <param name="hash">A 64-byte buffer. The output hash, which is always 64 bytes long.</param>
         /// <param name="message">The message to hash. May overlap with
         ///       <paramref name="hash"/>. May be
         ///       NULL if
@@ -4108,6 +4263,7 @@ namespace Monocypher
         /// <param name="key_size">Length of <paramref name="key"/>, in bytes. 32 is a good
         ///       default. Keys longer than 128 bytes will be reduced to 64 bytes by hashing
         ///       the key with SHA-512.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hmac_sha512_init(ref Monocypher.crypto_hmac_sha512_ctx ctx, IntPtr key, Monocypher.size_t key_size);
         
@@ -4125,6 +4281,7 @@ namespace Monocypher
         ///       want to wipe the key with
         ///       <see cref="crypto_wipe"/> once they are done
         ///       with it.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_hmac_sha512_init(ref Monocypher.crypto_hmac_sha512_ctx ctx, ReadOnlySpan<byte> key)
         {
             fixed(void* key_ptr = key)
@@ -4146,6 +4303,7 @@ namespace Monocypher
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
         /// <param name="message_size">Length of <paramref name="message"/>, in bytes.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hmac_sha512_update(ref Monocypher.crypto_hmac_sha512_ctx ctx, IntPtr message, Monocypher.size_t message_size);
         
@@ -4163,6 +4321,7 @@ namespace Monocypher
         ///       <paramref name="hmac"/>. May be
         ///       NULL if
         ///       <paramref name="message_size"/> is 0.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_hmac_sha512_update(ref Monocypher.crypto_hmac_sha512_ctx ctx, ReadOnlySpan<byte> message)
         {
             fixed(void* message_ptr = message)
@@ -4179,7 +4338,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
+        /// <param name="hmac">A 64-byte buffer. The output MAC, which is always 64 bytes long.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_hmac_sha512_final(ref Monocypher.crypto_hmac_sha512_ctx ctx, ref Byte64 hmac);
         
@@ -4193,7 +4353,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
+        /// <param name="hmac">A 64-byte buffer. The output MAC, which is always 64 bytes long.</param>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
         public static unsafe void crypto_hmac_sha512_final(ref Monocypher.crypto_hmac_sha512_ctx ctx, Span<byte> hmac)
         {
             ExpectSize64(nameof(hmac), hmac.Length);
@@ -4210,7 +4371,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
+        /// <param name="hmac">A 64-byte buffer. The output MAC, which is always 64 bytes long.</param>
         /// <param name="key">Some secret key. One cannot predict the final hash without it. Users may
         ///       want to wipe the key with
         ///       <see cref="crypto_wipe"/> once they are done
@@ -4236,7 +4397,7 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
-        /// <param name="hmac">The output MAC, which is always 64 bytes long.</param>
+        /// <param name="hmac">A 64-byte buffer. The output MAC, which is always 64 bytes long.</param>
         /// <param name="key">Some secret key. One cannot predict the final hash without it. Users may
         ///       want to wipe the key with
         ///       <see cref="crypto_wipe"/> once they are done
@@ -4264,6 +4425,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ed25519_public_key(ref Byte32 public_key, in Byte32 secret_key);
         
@@ -4278,6 +4441,8 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_ed25519_public_key(Span<byte> public_key, ReadOnlySpan<byte> secret_key)
         {
             ExpectSize32(nameof(public_key), public_key.Length);
@@ -4296,6 +4461,11 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="message">See Monocypher manual for more details.</param>
+        /// <param name="message_size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ed25519_sign(ref Byte64 signature, in Byte32 secret_key, in Byte32 public_key, IntPtr message, Monocypher.size_t message_size);
         
@@ -4310,6 +4480,10 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="message">See Monocypher manual for more details.</param>
         public static unsafe void crypto_ed25519_sign(Span<byte> signature, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key, ReadOnlySpan<byte> message)
         {
             ExpectSize64(nameof(signature), signature.Length);
@@ -4330,6 +4504,10 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="message">See Monocypher manual for more details.</param>
+        /// <param name="message_size">See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern int crypto_ed25519_check(in Byte64 signature, in Byte32 public_key, IntPtr message, Monocypher.size_t message_size);
         
@@ -4344,6 +4522,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="message">See Monocypher manual for more details.</param>
         public static unsafe int crypto_ed25519_check(ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key, ReadOnlySpan<byte> message)
         {
             ExpectSize64(nameof(signature), signature.Length);
@@ -4367,6 +4548,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ed25519_sign_init_first_pass(ref Monocypher.crypto_sign_ctx_abstract ctx, in Byte32 secret_key, in Byte32 public_key);
         
@@ -4385,6 +4569,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="secret_key">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_ed25519_sign_init_first_pass(ref Monocypher.crypto_sign_ctx_abstract ctx, ReadOnlySpan<byte> secret_key, ReadOnlySpan<byte> public_key)
         {
             ExpectSize32(nameof(secret_key), secret_key.Length);
@@ -4407,6 +4594,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_ed25519_check_init(ref Monocypher.crypto_check_ctx_abstract ctx, in Byte64 signature, in Byte32 public_key);
         
@@ -4425,6 +4615,9 @@ namespace Monocypher
         /// <br/>
         /// 
         /// </summary>
+        /// <param name="ctx">See Monocypher manual for more details.</param>
+        /// <param name="signature">A 64-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="public_key">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_ed25519_check_init(ref Monocypher.crypto_check_ctx_abstract ctx, ReadOnlySpan<byte> signature, ReadOnlySpan<byte> public_key)
         {
             ExpectSize64(nameof(signature), signature.Length);
@@ -4441,6 +4634,8 @@ namespace Monocypher
         ///   BLAKE2b. Please see the documentation for those functions for details.
         /// 
         /// </summary>
+        /// <param name="x25519">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="eddsa">A 32-byte buffer. See Monocypher manual for more details.</param>
         [DllImport(MonocypherDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void crypto_from_ed25519_private(ref Byte32 x25519, in Byte32 eddsa);
         
@@ -4453,6 +4648,8 @@ namespace Monocypher
         ///   BLAKE2b. Please see the documentation for those functions for details.
         /// 
         /// </summary>
+        /// <param name="x25519">A 32-byte buffer. See Monocypher manual for more details.</param>
+        /// <param name="eddsa">A 32-byte buffer. See Monocypher manual for more details.</param>
         public static unsafe void crypto_from_ed25519_private(Span<byte> x25519, ReadOnlySpan<byte> eddsa)
         {
             ExpectSize32(nameof(x25519), x25519.Length);

@@ -8,22 +8,22 @@ Monocypher.NET is a managed wrapper around [Monocypher](https://github.com/LoupV
 ## Features
 
 - Provides the entire native Monocypher API in an efficient 1-to-1 mapping:
-  - Authenticated Encryption
-  - Hashing
-  - Password Key Derivation
-  - Key Exchange
-  - Public Key Signatures
-  - Constant Time Comparison
-  - ...and more...
-- For each function, a duplicated API is provided using `Span`/`ReadOnlySpan` parameters.
+  - Authenticated Encryption (`RFC 8439` with `XChacha20` and `Poly1305`)
+  - Hashing (`Blake2b`)
+  - Password Key Derivation (`Argon2i`)
+  - Key Exchange (`X25519`)
+  - Public Key Signatures (`EdDSA` (RFC `8032`) with Blake2b and `edwards25519`)
+  - ...[and more](https://monocypher.org/manual/)...
+- For each raw native function, a duplicated API is provided using `Span`/`ReadOnlySpan` parameters.
 - Compatible with `.NET 5.0+` and `.NET Standard 2.0+`
 
 ## Usage
 
-Example of the [`crypto_lock`](https://monocypher.org/manual/aead) API
+Example of using the [`crypto_lock`](https://monocypher.org/manual/aead) API
 
 ```csharp
-// Add this at the beginning of your file
+// Use static at the beginning of your file to
+// import functions
 using static Monocypher.Monocypher;
 
 // ...
@@ -55,7 +55,23 @@ crypto_lock(mac, cipherText, key, nonce, inputText);
 
 ## Documentation
 
-Because Monocypher.NET is a raw wrapper of Monocypher, the [Monocypher manual](https://monocypher.org/manual/) can be used to easily dig into the API.
+Because Monocypher.NET is a raw wrapper of Monocypher, the excellent [Monocypher manual](https://monocypher.org/manual/) can be used to easily dig into the API.
+
+For example, the `crypto_lock` C API defined like this:
+
+```c
+void crypto_lock(uint8_t mac[16], uint8_t *cipher_text, const uint8_t key[32], const uint8_t nonce[24], const uint8_t *plain_text, size_t text_size);
+```
+
+is exposed with the following 2 functions in Monocypher.NET, one being a strict equivalent and the other using Span/ReadOnlySpan
+
+```csharp
+// Pure translation of the C API
+public static void crypto_lock(ref Byte16 mac, IntPtr cipher_text, in Byte32 key, in Byte24 nonce, IntPtr plain_text, Monocypher.size_t text_size);
+
+// API using Span/ReadOnlySpan
+public static void crypto_lock(Span<byte> mac, Span<byte> cipher_text, ReadOnlySpan<byte> key, ReadOnlySpan<byte> nonce, ReadOnlySpan<byte> plain_text)
+```
 
 ## Platforms
 

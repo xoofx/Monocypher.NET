@@ -14,7 +14,7 @@ Monocypher.NET is a managed wrapper around [Monocypher](https://github.com/LoupV
   - Key Exchange (`X25519`)
   - Public Key Signatures (`EdDSA` (RFC `8032`) with Blake2b and `edwards25519`)
   - ...[and more](https://monocypher.org/manual/)...
-- For each raw native function, a duplicated API is provided using `Span`/`ReadOnlySpan` parameters.
+- Each raw native function is duplicated with a more friendly API using `Span`/`ReadOnlySpan` parameters.
 - Compatible with `.NET 5.0+` and `.NET Standard 2.0+`
 
 ## Usage

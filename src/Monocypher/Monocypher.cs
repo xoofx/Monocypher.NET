@@ -60,6 +60,61 @@ namespace Monocypher
         }
 
         /// <summary>
+        /// Converts the input span to hexadecimal bytes representation (e.g "0x12, 0xaf, 0x56...")
+        /// </summary>
+        /// <param name="buffer">The buffer to convert to hex bytes.</param>
+        /// <param name="builder">The builder to received hexadecimal bytes.</param>
+        public static void ToHexBytes(this ReadOnlySpan<byte> buffer, StringBuilder builder)
+        {
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                if (i > 0) builder.Append(", ");
+                builder.Append("0x");
+                AppendByteToHex(builder, buffer[i]);
+            }
+        }
+
+        /// <summary>
+        /// Converts the input span to hexadecimal bytes representation (e.g "0x12, 0xaf, 0x56...")
+        /// </summary>
+        /// <param name="buffer">The buffer to convert to hex bytes.</param>
+        /// <returns>A string representation with hexadecimal bytes from the input span buffer.</returns>
+        public static string ToHexBytes(this ReadOnlySpan<byte> buffer)
+        {
+            var builder = new StringBuilder();
+            ToHexBytes(buffer, builder);
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Converts the input span to hexadecimal bytes representation (e.g "0x12, 0xaf, 0x56...")
+        /// </summary>
+        /// <param name="buffer">The buffer to convert to hex bytes.</param>
+        /// <param name="builder">The builder to received hexadecimal bytes.</param>
+        public static void ToHexBytes(this Span<byte> buffer, StringBuilder builder)
+        {
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                if (i > 0) builder.Append(", ");
+                builder.Append("0x");
+                AppendByteToHex(builder, buffer[i]);
+            }
+        }
+
+        /// <summary>
+        /// Converts the input span to hexadecimal bytes representation (e.g "0x12, 0xaf, 0x56...")
+        /// </summary>
+        /// <param name="buffer">The buffer to convert to hex bytes.</param>
+        /// <returns>A string representation with hexadecimal bytes from the input span buffer.</returns>
+        public static string ToHexBytes(this Span<byte> buffer)
+        {
+            var builder = new StringBuilder();
+            ToHexBytes(buffer, builder);
+            return builder.ToString();
+        }
+
+
+        /// <summary>
         /// A 8-byte struct.
         /// </summary>
         [StructLayout(LayoutKind.Sequential, Size = 8)]

@@ -47,6 +47,13 @@ function Build-Project {
         $CMakeBuilder = "Visual Studio 16 2019"
         $CMakeArch = "-A$MsvcArch"
         $BuildPlatformSubFolder = "/Release"
+    } elseif ($IsLinux) {
+        if ($NETArch -eq "arm64") {
+            $CMakeArch = "-DCMAKE_TOOLCHAIN_FILE=toolchains/aarch64-linux-gnu.toolchain.cmake"
+        }
+        elseif ($NETArch -eq "arm") {
+            $CMakeArch = "-DCMAKE_TOOLCHAIN_FILE=toolchains/arm-linux-gnueabihf.toolchain.cmake"
+        }
     }
 
     Write-Host "Building Monocypher $NETPlatform-$NETArch" -ForegroundColor Green

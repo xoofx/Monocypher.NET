@@ -26,8 +26,10 @@ jobs:
     - name: Setup Linux
       if: matrix.os == 'ubuntu-latest'
       run: |
-          sudo apt-get install gcc-aarch64-linux-gnu      
-          sudo apt-get install gcc-arm-linux-gnueabihf      
+          sudo apt-get install gcc-aarch64-linux-gnu
+          sudo apt-get install g++-aarch64-linux-gnu
+          sudo apt-get install gcc-arm-linux-gnueabihf
+          sudo apt-get install g++-arm-linux-gnueabihf
     - name: Build
       run: |
           ./build_monocypher_native.ps1

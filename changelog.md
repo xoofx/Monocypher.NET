@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.1
+- Fix `linux-arm` and `linux-arm64` native library versions
+
 ## 0.2.0
 - Add overrides for `crypto_chacha20`, `crypto_xchacha20`, `crypto_chacha20_ctr`, `crypto_xchacha20_ctr` that don't need an input plain text
 - Add Span/ReadOnlySpan `ToHexBytes` methods.

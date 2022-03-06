@@ -363,3 +363,6 @@ MigrationBackup/
 # Rust
 /lib/blake3_dotnet/target
 Cargo.lock
+
+# Remove artifacts produced by dotnet-releaser
+artifacts-dotnet-releaser/

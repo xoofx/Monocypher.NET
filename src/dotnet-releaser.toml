@@ -1,0 +1,6 @@
+# configuration file for dotnet-releaser
+[msbuild]
+project = "Monocypher.sln"
+[github]
+user = "xoofx"
+repo = "Monocypher.NET"

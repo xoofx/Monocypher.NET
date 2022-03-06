@@ -3,13 +3,8 @@
     <Description>Monocypher.NET is a managed wrapper around the Monocypher cryptographic library.</Description>
     <Copyright>Alexandre Mutel</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>0.2.1</VersionPrefix>
-    <!--<VersionSuffix>alpha</VersionSuffix>
-    <BuildNumber>9</BuildNumber>
-    <VersionSuffix Condition="'$(VersionSuffix)' != '' AND '$(BuildNumber)' != ''">$(VersionSuffix).$(BuildNumber)</VersionSuffix>-->
     <Authors>Alexandre Mutel</Authors>
     <PackageTags>aead; argon2i; blake2; eddsa; chacha20; xchacha20; x25519; poly1305; ed25519; Hash; Cryptography</PackageTags>
-    <PackageReleaseNotes>https://github.com/xoofx/Monocypher.NET/blob/master/changelog.md</PackageReleaseNotes>
     <PackageIcon>monocypher_dotnet.png</PackageIcon>
     <PackageProjectUrl>https://github.com/xoofx/Monocypher.NET</PackageProjectUrl>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>

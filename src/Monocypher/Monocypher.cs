@@ -13,7 +13,7 @@ namespace Monocypher
         private static readonly char[] HexBytes = new char[16] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
         private const string MonocypherDll = "monocypher_native";
 
-#if NET5_0
+#if !NETSTANDARD2_0
         // size_t in NET5.0 is relying on nint
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public readonly partial struct size_t : IEquatable<size_t>
@@ -51,7 +51,7 @@ namespace Monocypher
 
             public static implicit operator size_t(int value)
             {
-#if NET5_0
+#if !NETSTANDARD2_0
                 return new size_t(value);
 #else
                 return new size_t(new IntPtr(value));

@@ -15,6 +15,7 @@
 #
 # On Mac:
 #   osx-x64
+#   osx-arm64
 # -------------------------------------------------------------
 $ErrorActionPreference = "Stop"
 Try {
@@ -88,6 +89,10 @@ if ($IsWindows -Or $IsMacOS -Or $IsLinux) {
 
 if ($IsWindows -Or $IsLinux) {
     Build-Project arm
+    Build-Project arm64
+}
+
+if ($IsMacOS) {
     Build-Project arm64
 }
 

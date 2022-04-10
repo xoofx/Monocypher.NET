@@ -50,9 +50,9 @@ namespace Monocypher.Tests
             inputText[3] = (byte)'d';
 
             Span<byte> key = stackalloc byte[32];
-            RNGCryptoServiceProvider.Fill(key);
+            RandomNumberGenerator.Fill(key);
             Span<byte> nonce = stackalloc byte[24];
-            RNGCryptoServiceProvider.Fill(nonce);
+            RandomNumberGenerator.Fill(nonce);
 
             crypto_lock(mac, cipherText, key, nonce, inputText);
 

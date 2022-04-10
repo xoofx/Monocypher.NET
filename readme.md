@@ -79,7 +79,7 @@ Monocypher.NET is supported on the following platforms:
 
 - `win-x64`, `win-x86`, `win-arm64`, `win-arm`
 - `linux-x64`, `linux-arm64`, `linux-arm`
-- `osx-x64`
+- `osx-x64`, `osx-arm64`
 
 ## Performance
 

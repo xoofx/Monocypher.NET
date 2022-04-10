@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.2
+- Added runtime support for `osx-arm64` architecture
+
 ## 0.2.1
 - Fix `linux-arm` and `linux-arm64` native library versions
 

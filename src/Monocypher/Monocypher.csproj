@@ -1,9 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="Monocypher.props" />
-
   <PropertyGroup>
     <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+
+    <Description>Monocypher.NET is a managed wrapper around the Monocypher cryptographic library.</Description>
+    <Copyright>Alexandre Mutel</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>Alexandre Mutel</Authors>
+    <PackageTags>aead; argon2i; blake2; eddsa; chacha20; xchacha20; x25519; poly1305; ed25519; Hash; Cryptography</PackageTags>
+    <PackageIcon>monocypher_dotnet.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/xoofx/Monocypher.NET</PackageProjectUrl>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>$(NoWarn);CS1591;CS0419;CS1734;CS1572;CS1573;CS1574</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,6 +21,10 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../img/monocypher_dotnet.png" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="runtimes\**\*">
@@ -26,12 +39,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MinVer" Version="2.5.0">
+    <PackageReference Include="MinVer" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+
     <!--Add support for sourcelink-->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
+  <Target Name="PatchVersion" AfterTargets="MinVer">
+    <PropertyGroup>
+      <!-- Workaround for MinVer, the minor version in this library is like a major version because major is 0 so we need to remove this once this library will be >= 1.0 -->
+      <AssemblyVersion>$(MinVerMajor).$(MinVerMinor).0.0</AssemblyVersion>
+    </PropertyGroup>
+  </Target>
 </Project>

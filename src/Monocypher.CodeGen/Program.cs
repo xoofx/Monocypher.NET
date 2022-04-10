@@ -356,12 +356,17 @@ namespace Monocypher.CodeGen
             }
         }
 
+        private static string GetParamName(CSharpParamComment paramComment)
+        {
+            return paramComment.Attributes.First(x => x.Name == "name").Value;
+        }
+
         private static void CleanupCommentParameters(CSharpMethod method, List<ParameterExtra> extraParameters)
         {
             var toRemoveParamCommentList = new List<CSharpParamComment>();
             foreach (var paramComment in method.Comment.Children.OfType<CSharpParamComment>())
             {
-                if (method.Parameters.All(x => x.Name != paramComment.Name))
+                if (method.Parameters.All(x => x.Name != GetParamName(paramComment)))
                 {
                     toRemoveParamCommentList.Add(paramComment);
                 }
@@ -376,7 +381,7 @@ namespace Monocypher.CodeGen
             foreach (var methodParameter in method.Parameters)
             {
                 var extraParameter = methodParameter is CSharpCustomParameter customParam ? customParam.Extra : extraParameters.First(x => x.InteropParameter == methodParameter);
-                var comment = method.Comment.Children.OfType<CSharpParamComment>().FirstOrDefault(x => x.Name == methodParameter.Name);
+                var comment = method.Comment.Children.OfType<CSharpParamComment>().FirstOrDefault(x => GetParamName(x) == methodParameter.Name);
 
                 var defaultTextArg = new CSharpTextComment($"See Monocypher manual for more details.");
                 // Add missing parameter comment

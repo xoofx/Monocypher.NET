@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/xoofx/Monocypher.NET</PackageProjectUrl>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>$(NoWarn);CS1591;CS0419;CS1734;CS1572;CS1573;CS1574</NoWarn>
@@ -24,6 +25,7 @@
 
   <ItemGroup>
     <None Include="../../img/monocypher_dotnet.png" Pack="true" PackagePath="" />
+    <None Include="../../readme.md" Pack="true" PackagePath="/"/>
   </ItemGroup>
 
   <ItemGroup>

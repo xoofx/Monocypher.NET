@@ -1,6 +1,6 @@
 # Monocypher<font color="FF8C44">.NET</font> [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/managed/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![Build Status](https://github.com/xoofx/Monocypher.NET/workflows/native/badge.svg?branch=master)](https://github.com/xoofx/Monocypher.NET/actions) [![NuGet](https://img.shields.io/nuget/v/Monocypher.svg)](https://www.nuget.org/packages/Monocypher)
 
-<img align="right" width="160px" height="160px" src="img/monocypher_dotnet.png">
+<img align="right" width="160px" height="160px" src="https://raw.githubusercontent.com/xoofx/Monocypher.NET/master/img/monocypher_dotnet.png">
 
 Monocypher.NET is a managed wrapper around [Monocypher](https://github.com/LoupVaillant/Monocypher) cryptographic library.
 
@@ -92,7 +92,7 @@ That being said, if you are building an IoT project using the C Monocypher and y
 
 ## How to Build?
 
-You need to install the [.NET 5 SDK](https://dotnet.microsoft.com/download/dotnet/5.0). Then from the root folder:
+You need to install the [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0). Then from the root folder:
 
 ```console
 $ dotnet build src -c Release

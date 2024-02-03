@@ -67,6 +67,7 @@ namespace Monocypher.CodeGen
                 {
                     e => e.Map<CppField>("crypto_blake2b_vtable").Discard(),
                     e => e.Map<CppField>("crypto_sha512_vtable").Discard(),
+                    e => e.Map<CppField>("crypto_argon2_no_extras").Discard(),
                 }
             };
             csOptions.Plugins.Insert(0, new FixedArrayTypeConverter());

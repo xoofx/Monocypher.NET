@@ -4,7 +4,7 @@
 
 Monocypher.NET is a managed wrapper around [Monocypher](https://github.com/LoupVaillant/Monocypher) cryptographic library.
 
-> The current _native_ version of Monocypher used by Monocypher.NET is `3.1.2`
+> The current _native_ version of Monocypher used by Monocypher.NET is `4.0.2`
 ## Features
 
 - Provides the entire native Monocypher API in an efficient 1-to-1 mapping:
@@ -46,7 +46,7 @@ RNGCryptoServiceProvider.Fill(key);
 Span<byte> nonce = stackalloc byte[24];
 RNGCryptoServiceProvider.Fill(nonce);
 
-crypto_lock(mac, cipherText, key, nonce, inputText);
+crypto_aead_lock(cipherText, mac, key, nonce, ReadOnlySpan<byte>.Empty, inputText);
 
 // mac contains the authenticated code
 // cipherText contains the encrypted message
@@ -92,7 +92,7 @@ That being said, if you are building an IoT project using the C Monocypher and y
 
 ## How to Build?
 
-You need to install the [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0). Then from the root folder:
+You need to install the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0). Then from the root folder:
 
 ```console
 $ dotnet build src -c Release

@@ -37,6 +37,12 @@ function Build-Project {
     if ($IsMacOS) {
         $NETPlatform = "osx"
         $NETSharedLibExtension = "dylib"
+        if ($NETArch -eq "arm64") {
+            $CMakeArch = "-DCMAKE_OSX_DEPLOYMENT_TARGET=10.10", "-DCMAKE_OSX_ARCHITECTURES=arm64"
+        }
+        elseif ($NETArch -eq "x64") {
+            $CMakeArch = "-DCMAKE_OSX_DEPLOYMENT_TARGET=10.10", "-DCMAKE_OSX_ARCHITECTURES=x86_64"
+        }
     }
     elseif ($IsWindows) {
         $MsvcArch = $NETArch

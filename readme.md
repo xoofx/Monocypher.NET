@@ -112,4 +112,4 @@ The native Monocypher is released with the following [BSD-Clause 2 license](http
 
 ## Author
 
-Alexandre Mutel aka [xoofx](http://xoofx.com).
+Alexandre Mutel aka [xoofx](https://xoofx.github.io).
